@@ -1004,6 +1004,7 @@ GameObject:
   - component: {fileID: 952072603}
   - component: {fileID: 952072605}
   - component: {fileID: 952072604}
+  - component: {fileID: 952072606}
   m_Layer: 0
   m_Name: Elevation
   m_TagString: Untagged
@@ -1144,6 +1145,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!19719996 &952072606
+TilemapCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952072602}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &1610752286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,6 +1172,7 @@ GameObject:
   - component: {fileID: 1610752290}
   - component: {fileID: 1610752289}
   - component: {fileID: 1610752288}
+  - component: {fileID: 1610752287}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -1162,6 +1180,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!58 &1610752287
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610752286}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.009128378, y: -0.10141047}
+  serializedVersion: 2
+  m_Radius: 0.0648174
 --- !u!114 &1610752288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1300,7 +1334,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958453309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.489, y: 0.32, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6548175, y: 0.6548175, z: 0.6548175}
   m_Children: []
   m_Father: {fileID: 1610752290}
