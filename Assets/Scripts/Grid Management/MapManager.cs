@@ -5,13 +5,22 @@ using UnityEngine.Tilemaps;
 
 public class MapManager : MonoBehaviour
 {
-    private static MapManager _instance;
-    public static MapManager Instance { get { return _instance; } }
-
     public OverlayTile overlayTilePrefab;
     public GameObject overlayContainer;
 
     public Dictionary<Vector2Int, OverlayTile> map;
+
+    public static MapManager Instance { get { return _instance; } }
+    private static MapManager _instance;
+
+    [SerializeField] private GameObject _characterPrefab;
+
+    [SerializeField] private Vector2Int _characterStartingCell;
+    [SerializeField] private Vector2 _characterStartingDirection;
+
+    private PlayerInfo character;
+
+    
 
     private void Awake()
     {
@@ -51,12 +60,33 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
-        
+        PositionPlayer(_characterStartingCell);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (InputManager.Instance.LeftMouseButtonPressed())
+        {
+            PrintMap();
+        }
+    }
+
+    void PrintMap()
+    {
+        foreach (var pair in map)
+        {
+            Debug.Log($"key: {pair.Key} value : {pair.Value}");
+        }
+    }
+
+    public void PositionPlayer(Vector2Int position)
+    {
+        map.TryGetValue(position, out OverlayTile tile);
+        character = Instantiate(_characterPrefab).GetComponent<PlayerInfo>();
+        character.transform.position = tile.transform.position;
+        PlayerAnimation _anim = character.transform.Find("CharacterSprite").GetComponent<PlayerAnimation>();
+        _anim.SetDirection(_characterStartingDirection);
+        character.SetActiveTile(tile);
     }
 }
