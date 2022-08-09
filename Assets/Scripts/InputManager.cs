@@ -36,4 +36,9 @@ public class InputManager : MonoBehaviour
     {
         return _input.Mouse.MousePosition.ReadValue<Vector2>();
     }
+
+    public bool LeftMouseButtonPressed()
+    {
+        return _input.Mouse.LeftButtonPressed.triggered;
+    }
 }

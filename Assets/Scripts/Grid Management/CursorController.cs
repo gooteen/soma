@@ -12,7 +12,7 @@ public class CursorController : MonoBehaviour
         
     }
 
-    void Update()
+    void LateUpdate()
     {
         Debug.Log(GetFocusedOnTile());
         
@@ -20,8 +20,11 @@ public class CursorController : MonoBehaviour
         {
             transform.position = _focusedTile.transform.position;
             transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = _focusedTile.GetComponent<SpriteRenderer>().sortingOrder;
+            if(InputManager.Instance.LeftMouseButtonPressed())
+            {
+                _focusedTile.GetComponent<OverlayTile>().ShowOverlay();
+            }
         }
-        
     }
 
     

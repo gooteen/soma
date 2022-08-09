@@ -4,20 +4,28 @@ using UnityEngine;
 
 public class OverlayTile : MonoBehaviour
 {
+    private Color color;
+
+    void Awake()
+    {
+        color = gameObject.GetComponent<SpriteRenderer>().color;
+    }
    
-    // Update is called once per frame
     void Update()
     {
-        
+        if (InputManager.Instance.LeftMouseButtonPressed())
+        {
+            HideOverlay();
+        }
     }
 
-    private void ShowOverlay()
+    public void ShowOverlay()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
     }
 
     private void HideOverlay()
     {
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 0);
     }
 }
