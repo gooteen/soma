@@ -80,11 +80,12 @@ public class CursorController : MonoBehaviour
         }
     }
 
+    // Transfer to a separate player movement script
     private void MoveAlongPath()
     {
         var step = 5 * Time.deltaTime;
-        _player.transform.position = Vector2.MoveTowards(_player.transform.position, path[0].transform.position, step);
-        if (Vector2.Distance(_player.transform.position, path[0].transform.position) < 0.0001f)
+        _player.transform.position = Vector3.MoveTowards(_player.transform.position, path[0].transform.position, step);
+        if (Vector3.Distance(_player.transform.position, path[0].transform.position) < 0.0001f)
         {
             _player.transform.position = path[0].transform.position;
             _playerInfo.SetActiveTile(path[0]);
