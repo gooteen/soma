@@ -16,7 +16,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private GameObject _characterPrefab;
 
     [SerializeField] private Vector2Int _characterStartingCell;
-    [SerializeField] private Vector2 _characterStartingDirection;
+    [SerializeField] private Vector2 _characterStartingOrientation;
 
     private PlayerInfo character;
 
@@ -56,6 +56,7 @@ public class MapManager : MonoBehaviour
 
                     overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 2);
                     overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
+                    overlayTile.gridLocation = tileLocation;
                     map.Add(tileKey, overlayTile);
                 }
             }
@@ -86,7 +87,7 @@ public class MapManager : MonoBehaviour
         character = Instantiate(_characterPrefab).GetComponent<PlayerInfo>();
         character.transform.position = tile.transform.position;
         PlayerAnimation _anim = character.transform.Find("CharacterSprite").GetComponent<PlayerAnimation>();
-        _anim.SetDirection(_characterStartingDirection);
+        _anim.SetDirection(_characterStartingOrientation);
         character.SetActiveTile(tile);
     }
 }

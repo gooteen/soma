@@ -10,4 +10,9 @@ public class PlayerInfo : MonoBehaviour
     {
         _activeTile = tile;
     }
+
+    public OverlayTile GetActiveTile()
+    {
+        return _activeTile;
+    }
 }
