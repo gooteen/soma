@@ -20,8 +20,6 @@ public class MapManager : MonoBehaviour
 
     private PlayerInfo character;
 
-    
-
     private void Awake()
     {
         if (_instance != null && _instance != this)

@@ -143,7 +143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8562092601695612361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.22, y: 5.75, z: 0.82}
+  m_LocalPosition: {x: -1.22, y: 5.75, z: 0}
   m_LocalScale: {x: 2.2327828, y: 2.2327828, z: 2.2327828}
   m_Children:
   - {fileID: 8562092601504214249}
@@ -184,9 +184,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0040188865, y: 0.0583216}
+  m_Offset: {x: -0.0064978986, y: 0.0938895}
   serializedVersion: 2
-  m_Radius: 0.05587036
+  m_Radius: 0.0971728
 --- !u!114 &8562092601695612407
 MonoBehaviour:
   m_ObjectHideFlags: 0

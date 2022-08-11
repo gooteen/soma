@@ -10,9 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(Mathf.FloorToInt(0.8f));
         _rb = GetComponent<Rigidbody2D>();
-        //input.PlayerMovement.Run.performed += Move;
     }
     
     void FixedUpdate()

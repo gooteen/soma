@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 6895900443220609824}
   - component: {fileID: 6895900443220609827}
   - component: {fileID: 6895900443220609821}
-  - component: {fileID: 6895900443220609826}
   - component: {fileID: 1826304771}
+  - component: {fileID: 7938189183334727638}
   m_Layer: 8
   m_Name: CharacterTactical
-  m_TagString: Untagged
+  m_TagString: PlayerTactical
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,20 +72,6 @@ CircleCollider2D:
   m_Offset: {x: -0.00912838, y: 0.06020735}
   serializedVersion: 2
   m_Radius: 0.057537396
---- !u!114 &6895900443220609826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6895900443220609820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e4513592fc0d034687bd703a90e9fb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _movementSpeed: 3
-  anim: {fileID: 6895900443413973571}
 --- !u!114 &1826304771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +85,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _activeTile: {fileID: 0}
+--- !u!114 &7938189183334727638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895900443220609820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5954727c49f1c3445bcbbad7451ac25d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 2
+  _anim: {fileID: 6895900443413973571}
 --- !u!1 &6895900443413973567
 GameObject:
   m_ObjectHideFlags: 0

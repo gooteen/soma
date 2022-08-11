@@ -11,40 +11,44 @@ public class CursorController : MonoBehaviour
 
     private GameObject _player;
     private PlayerInfo _playerInfo;
+    private TacticalPlayerMovement _playerMovement;
 
     private List<OverlayTile> path = new List<OverlayTile>();
+    private OverlayTile _destinationTile;
+    private bool cursorLocked;
 
     void Start()
     {
+        cursorLocked = false;
         pathFinder = new PathFinder();
     }
 
     void LateUpdate()
     {
-        //Debug.Log(GetFocusedOnTile());
-        
         if (GetFocusedOnTile())
         {
             transform.position = _focusedTile.transform.position;
             transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = _focusedTile.GetComponent<SpriteRenderer>().sortingOrder;
-            if(InputManager.Instance.LeftMouseButtonPressed())
+            if(InputManager.Instance.LeftMouseButtonPressed() && !cursorLocked)
             {
-                _focusedTile.GetComponent<OverlayTile>().ShowOverlay();
+                cursorLocked = true;
+                _destinationTile = _focusedTile;
+                _destinationTile.GetComponent<OverlayTile>().ShowOverlay();
 
-                _player = GameObject.Find("CharacterTactical(Clone)");
+                _player = GameObject.FindWithTag("PlayerTactical");
 
                 if (_player != null)
                 {
                     _playerInfo = _player.GetComponent<PlayerInfo>();
+                    _playerMovement = _player.GetComponent<TacticalPlayerMovement>();
                 } else
                 {
                     Debug.Log("No player");
-
                 }
 
                 if (_playerInfo != null)
                 {
-                    path = pathFinder.FindPath(_playerInfo.GetActiveTile(), _focusedTile);
+                    path = pathFinder.FindPath(_playerInfo.GetActiveTile(), _destinationTile);
                     foreach (OverlayTile step in path)
                     {
                         Debug.Log($"PATH:{step.gridLocation}");
@@ -58,12 +62,26 @@ public class CursorController : MonoBehaviour
         if (path.Count > 0)
         {
             Debug.Log("Have a path!");
-            MoveAlongPath();
+            if (_playerMovement != null)
+            {
+                path = _playerMovement.MoveAlongPath(path, _destinationTile);
+                //MoveAlongPath();
+            } else
+            {
+                Debug.Log("No player movement");
+            }
+        } else
+        {
+            cursorLocked = false;
         }
     }
 
     public bool GetFocusedOnTile()
     {
+        if (!cursorLocked)
+        {
+
+        }
         // The camera component tagged "MainCamera"
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(InputManager.Instance.GetMousePosition());
         Vector2 mousePos2d = new Vector2(mousePos.x, mousePos.y);
@@ -72,7 +90,6 @@ public class CursorController : MonoBehaviour
         {
             _focusedTile = hit.collider.gameObject.GetComponent<OverlayTile>();
             Debug.Log("Hit " + hit.collider.gameObject);
-            Debug.DrawRay(mousePos2d, Vector2.zero * 10);
             return true;
         } else
         {
