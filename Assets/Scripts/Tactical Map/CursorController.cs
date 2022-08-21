@@ -9,10 +9,6 @@ public class CursorController : MonoBehaviour
 
     private PathFinder pathFinder;
 
-    private GameObject _player;
-    private PlayerInfo _playerInfo;
-    private TacticalPlayerMovement _playerMovement;
-
     private List<OverlayTile> path = new List<OverlayTile>();
     private OverlayTile _destinationTile;
     private bool cursorLocked;
@@ -29,47 +25,27 @@ public class CursorController : MonoBehaviour
         {
             transform.position = _focusedTile.transform.position;
             transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = _focusedTile.GetComponent<SpriteRenderer>().sortingOrder;
-            if(InputManager.Instance.LeftMouseButtonPressed() && !cursorLocked)
+            if(Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
             {
                 cursorLocked = true;
                 _destinationTile = _focusedTile;
                 _destinationTile.GetComponent<OverlayTile>().ShowOverlay();
 
-                _player = GameObject.FindWithTag("PlayerTactical");
 
-                if (_player != null)
+                path = pathFinder.FindPath(Engine.Instance.TacticalPlayer.GetActiveTile(), _destinationTile);
+                foreach (OverlayTile step in path)
                 {
-                    _playerInfo = _player.GetComponent<PlayerInfo>();
-                    _playerMovement = _player.GetComponent<TacticalPlayerMovement>();
-                } else
-                {
-                    Debug.Log("No player");
-                }
-
-                if (_playerInfo != null)
-                {
-                    path = pathFinder.FindPath(_playerInfo.GetActiveTile(), _destinationTile);
-                    foreach (OverlayTile step in path)
-                    {
-                        Debug.Log($"PATH:{step.gridLocation}");
-                    }
-                } else
-                {
-                    Debug.Log("No player info");
+                    Debug.Log($"PATH:{step.gridLocation}");
                 }
             }
         }
         if (path.Count > 0)
         {
             Debug.Log("Have a path!");
-            if (_playerMovement != null)
-            {
-                path = _playerMovement.MoveAlongPath(path, _destinationTile);
-                //MoveAlongPath();
-            } else
-            {
-                Debug.Log("No player movement");
-            }
+           
+            path = Engine.Instance.TacticalPlayer.MoveAlongPath(path, _destinationTile);
+            //MoveAlongPath();
+            
         } else
         {
             cursorLocked = false;
@@ -78,12 +54,8 @@ public class CursorController : MonoBehaviour
 
     public bool GetFocusedOnTile()
     {
-        if (!cursorLocked)
-        {
-
-        }
         // The camera component tagged "MainCamera"
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(InputManager.Instance.GetMousePosition());
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Engine.Instance.InputManager.GetMousePosition());
         Vector2 mousePos2d = new Vector2(mousePos.x, mousePos.y);
         RaycastHit2D hit = Physics2D.Raycast(mousePos2d, Vector2.zero, Mathf.Infinity, _layerMask, -Mathf.Infinity, Mathf.Infinity);
         if (hit.collider != null)
@@ -97,7 +69,7 @@ public class CursorController : MonoBehaviour
         }
     }
 
-    // Transfer to a separate player movement script
+    /*
     private void MoveAlongPath()
     {
         var step = 5 * Time.deltaTime;
@@ -109,4 +81,5 @@ public class CursorController : MonoBehaviour
             path.RemoveAt(0);
         }
     }
+    */
 }

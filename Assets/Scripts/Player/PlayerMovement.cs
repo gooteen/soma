@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate()
     {
-        Vector2 direction = InputManager.Instance.GetMovementDirection();
+        Vector2 direction = Engine.Instance.InputManager.GetMovementDirection();
         Move(direction);
         anim.SetDirection(direction);
     }

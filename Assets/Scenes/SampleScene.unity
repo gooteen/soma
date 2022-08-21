@@ -131,6 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 169661010}
   - component: {fileID: 169661011}
+  - component: {fileID: 169661012}
   m_Layer: 0
   m_Name: Engine
   m_TagString: Untagged
@@ -164,6 +165,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74a86af116a669c4db07477f7f8c9444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &169661012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169661009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e072b61443b388d489f26ac71e26a652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
 --- !u!1 &344250616
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +940,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.06
+  orthographic size: 2.4481387
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -966,7 +980,7 @@ PrefabInstance:
     - target: {fileID: 8562092601695612361, guid: 6c1638883be54c9439a76386d1e4edc7,
         type: 3}
       propertyPath: m_Name
-      value: Character
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8562092601695612405, guid: 6c1638883be54c9439a76386d1e4edc7,
         type: 3}
@@ -1237,7 +1251,7 @@ Transform:
   - {fileID: 344250617}
   - {fileID: 952072603}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1781895714
 MonoBehaviour:

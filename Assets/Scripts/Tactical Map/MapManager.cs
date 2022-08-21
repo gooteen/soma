@@ -18,8 +18,6 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Vector2Int _characterStartingCell;
     [SerializeField] private Vector2 _characterStartingOrientation;
 
-    private PlayerInfo character;
-
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -31,7 +29,6 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         var tileMap = gameObject.GetComponentInChildren<Tilemap>();
@@ -65,7 +62,7 @@ public class MapManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InputManager.Instance.LeftMouseButtonPressed())
+        if (Engine.Instance.InputManager.LeftMouseButtonPressed())
         {
             PrintMap();
         }
@@ -82,10 +79,13 @@ public class MapManager : MonoBehaviour
     public void PositionPlayer(Vector2Int position)
     {
         map.TryGetValue(position, out OverlayTile tile);
-        character = Instantiate(_characterPrefab).GetComponent<PlayerInfo>();
+        //Debug.Log("tile: " + tile);
+        GameObject character = Instantiate(_characterPrefab);
+        Engine.Instance.InitializeTacticalPlayer(character);
+
         character.transform.position = tile.transform.position;
-        PlayerAnimation _anim = character.transform.Find("CharacterSprite").GetComponent<PlayerAnimation>();
-        _anim.SetDirection(_characterStartingOrientation);
-        character.SetActiveTile(tile);
+
+        Engine.Instance.TacticalPlayer.SetDirection(_characterStartingOrientation);
+        Engine.Instance.TacticalPlayer.SetActiveTile(tile);
     }
 }

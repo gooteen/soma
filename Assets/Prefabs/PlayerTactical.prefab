@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 6895900443220609821}
   - component: {fileID: 1826304771}
   - component: {fileID: 7938189183334727638}
+  - component: {fileID: 318807871}
   m_Layer: 8
-  m_Name: CharacterTactical
+  m_Name: PlayerTactical
   m_TagString: PlayerTactical
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,6 +100,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 2
   _anim: {fileID: 6895900443413973571}
+--- !u!114 &318807871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6895900443220609820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02830df51f512b845a641840de95da36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerAnimation: {fileID: 6895900443413973571}
 --- !u!1 &6895900443413973567
 GameObject:
   m_ObjectHideFlags: 0

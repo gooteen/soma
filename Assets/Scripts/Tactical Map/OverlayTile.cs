@@ -26,7 +26,7 @@ public class OverlayTile : MonoBehaviour
    
     void Update()
     {
-        if (InputManager.Instance.LeftMouseButtonPressed())
+        if (Engine.Instance.InputManager.LeftMouseButtonPressed())
         {
             HideOverlay();
         }
