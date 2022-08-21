@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    //переделать из синглтона обратно, обращаться через Engine
     private static InputManager _instance;
     private PlayerInputActions _input;
     public static InputManager Instance { get { return _instance; } }
