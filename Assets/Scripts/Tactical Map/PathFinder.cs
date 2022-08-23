@@ -47,35 +47,14 @@ public class PathFinder
         return new List<OverlayTile>();
     }
 
-    private List<OverlayTile> GetFinishedList(OverlayTile start, OverlayTile end)
-    {
-        List<OverlayTile> finishedList = new List<OverlayTile>();
-        OverlayTile currentTile = end;
-
-        while (currentTile != start)
-        {
-            finishedList.Add(currentTile);
-            currentTile = currentTile.previous;
-        }
-
-        finishedList.Reverse();
-
-        return finishedList;
-    }
-
-    private int GetManhattanDistance(OverlayTile start, OverlayTile neighbour)
-    {
-        return Mathf.Abs(start.gridLocation.x - neighbour.gridLocation.x) + Mathf.Abs(start.gridLocation.y - neighbour.gridLocation.y);
-    }
-
-    private List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile)
+    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile)
     {
         var map = MapManager.Instance.map;
 
         List<OverlayTile> neighbours = new List<OverlayTile>();
 
         Vector2Int locationToCheckTop = new Vector2Int(
-            currentOverlayTile.gridLocation.x, 
+            currentOverlayTile.gridLocation.x,
             currentOverlayTile.gridLocation.y + 1
             );
 
@@ -115,5 +94,26 @@ public class PathFinder
         }
 
         return neighbours;
+    }
+
+    private List<OverlayTile> GetFinishedList(OverlayTile start, OverlayTile end)
+    {
+        List<OverlayTile> finishedList = new List<OverlayTile>();
+        OverlayTile currentTile = end;
+
+        while (currentTile != start)
+        {
+            finishedList.Add(currentTile);
+            currentTile = currentTile.previous;
+        }
+
+        finishedList.Reverse();
+
+        return finishedList;
+    }
+
+    private int GetManhattanDistance(OverlayTile start, OverlayTile neighbour)
+    {
+        return Mathf.Abs(start.gridLocation.x - neighbour.gridLocation.x) + Mathf.Abs(start.gridLocation.y - neighbour.gridLocation.y);
     }
 }
