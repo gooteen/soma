@@ -1270,7 +1270,7 @@ MonoBehaviour:
   overlayContainer: {fileID: 2043911680}
   _characterPrefab: {fileID: 6895900443220609820, guid: 8ccbde6aca6a63843bf757a28db168a4,
     type: 3}
-  _characterStartingCell: {x: 7, y: 9}
+  _characterStartingTile: {x: 7, y: 7}
   _characterStartingOrientation: {x: 0.5, y: 1}
 --- !u!1 &2043911680
 GameObject:

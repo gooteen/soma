@@ -23,21 +23,13 @@ public class OverlayTile : MonoBehaviour
     {
         color = gameObject.GetComponent<SpriteRenderer>().color;
     }
-   
-    void Update()
-    {
-        if (Engine.Instance.InputManager.LeftMouseButtonPressed())
-        {
-            HideOverlay();
-        }
-    }
 
-    public void ShowOverlay()
+    public void ShowTile()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 1);
     }
 
-    private void HideOverlay()
+    public void HideTile()
     {
         gameObject.GetComponent<SpriteRenderer>().color = new Color(color.r, color.g, color.b, 0);
     }

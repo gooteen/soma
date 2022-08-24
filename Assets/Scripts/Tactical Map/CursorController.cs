@@ -4,35 +4,55 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour
 {
+    public static CursorController Instance { get { return _instance; } }
+    private static CursorController _instance;
+
     [SerializeField] private LayerMask _layerMask;
     private OverlayTile _focusedTile;
 
     private PathFinder pathFinder;
+    private RangeFinder rangeFinder;
 
     private List<OverlayTile> path = new List<OverlayTile>();
+    private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
+
     private OverlayTile _destinationTile;
     private bool cursorLocked;
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
     void Start()
     {
         cursorLocked = false;
         pathFinder = new PathFinder();
+        rangeFinder = new RangeFinder();
     }
 
     void LateUpdate()
     {
         if (GetFocusedOnTile())
         {
-            transform.position = _focusedTile.transform.position;
+            transform.position = new Vector3(_focusedTile.transform.position.x, _focusedTile.transform.position.y, _focusedTile.transform.position.z + 0.01f);
             transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = _focusedTile.GetComponent<SpriteRenderer>().sortingOrder;
             if(Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
             {
                 cursorLocked = true;
                 _destinationTile = _focusedTile;
-                _destinationTile.GetComponent<OverlayTile>().ShowOverlay();
 
+                // если что-то поломалось, попробовать вернуть сюда GetComponent<OverlayTile>()
+                //_destinationTile.ShowTile();
 
-                path = pathFinder.FindPath(Engine.Instance.TacticalPlayer.GetActiveTile(), _destinationTile);
+                path = pathFinder.FindPath(Engine.Instance.TacticalPlayer.GetActiveTile(), _destinationTile, inRangeTiles);
                 foreach (OverlayTile step in path)
                 {
                     Debug.Log($"PATH:{step.gridLocation}");
@@ -66,6 +86,21 @@ public class CursorController : MonoBehaviour
         } else
         {
             return false;
+        }
+    }
+
+    public void GetInRangeTiles()
+    {
+        foreach (OverlayTile item in inRangeTiles)
+        {
+            item.HideTile();
+        }
+
+        inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), 3);
+
+        foreach (OverlayTile item in inRangeTiles)
+        {
+            item.ShowTile();
         }
     }
 

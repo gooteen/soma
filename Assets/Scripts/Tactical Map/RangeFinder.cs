@@ -24,7 +24,7 @@ public class RangeFinder
 
             foreach (OverlayTile item in tileForPreviousStep)
             {
-                surroundingTiles.AddRange(_pathFinder.GetNeighbourTiles(item));
+                surroundingTiles.AddRange(_pathFinder.GetNeighbourTiles(item, new List<OverlayTile>()));
 
             }
             inRangeTiles.AddRange(surroundingTiles);

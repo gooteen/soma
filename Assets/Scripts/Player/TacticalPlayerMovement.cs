@@ -46,11 +46,13 @@ public class TacticalPlayerMovement : MonoBehaviour
             _info.SetActiveTile(path[0]);
             if (_info.GetActiveTile() == _destinationTile)
             {
-                Debug.Log("Prishel'");
                 transform.position = _nextTile.position;
+                CursorController.Instance.GetInRangeTiles();
             }
             path.RemoveAt(0);
         }
         return path;
     }
+
+    
 }

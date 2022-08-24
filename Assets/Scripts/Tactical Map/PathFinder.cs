@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PathFinder
 {
-    public List<OverlayTile> FindPath(OverlayTile start, OverlayTile end)
+    public List<OverlayTile> FindPath(OverlayTile start, OverlayTile end, List<OverlayTile> searchableTiles)
     {
         List<OverlayTile> openList = new List<OverlayTile>();
         List<OverlayTile> closedList = new List<OverlayTile>();
@@ -24,7 +24,7 @@ public class PathFinder
                 return GetFinishedList(start, end);
             }
 
-            var neighbourTiles = GetNeighbourTiles(currentOverlayTile);
+            var neighbourTiles = GetNeighbourTiles(currentOverlayTile, searchableTiles);
 
             foreach (var neighbour in neighbourTiles)
             {
@@ -47,9 +47,21 @@ public class PathFinder
         return new List<OverlayTile>();
     }
 
-    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile)
+    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles)
     {
-        var map = MapManager.Instance.map;
+        Dictionary<Vector2Int, OverlayTile> map = MapManager.Instance.map;
+        Dictionary<Vector2Int, OverlayTile> tilesToSearch = new Dictionary<Vector2Int, OverlayTile>();
+
+        if (searchableTiles.Count > 0)
+        {
+            foreach (OverlayTile item in searchableTiles)
+            {
+                tilesToSearch.Add(new Vector2Int(item.gridLocation.x, item.gridLocation.y), item);
+            }
+        } else
+        {
+            tilesToSearch = map;
+        }
 
         List<OverlayTile> neighbours = new List<OverlayTile>();
 
@@ -58,9 +70,9 @@ public class PathFinder
             currentOverlayTile.gridLocation.y + 1
             );
 
-        if (map.ContainsKey(locationToCheckTop))
+        if (tilesToSearch.ContainsKey(locationToCheckTop))
         {
-            neighbours.Add(map[locationToCheckTop]);
+            neighbours.Add(tilesToSearch[locationToCheckTop]);
         }
 
         Vector2Int locationToCheckBottom = new Vector2Int(
@@ -68,9 +80,9 @@ public class PathFinder
             currentOverlayTile.gridLocation.y - 1
             );
 
-        if (map.ContainsKey(locationToCheckBottom))
+        if (tilesToSearch.ContainsKey(locationToCheckBottom))
         {
-            neighbours.Add(map[locationToCheckBottom]);
+            neighbours.Add(tilesToSearch[locationToCheckBottom]);
         }
 
         Vector2Int locationToCheckRight = new Vector2Int(
@@ -78,9 +90,9 @@ public class PathFinder
             currentOverlayTile.gridLocation.y
             );
 
-        if (map.ContainsKey(locationToCheckRight))
+        if (tilesToSearch.ContainsKey(locationToCheckRight))
         {
-            neighbours.Add(map[locationToCheckRight]);
+            neighbours.Add(tilesToSearch[locationToCheckRight]);
         }
 
         Vector2Int locationToCheckLeft = new Vector2Int(
@@ -88,9 +100,9 @@ public class PathFinder
             currentOverlayTile.gridLocation.y
             );
 
-        if (map.ContainsKey(locationToCheckLeft))
+        if (tilesToSearch.ContainsKey(locationToCheckLeft))
         {
-            neighbours.Add(map[locationToCheckLeft]);
+            neighbours.Add(tilesToSearch[locationToCheckLeft]);
         }
 
         return neighbours;

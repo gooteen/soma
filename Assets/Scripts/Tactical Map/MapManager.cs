@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] private GameObject _characterPrefab;
 
-    [SerializeField] private Vector2Int _characterStartingCell;
+    [SerializeField] private Vector2Int _characterStartingTile;
     [SerializeField] private Vector2 _characterStartingOrientation;
 
     private void Awake()
@@ -56,7 +56,7 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
-        PositionPlayer(_characterStartingCell);
+        PositionPlayer(_characterStartingTile);
     }
 
     // Update is called once per frame
@@ -87,5 +87,6 @@ public class MapManager : MonoBehaviour
 
         Engine.Instance.TacticalPlayer.SetDirection(_characterStartingOrientation);
         Engine.Instance.TacticalPlayer.SetActiveTile(tile);
+        CursorController.Instance.GetInRangeTiles();
     }
 }
