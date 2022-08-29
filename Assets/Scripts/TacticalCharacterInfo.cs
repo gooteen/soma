@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInfo : MonoBehaviour
+public abstract class TacticalCharacterInfo : MonoBehaviour
 {
     [SerializeField] private OverlayTile _activeTile;
 
     public void SetActiveTile(OverlayTile tile)
     {
         _activeTile = tile;
+        // блокируем плитку на ход противкника
     }
 
     public OverlayTile GetActiveTile()

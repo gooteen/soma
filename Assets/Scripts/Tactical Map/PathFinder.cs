@@ -28,7 +28,7 @@ public class PathFinder
 
             foreach (var neighbour in neighbourTiles)
             {
-                if (neighbour.isBlocked || closedList.Contains(neighbour))
+                if (neighbour.IsBlocked() || closedList.Contains(neighbour))
                 {
                     continue;
                 }

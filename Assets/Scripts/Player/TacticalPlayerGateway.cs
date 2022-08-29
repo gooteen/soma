@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class TacticalPlayerGateway : MonoBehaviour
 {
-    [SerializeField] private PlayerInfo _playerInfo;
-    private TacticalPlayerMovement _tacticalPlayerMovement;
-    [SerializeField] private PlayerAnimation _playerAnimation;
+    [SerializeField] private TacticalPlayerInfo _playerInfo;
+    private TacticalMovement _tacticalPlayerMovement;
+    [SerializeField] private CharacterAnimation _playerAnimation;
 
     private void Awake()
     {
-        _playerInfo = GetComponent<PlayerInfo>();
-        _tacticalPlayerMovement = GetComponent<TacticalPlayerMovement>();
+        _playerInfo = GetComponent<TacticalPlayerInfo>();
+        _tacticalPlayerMovement = GetComponent<TacticalMovement>();
     }
 
     public List<OverlayTile> MoveAlongPath(List<OverlayTile> path, OverlayTile destination)

@@ -14,9 +14,15 @@ public class MapManager : MonoBehaviour
     private static MapManager _instance;
 
     [SerializeField] private GameObject _characterPrefab;
+    // temporary
+    [SerializeField] private GameObject _enemyPrefab;
 
     [SerializeField] private Vector2Int _characterStartingTile;
     [SerializeField] private Vector2 _characterStartingOrientation;
+
+    // temporary
+    [SerializeField] private Vector2Int _enemyStartingTile;
+    [SerializeField] private Vector2 _enemyStartingOrientation;
 
     private void Awake()
     {
@@ -44,9 +50,9 @@ public class MapManager : MonoBehaviour
                 var tileKey = new Vector2Int(x, y);
                 if (tileMap.HasTile(tileLocation) && !map.ContainsKey(tileKey))
                 {
-                    Debug.Log(tileLocation);
+                    //Debug.Log(tileLocation);
                     var overlayTile = Instantiate(overlayTilePrefab, overlayContainer.transform);
-                    Debug.Log(tileMap.GetCellCenterWorld(tileLocation));
+                    //Debug.Log(tileMap.GetCellCenterWorld(tileLocation));
                     var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
 
                     overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 2);
@@ -57,6 +63,7 @@ public class MapManager : MonoBehaviour
             }
         }
         PositionPlayer(_characterStartingTile);
+        PositionEnemy(_enemyStartingTile);
     }
 
     // Update is called once per frame
@@ -87,6 +94,21 @@ public class MapManager : MonoBehaviour
 
         Engine.Instance.TacticalPlayer.SetDirection(_characterStartingOrientation);
         Engine.Instance.TacticalPlayer.SetActiveTile(tile);
-        CursorController.Instance.GetInRangeTiles();
+        CursorController.Instance.SetInRangeTiles();
+    }
+
+    // merge into a universal function later
+    public void PositionEnemy(Vector2Int position)
+    {
+        map.TryGetValue(position, out OverlayTile tile);
+        //Debug.Log("tile: " + tile);
+        GameObject character = Instantiate(_enemyPrefab);
+        TacticalEnemyInfo enemy = character.GetComponent<TacticalEnemyInfo>();
+        CharacterAnimation animation = character.GetComponentsInChildren<CharacterAnimation>()[0];
+        Debug.Log("animation: " + animation);
+        character.transform.position = tile.transform.position;
+
+        animation.SetDirection(_enemyStartingOrientation);
+        enemy.SetActiveTile(tile);
     }
 }

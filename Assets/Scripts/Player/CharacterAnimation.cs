@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimation : MonoBehaviour
+public class CharacterAnimation : MonoBehaviour
 {
     [SerializeField] private float _staticThreshold;
     [SerializeField] private int _numberOfSlices;

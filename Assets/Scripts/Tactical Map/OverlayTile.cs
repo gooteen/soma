@@ -11,17 +11,33 @@ public class OverlayTile : MonoBehaviour
 
     public int F { get { return G + H; } }
 
-    public bool isBlocked;
 
     public OverlayTile previous;
 
     public Vector3Int gridLocation;
+
+    private bool isBlocked;
 
     private Color color;
 
     void Awake()
     {
         color = gameObject.GetComponent<SpriteRenderer>().color;
+    }
+
+    public void BlockTile()
+    {
+        isBlocked = true;
+    }
+
+    public void UnlockTile()
+    {
+        isBlocked = false;
+    }
+
+    public bool IsBlocked()
+    {
+        return isBlocked;
     }
 
     public void ShowTile()

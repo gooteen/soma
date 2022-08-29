@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Engine : MonoBehaviour
 {
-    private InputManager _input;
+    public int mode;
 
     //ссылка на класс-интерфейс игрока
     [SerializeField] private TacticalPlayerGateway _player;
+
+    private InputManager _input;
 
     public InputManager InputManager { get { return _input; } }
     
@@ -21,6 +23,24 @@ public class Engine : MonoBehaviour
         Instance = this;
         _input = GetComponent<InputManager>();
     }
+
+    // TEMP __________________________________________________
+
+    public void ChangeMode()
+    {
+        if (mode == 1)
+        {
+            mode = 0;
+            CursorController.Instance.SetInRangeTiles();
+        }
+        else
+        {
+            mode = 1;
+            CursorController.Instance.SetInRangeTiles();
+        }
+    }
+    // TEMP___________________________________________________
+
 
     public void InitializeTacticalPlayer(GameObject player)
     {

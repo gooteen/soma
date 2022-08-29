@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TacticalPlayerMovement : MonoBehaviour
+public class TacticalMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
-    [SerializeField] private PlayerAnimation _anim;
-    private PlayerInfo _info;
+    [SerializeField] private CharacterAnimation _anim;
+    private TacticalCharacterInfo _info;
 
     private OverlayTile _destinationTile;
     private Transform _nextTile;
@@ -14,7 +14,7 @@ public class TacticalPlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        _info = GetComponent<PlayerInfo>();
+        _info = GetComponent<TacticalCharacterInfo>();
     }
 
     void Update()
@@ -47,7 +47,7 @@ public class TacticalPlayerMovement : MonoBehaviour
             if (_info.GetActiveTile() == _destinationTile)
             {
                 transform.position = _nextTile.position;
-                CursorController.Instance.GetInRangeTiles();
+                CursorController.Instance.SetInRangeTiles();
             }
             path.RemoveAt(0);
         }

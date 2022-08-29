@@ -46,16 +46,16 @@ public class CursorController : MonoBehaviour
             transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = _focusedTile.GetComponent<SpriteRenderer>().sortingOrder;
             if(Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
             {
-                cursorLocked = true;
-                _destinationTile = _focusedTile;
-
-                // если что-то поломалось, попробовать вернуть сюда GetComponent<OverlayTile>()
-                //_destinationTile.ShowTile();
-
-                path = pathFinder.FindPath(Engine.Instance.TacticalPlayer.GetActiveTile(), _destinationTile, inRangeTiles);
-                foreach (OverlayTile step in path)
+                if (Engine.Instance.mode == 1)
                 {
-                    Debug.Log($"PATH:{step.gridLocation}");
+                    cursorLocked = true;
+                    _destinationTile = _focusedTile;
+
+                    path = pathFinder.FindPath(Engine.Instance.TacticalPlayer.GetActiveTile(), _destinationTile, inRangeTiles);
+                    foreach (OverlayTile step in path)
+                    {
+                        Debug.Log($"PATH:{step.gridLocation}");
+                    }
                 }
             }
         }
@@ -89,14 +89,22 @@ public class CursorController : MonoBehaviour
         }
     }
 
-    public void GetInRangeTiles()
+    public void SetInRangeTiles()
     {
         foreach (OverlayTile item in inRangeTiles)
         {
             item.HideTile();
         }
 
-        inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), 3);
+        // feed the turn's remaining AP into the function
+        if (Engine.Instance.mode == 1)
+        {
+            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), 3);
+
+        } else
+        {
+            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), 1);
+        }
 
         foreach (OverlayTile item in inRangeTiles)
         {
