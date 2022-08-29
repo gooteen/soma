@@ -1693,6 +1693,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6895900443220609820, guid: 8ccbde6aca6a63843bf757a28db168a4,
         type: 3}
+    - target: {fileID: 6540451308970959483, guid: badb8577e85cd1d44839dece32f7bb74,
+        type: 3}
+      propertyPath: _enemyLayerMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 6540451308970959483, guid: badb8577e85cd1d44839dece32f7bb74,
+        type: 3}
+      propertyPath: _gridMarkerLayerMask.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 6540451308970959485, guid: badb8577e85cd1d44839dece32f7bb74,
         type: 3}
       propertyPath: m_RootOrder

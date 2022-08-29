@@ -7,7 +7,9 @@ public class CursorController : MonoBehaviour
     public static CursorController Instance { get { return _instance; } }
     private static CursorController _instance;
 
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private LayerMask _gridMarkerLayerMask;
+    [SerializeField] private LayerMask _enemyLayerMask;
+    private TacticalCharacterInfo _currentFocusedEnemy;
     private OverlayTile _focusedTile;
 
     private PathFinder pathFinder;
@@ -40,14 +42,15 @@ public class CursorController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (GetFocusedOnTile())
+        if (Engine.Instance.mode == 1)
         {
-            transform.position = new Vector3(_focusedTile.transform.position.x, _focusedTile.transform.position.y, _focusedTile.transform.position.z + 0.01f);
-            transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = _focusedTile.GetComponent<SpriteRenderer>().sortingOrder;
-            if(Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
+            if (GetFocusedOnTile())
             {
-                if (Engine.Instance.mode == 1)
+                transform.position = new Vector3(_focusedTile.transform.position.x, _focusedTile.transform.position.y, _focusedTile.transform.position.z + 0.01f);
+                transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = _focusedTile.GetComponent<SpriteRenderer>().sortingOrder;
+                if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
                 {
+                    
                     cursorLocked = true;
                     _destinationTile = _focusedTile;
 
@@ -56,9 +59,23 @@ public class CursorController : MonoBehaviour
                     {
                         Debug.Log($"PATH:{step.gridLocation}");
                     }
+                    
+                }
+            }
+        } else
+        {
+            if (GetFocusedOnEnemy())
+            {
+                if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
+                {
+                  if (inRangeTiles.Contains(_focusedTile))
+                    {
+                        _currentFocusedEnemy.TakeDamage(5);
+                    } 
                 }
             }
         }
+        
         if (path.Count > 0)
         {
             Debug.Log("Have a path!");
@@ -77,13 +94,31 @@ public class CursorController : MonoBehaviour
         // The camera component tagged "MainCamera"
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Engine.Instance.InputManager.GetMousePosition());
         Vector2 mousePos2d = new Vector2(mousePos.x, mousePos.y);
-        RaycastHit2D hit = Physics2D.Raycast(mousePos2d, Vector2.zero, Mathf.Infinity, _layerMask, -Mathf.Infinity, Mathf.Infinity);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos2d, Vector2.zero, Mathf.Infinity, _gridMarkerLayerMask, -Mathf.Infinity, Mathf.Infinity);
         if (hit.collider != null)
         {
             _focusedTile = hit.collider.gameObject.GetComponent<OverlayTile>();
             Debug.Log("Hit " + hit.collider.gameObject);
             return true;
         } else
+        {
+            return false;
+        }
+    }
+
+    public bool GetFocusedOnEnemy()
+    {
+        // The camera component tagged "MainCamera"
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Engine.Instance.InputManager.GetMousePosition());
+        Vector2 mousePos2d = new Vector2(mousePos.x, mousePos.y);
+        RaycastHit2D hit = Physics2D.Raycast(mousePos2d, Vector2.zero, Mathf.Infinity, _enemyLayerMask, -Mathf.Infinity, Mathf.Infinity);
+        if (hit.collider != null)
+        {
+            _currentFocusedEnemy = hit.collider.gameObject.GetComponent<TacticalCharacterInfo>();
+            _focusedTile = _currentFocusedEnemy.GetActiveTile();
+            return true;
+        }
+        else
         {
             return false;
         }

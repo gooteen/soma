@@ -32,11 +32,13 @@ public class Engine : MonoBehaviour
         {
             mode = 0;
             CursorController.Instance.SetInRangeTiles();
+            CursorController.Instance.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
         else
         {
             mode = 1;
             CursorController.Instance.SetInRangeTiles();
+            CursorController.Instance.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
     }
     // TEMP___________________________________________________
