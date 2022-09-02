@@ -4,13 +4,18 @@ using UnityEngine;
 
 public abstract class TacticalCharacterInfo : MonoBehaviour
 {
-    [SerializeField] private float _healthPoints = 50;
-    [SerializeField] private float _actionPoints = 5;
-    [SerializeField] private OverlayTile _activeTile;
+    [SerializeField] internal float _healthPoints = 50;
+    [SerializeField] internal float _actionPoints = 5;
+    [SerializeField] internal OverlayTile _activeTile;
 
     public void TakeDamage(float damage)
     {
         _healthPoints -= damage;
+    }
+
+    public float GetHP()
+    {
+        return _healthPoints;
     }
 
     public void SetActiveTile(OverlayTile tile)

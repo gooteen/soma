@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+// TEMP
+using UnityEngine.UI;
 
 public class MapManager : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class MapManager : MonoBehaviour
     // temporary
     [SerializeField] private Vector2Int _enemyStartingTile;
     [SerializeField] private Vector2 _enemyStartingOrientation;
+    [SerializeField] Text text;
 
     private void Awake()
     {
@@ -71,7 +74,12 @@ public class MapManager : MonoBehaviour
     {
         if (Engine.Instance.InputManager.LeftMouseButtonPressed())
         {
-            PrintMap();
+            // TEMP
+            if (GameObject.Find("EnemyTactical(Clone)") != null)
+            {
+                text.text = $"Enemy HP: {GameObject.Find("EnemyTactical(Clone)").GetComponent<TacticalCharacterInfo>().GetHP().ToString()}";
+            }
+            //PrintMap();
         }
     }
 

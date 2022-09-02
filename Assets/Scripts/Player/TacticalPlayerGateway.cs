@@ -19,6 +19,11 @@ public class TacticalPlayerGateway : MonoBehaviour
         return _tacticalPlayerMovement.MoveAlongPath(path, destination);
     }
 
+    public string GetCurrentStaticDirection()
+    {
+        return _playerAnimation.GetCurrentStaticDirection();
+    }
+
     public void SetDirection(Vector2 direction)
     {
         _playerAnimation.SetDirection(direction);

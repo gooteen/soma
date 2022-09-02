@@ -24,7 +24,7 @@ public class PathFinder
                 return GetFinishedList(start, end);
             }
 
-            var neighbourTiles = GetNeighbourTiles(currentOverlayTile, searchableTiles);
+            var neighbourTiles = GetNeighbourTiles(currentOverlayTile, searchableTiles, new List<string> { "NW", "SE", "SW", "NE" });
 
             foreach (var neighbour in neighbourTiles)
             {
@@ -47,7 +47,7 @@ public class PathFinder
         return new List<OverlayTile>();
     }
 
-    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles)
+    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles, List<string> modes)
     {
         Dictionary<Vector2Int, OverlayTile> map = MapManager.Instance.map;
         Dictionary<Vector2Int, OverlayTile> tilesToSearch = new Dictionary<Vector2Int, OverlayTile>();
@@ -65,46 +65,55 @@ public class PathFinder
 
         List<OverlayTile> neighbours = new List<OverlayTile>();
 
-        Vector2Int locationToCheckTop = new Vector2Int(
-            currentOverlayTile.gridLocation.x,
-            currentOverlayTile.gridLocation.y + 1
-            );
-
-        if (tilesToSearch.ContainsKey(locationToCheckTop))
+        if (modes.Contains("NW"))
         {
-            neighbours.Add(tilesToSearch[locationToCheckTop]);
+            Vector2Int locationToCheckTop = new Vector2Int(
+           currentOverlayTile.gridLocation.x,
+           currentOverlayTile.gridLocation.y + 1
+           );
+
+            if (tilesToSearch.ContainsKey(locationToCheckTop))
+            {
+                neighbours.Add(tilesToSearch[locationToCheckTop]);
+            }
         }
 
-        Vector2Int locationToCheckBottom = new Vector2Int(
-            currentOverlayTile.gridLocation.x,
-            currentOverlayTile.gridLocation.y - 1
-            );
-
-        if (tilesToSearch.ContainsKey(locationToCheckBottom))
+        if (modes.Contains("SE"))
         {
-            neighbours.Add(tilesToSearch[locationToCheckBottom]);
+            Vector2Int locationToCheckBottom = new Vector2Int(
+        currentOverlayTile.gridLocation.x,
+        currentOverlayTile.gridLocation.y - 1
+        );
+
+            if (tilesToSearch.ContainsKey(locationToCheckBottom))
+            {
+                neighbours.Add(tilesToSearch[locationToCheckBottom]);
+            }
         }
-
-        Vector2Int locationToCheckRight = new Vector2Int(
-            currentOverlayTile.gridLocation.x + 1,
-            currentOverlayTile.gridLocation.y
-            );
-
-        if (tilesToSearch.ContainsKey(locationToCheckRight))
+        if (modes.Contains("NE"))
         {
-            neighbours.Add(tilesToSearch[locationToCheckRight]);
-        }
+            Vector2Int locationToCheckRight = new Vector2Int(
+        currentOverlayTile.gridLocation.x + 1,
+        currentOverlayTile.gridLocation.y
+        );
 
-        Vector2Int locationToCheckLeft = new Vector2Int(
+            if (tilesToSearch.ContainsKey(locationToCheckRight))
+            {
+                neighbours.Add(tilesToSearch[locationToCheckRight]);
+            }
+        }
+        if (modes.Contains("SW"))
+        {
+            Vector2Int locationToCheckLeft = new Vector2Int(
             currentOverlayTile.gridLocation.x - 1,
             currentOverlayTile.gridLocation.y
             );
 
-        if (tilesToSearch.ContainsKey(locationToCheckLeft))
-        {
-            neighbours.Add(tilesToSearch[locationToCheckLeft]);
+            if (tilesToSearch.ContainsKey(locationToCheckLeft))
+            {
+                neighbours.Add(tilesToSearch[locationToCheckLeft]);
+            }
         }
-
         return neighbours;
     }
 

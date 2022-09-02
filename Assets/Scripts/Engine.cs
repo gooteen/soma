@@ -28,17 +28,22 @@ public class Engine : MonoBehaviour
 
     public void ChangeMode()
     {
-        if (mode == 1)
+        mode++;
+
+        if (mode == 3)
         {
             mode = 0;
+        } 
+
+        if (mode == 0)
+        {
             CursorController.Instance.SetInRangeTiles();
-            CursorController.Instance.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            CursorController.Instance.gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
         else
         {
-            mode = 1;
             CursorController.Instance.SetInRangeTiles();
-            CursorController.Instance.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            CursorController.Instance.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
     // TEMP___________________________________________________

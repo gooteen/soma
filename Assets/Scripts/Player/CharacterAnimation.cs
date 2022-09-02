@@ -43,6 +43,11 @@ public class CharacterAnimation : MonoBehaviour
         _anim.Play(_directionArray[_lastDirection]);
     }
 
+    public string GetCurrentStaticDirection()
+    {
+        return _staticDirections[_lastDirection];
+    }
+
     private int DirectionToIndex(Vector2 direction)
     {
         float step = 360 / _numberOfSlices;

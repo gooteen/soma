@@ -42,7 +42,7 @@ public class CursorController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Engine.Instance.mode == 1)
+        if (Engine.Instance.mode == 0)
         {
             if (GetFocusedOnTile())
             {
@@ -132,13 +132,16 @@ public class CursorController : MonoBehaviour
         }
 
         // feed the turn's remaining AP into the function
-        if (Engine.Instance.mode == 1)
+        if (Engine.Instance.mode == 0)
         {
             inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), 3);
 
-        } else
+        } else if (Engine.Instance.mode == 1)
         {
             inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), 1);
+        } else
+        {
+            inRangeTiles = rangeFinder.GetTilesInIntervalVer2(Engine.Instance.TacticalPlayer.GetActiveTile(), 6, new List<string> { "NW", "SE", "SW", "NE" });
         }
 
         foreach (OverlayTile item in inRangeTiles)
