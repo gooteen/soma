@@ -6,6 +6,7 @@ public class TacticalMovement : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private CharacterAnimation _anim;
+    [SerializeField] private int ActionPointsPerStep;
     private TacticalCharacterInfo _info;
 
     private OverlayTile _destinationTile;
@@ -47,9 +48,13 @@ public class TacticalMovement : MonoBehaviour
             if (_info.GetActiveTile() == _destinationTile)
             {
                 transform.position = _nextTile.position;
-                CursorController.Instance.SetInRangeTiles();
+                if (gameObject.tag != "EnemyTactical")
+                {
+                    CursorController.Instance.SetInRangeTiles();
+                }
             }
             path.RemoveAt(0);
+            _info.TakeAwayActionPoints(ActionPointsPerStep);
         }
         return path;
     }

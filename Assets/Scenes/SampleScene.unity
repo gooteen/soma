@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 169661010}
   - component: {fileID: 169661011}
   - component: {fileID: 169661012}
+  - component: {fileID: 169661013}
   m_Layer: 0
   m_Name: Engine
   m_TagString: Untagged
@@ -179,6 +180,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 0
   _player: {fileID: 0}
+--- !u!114 &169661013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169661009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468fafd064fd4e74eaed624be49457fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _charactersInBattle: []
+  _currentCharacter: {fileID: 0}
+  _timeBetweenTurns: 0
 --- !u!1 &240346254
 GameObject:
   m_ObjectHideFlags: 0

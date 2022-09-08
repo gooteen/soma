@@ -10,8 +10,10 @@ public class Engine : MonoBehaviour
     [SerializeField] private TacticalPlayerGateway _player;
 
     private InputManager _input;
+    private TurnManager _turnManager;
 
     public InputManager InputManager { get { return _input; } }
+    public TurnManager TurnManager { get { return _turnManager; } }
     
     //геттер и сеттер на класс-интерфейс игрока
     public TacticalPlayerGateway TacticalPlayer { get { return _player; } }
@@ -22,6 +24,7 @@ public class Engine : MonoBehaviour
     {
         Instance = this;
         _input = GetComponent<InputManager>();
+        _turnManager = GetComponent<TurnManager>();
     }
 
     // TEMP __________________________________________________

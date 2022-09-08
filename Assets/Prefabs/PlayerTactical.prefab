@@ -85,6 +85,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca92835858c64a84696d6f0af7e3d6ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthPoints: 50
+  _actionPoints: 5
+  _damage: 5
   _activeTile: {fileID: 0}
 --- !u!114 &7938189183334727638
 MonoBehaviour:
@@ -100,6 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 2
   _anim: {fileID: 6895900443413973571}
+  ActionPointsPerStep: 1
 --- !u!114 &318807871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02830df51f512b845a641840de95da36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInfo: {fileID: 0}
   _playerAnimation: {fileID: 6895900443413973571}
 --- !u!1 &6895900443413973567
 GameObject:

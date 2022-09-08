@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 2343581408617937799}
   m_Layer: 10
   m_Name: EnemyTactical
-  m_TagString: PlayerTactical
+  m_TagString: EnemyTactical
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,6 +200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a8af94327092c49927abd1b47beebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _healthPoints: 50
+  _actionPoints: 5
+  _damage: 5
   _activeTile: {fileID: 0}
 --- !u!114 &2343581408617937799
 MonoBehaviour:
@@ -215,3 +218,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1
   _anim: {fileID: 6980584620542662225}
+  ActionPointsPerStep: 1

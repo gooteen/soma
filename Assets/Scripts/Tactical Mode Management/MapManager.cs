@@ -91,6 +91,18 @@ public class MapManager : MonoBehaviour
         }
     }
 
+    public List<OverlayTile> GetAllTilesOnMap()
+    {
+        List<OverlayTile> allTiles = new List<OverlayTile>();
+        foreach (var tile in map)
+        {
+            allTiles.Add(tile.Value);
+        }
+
+        return allTiles;
+    }
+
+
     public void PositionPlayer(Vector2Int position)
     {
         map.TryGetValue(position, out OverlayTile tile);

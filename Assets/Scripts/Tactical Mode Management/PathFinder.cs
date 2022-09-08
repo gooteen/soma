@@ -47,6 +47,11 @@ public class PathFinder
         return new List<OverlayTile>();
     }
 
+    public int GetManhattanDistance(OverlayTile start, OverlayTile neighbour)
+    {
+        return Mathf.Abs(start.gridLocation.x - neighbour.gridLocation.x) + Mathf.Abs(start.gridLocation.y - neighbour.gridLocation.y);
+    }
+
     public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles, List<string> modes)
     {
         Dictionary<Vector2Int, OverlayTile> map = MapManager.Instance.map;
@@ -131,10 +136,5 @@ public class PathFinder
         finishedList.Reverse();
 
         return finishedList;
-    }
-
-    private int GetManhattanDistance(OverlayTile start, OverlayTile neighbour)
-    {
-        return Mathf.Abs(start.gridLocation.x - neighbour.gridLocation.x) + Mathf.Abs(start.gridLocation.y - neighbour.gridLocation.y);
     }
 }
