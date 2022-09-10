@@ -25,7 +25,11 @@ public class MapManager : MonoBehaviour
     // temporary
     [SerializeField] private Vector2Int _enemyStartingTile;
     [SerializeField] private Vector2 _enemyStartingOrientation;
-    [SerializeField] Text text;
+    [SerializeField] Text PlayerTextHP;
+    [SerializeField] Text PlayerTextAP;
+    [SerializeField] Text EnemyTextHP;
+    [SerializeField] Text EnemyTextAP;
+
 
     private void Awake()
     {
@@ -67,20 +71,32 @@ public class MapManager : MonoBehaviour
         }
         PositionPlayer(_characterStartingTile);
         PositionEnemy(_enemyStartingTile);
+        Engine.Instance.TurnManager.SetNextCharacter();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Engine.Instance.InputManager.LeftMouseButtonPressed())
+        
+        // TEMP
+        if (GameObject.Find("EnemyTactical(Clone)") != null)
         {
-            // TEMP
-            if (GameObject.Find("EnemyTactical(Clone)") != null)
-            {
-                text.text = $"Enemy HP: {GameObject.Find("EnemyTactical(Clone)").GetComponent<TacticalCharacterInfo>().GetHP().ToString()}";
-            }
-            //PrintMap();
+            EnemyTextHP.text = $"Enemy HP: {GameObject.Find("EnemyTactical(Clone)").GetComponent<TacticalCharacterInfo>().GetHealthPoints().ToString()}";
         }
+        if (GameObject.Find("PlayerTactical(Clone)") != null)
+        {
+            PlayerTextHP.text = $"Player HP: {GameObject.Find("PlayerTactical(Clone)").GetComponent<TacticalCharacterInfo>().GetHealthPoints().ToString()}";
+        }
+        if (GameObject.Find("EnemyTactical(Clone)") != null)
+        {
+            EnemyTextAP.text = $"Enemy AP: {GameObject.Find("EnemyTactical(Clone)").GetComponent<TacticalCharacterInfo>().GetActionPoints().ToString()}";
+        }
+        if (GameObject.Find("PlayerTactical(Clone)") != null)
+        {
+            PlayerTextAP.text = $"Player AP: {GameObject.Find("PlayerTactical(Clone)").GetComponent<TacticalCharacterInfo>().GetActionPoints().ToString()}";
+        }
+        //PrintMap();
+        
     }
 
     void PrintMap()
@@ -108,7 +124,9 @@ public class MapManager : MonoBehaviour
         map.TryGetValue(position, out OverlayTile tile);
         //Debug.Log("tile: " + tile);
         GameObject character = Instantiate(_characterPrefab);
+
         Engine.Instance.InitializeTacticalPlayer(character);
+        Engine.Instance.TurnManager.AddCharacterToTheList(character);
 
         character.transform.position = tile.transform.position;
 
@@ -123,6 +141,8 @@ public class MapManager : MonoBehaviour
         map.TryGetValue(position, out OverlayTile tile);
         //Debug.Log("tile: " + tile);
         GameObject character = Instantiate(_enemyPrefab);
+        Engine.Instance.TurnManager.AddCharacterToTheList(character);
+
         TacticalEnemyInfo enemy = character.GetComponent<TacticalEnemyInfo>();
         CharacterAnimation animation = character.GetComponentsInChildren<CharacterAnimation>()[0];
         Debug.Log("animation: " + animation);

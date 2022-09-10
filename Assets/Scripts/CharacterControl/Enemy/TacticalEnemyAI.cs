@@ -6,9 +6,12 @@ using System.Linq;
 public class TacticalEnemyAI : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _playersInBattle;
+    [SerializeField] private bool _inATurn;
+
     private TacticalCharacterInfo _info;
     private TacticalMovement _movement;
-    private bool _inATurn;
+
+    private Dictionary<OverlayTile, GameObject> destinationToTarget;
 
     private List<OverlayTile> _currentPath;
     private OverlayTile _currentDestinationTile;
@@ -23,8 +26,9 @@ public class TacticalEnemyAI : MonoBehaviour
     {
         _info = GetComponent<TacticalCharacterInfo>();
         _movement = GetComponent<TacticalMovement>();
+        destinationToTarget = new Dictionary<OverlayTile, GameObject>();
 
-        GameObject[] _charactersInBattle = Engine.Instance.TurnManager.GetCharactersInBattle();
+        List<GameObject> _charactersInBattle = Engine.Instance.TurnManager.GetCharactersInBattle();
         foreach (GameObject character in _charactersInBattle)
         {
             if (character.tag != "EnemyTactical")
@@ -40,38 +44,48 @@ public class TacticalEnemyAI : MonoBehaviour
     {
         if (_inATurn)
         {
+            Debug.Log("Enemy's turn!!");
             if(!_targetInReach)
             {
-                if (_info.GetAP() > 0)
+                if (_info.GetActionPoints() > 0)
                 {
                     _currentPath = _movement.MoveAlongPath(_currentPath, _currentDestinationTile);
                 } else
                 {
+                    Debug.Log("finished turn");
+                    _movement.DropDestinationTile();
                     FinishTurn();
                 }
             } else
             {
-                if (_info.GetAP() > 0)
+                if (_info.GetActionPoints() > 0)
                 {
-                    _currentTargetInReach = Engine.Instance.TurnManager.FindCharacterByTile(_currentDestinationTile);
-                    StartCoroutine("Hit");
+                    _currentTargetInReach = destinationToTarget[_currentDestinationTile];
+                    Hit();
                 } else
                 {
                     FinishTurn();
+                    Debug.Log("finished turn");
                 }
             }
         }
     }
 
+    public void SetTargetInReach()
+    {
+        _targetInReach = true;
+    }
+
     public void StartTurn()
     {
+        Debug.Log("started turn");
         SetGoal();
         _inATurn = true;
     }
 
-    private IEnumerator Hit()
+    private void Hit()
     {
-        yield return new WaitForSeconds(3);
+        Debug.Log("_currentTargetInReach: " + _currentTargetInReach);
         _currentTargetInReach.GetComponent<TacticalCharacterInfo>().TakeDamage(5);
         _info.TakeAwayActionPoints(1);
     }
@@ -79,12 +93,15 @@ public class TacticalEnemyAI : MonoBehaviour
     private void FinishTurn()
     {
         _inATurn = false;
+        destinationToTarget.Clear();
         Engine.Instance.TurnManager.ToNextTurn();
+
     }
 
     private void SetGoal()
     {
         Dictionary<OverlayTile, int> tileManhattanDistances = new Dictionary<OverlayTile, int>();
+
         OverlayTile _closestTile;
         foreach (GameObject player in _playersInBattle)
         {
@@ -95,6 +112,7 @@ public class TacticalEnemyAI : MonoBehaviour
             {
                 int tileManhattanDistance =_pathFinder.GetManhattanDistance(_info.GetActiveTile(), tile);
                 tileManhattanDistances.Add(tile, tileManhattanDistance);
+                destinationToTarget.Add(tile, player);
             }
         }
         _closestTile = tileManhattanDistances.OrderBy(x => x.Value).First().Key;

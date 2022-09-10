@@ -29,6 +29,20 @@ public class Engine : MonoBehaviour
 
     // TEMP __________________________________________________
 
+    public void UpdatePlayerGateway(TacticalPlayerGateway player)
+    {
+        if (player == null)
+        {
+            _player = null;
+            Debug.Log("Gateway null");
+        }
+        else
+        {
+            Debug.Log("Gateway: " + player);
+        }
+        _player = player;
+    }
+
     public void ChangeMode()
     {
         mode++;
@@ -41,16 +55,15 @@ public class Engine : MonoBehaviour
         if (mode == 0)
         {
             CursorController.Instance.SetInRangeTiles();
-            CursorController.Instance.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            CursorController.Instance.ShowCursor();
         }
         else
         {
             CursorController.Instance.SetInRangeTiles();
-            CursorController.Instance.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            CursorController.Instance.HideCursor();
         }
     }
     // TEMP___________________________________________________
-
 
     public void InitializeTacticalPlayer(GameObject player)
     {

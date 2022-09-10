@@ -129,6 +129,7 @@ GameObject:
   - component: {fileID: 6980584620890363663}
   - component: {fileID: 6980584620890363657}
   - component: {fileID: 2343581408617937799}
+  - component: {fileID: 2789111881980390340}
   m_Layer: 10
   m_Name: EnemyTactical
   m_TagString: EnemyTactical
@@ -201,7 +202,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthPoints: 50
-  _actionPoints: 5
+  _maxActionPoints: 5
+  _currentActionPoints: 0
   _damage: 5
   _activeTile: {fileID: 0}
 --- !u!114 &2343581408617937799
@@ -219,3 +221,17 @@ MonoBehaviour:
   _speed: 1
   _anim: {fileID: 6980584620542662225}
   ActionPointsPerStep: 1
+--- !u!114 &2789111881980390340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980584620890363662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f032962fa19547644a470fe3c75779ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playersInBattle: []
+  _inATurn: 0

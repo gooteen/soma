@@ -86,7 +86,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthPoints: 50
-  _actionPoints: 5
+  _maxActionPoints: 5
+  _currentActionPoints: 0
   _damage: 5
   _activeTile: {fileID: 0}
 --- !u!114 &7938189183334727638

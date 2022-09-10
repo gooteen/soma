@@ -36,6 +36,11 @@ public class TacticalMovement : MonoBehaviour
         }
     }
 
+    public void DropDestinationTile()
+    {
+        _destinationTile = null;
+    }
+
     public List<OverlayTile> MoveAlongPath(List<OverlayTile> path, OverlayTile destination)
     {
         _destinationTile = destination;
@@ -44,6 +49,7 @@ public class TacticalMovement : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, _nextTile.position, _speed * Time.deltaTime);
         if (Vector3.Distance(transform.position, _nextTile.position) < 0.0001f)
         {
+            _info.TakeAwayActionPoints(ActionPointsPerStep);
             _info.SetActiveTile(path[0]);
             if (_info.GetActiveTile() == _destinationTile)
             {
@@ -51,10 +57,12 @@ public class TacticalMovement : MonoBehaviour
                 if (gameObject.tag != "EnemyTactical")
                 {
                     CursorController.Instance.SetInRangeTiles();
+                } else
+                {
+                    gameObject.GetComponent<TacticalEnemyAI>().SetTargetInReach();
                 }
             }
             path.RemoveAt(0);
-            _info.TakeAwayActionPoints(ActionPointsPerStep);
         }
         return path;
     }

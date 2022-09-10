@@ -42,51 +42,79 @@ public class CursorController : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Engine.Instance.mode == 0)
+        if (Engine.Instance.TacticalPlayer != null)
         {
-            if (GetFocusedOnTile())
+            if (Engine.Instance.TacticalPlayer.GetActionPoints() > 0)
             {
-                transform.position = new Vector3(_focusedTile.transform.position.x, _focusedTile.transform.position.y, _focusedTile.transform.position.z + 0.01f);
-                transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = _focusedTile.GetComponent<SpriteRenderer>().sortingOrder;
-                if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
+                if (Engine.Instance.mode == 0)
                 {
-                    
-                    cursorLocked = true;
-                    _destinationTile = _focusedTile;
+                    if (GetFocusedOnTile())
+                    {
+                        transform.position = new Vector3(_focusedTile.transform.position.x, _focusedTile.transform.position.y, _focusedTile.transform.position.z + 0.01f);
+                        transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = _focusedTile.GetComponent<SpriteRenderer>().sortingOrder;
+                        if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
+                        {
+                            cursorLocked = true;
+                            _destinationTile = _focusedTile;
 
-                    path = pathFinder.FindPath(Engine.Instance.TacticalPlayer.GetActiveTile(), _destinationTile, inRangeTiles);
-                    foreach (OverlayTile step in path)
-                    {
-                        Debug.Log($"PATH:{step.gridLocation}");
+                            path = pathFinder.FindPath(Engine.Instance.TacticalPlayer.GetActiveTile(), _destinationTile, inRangeTiles);
+                            foreach (OverlayTile step in path)
+                            {
+                                Debug.Log($"PATH:{step.gridLocation}");
+                            }
+
+                        }
                     }
-                    
                 }
-            }
-        } else
-        {
-            if (GetFocusedOnEnemy())
-            {
-                if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
+                else
                 {
-                  if (inRangeTiles.Contains(_focusedTile))
+                    if (GetFocusedOnEnemy())
                     {
-                        _currentFocusedEnemy.TakeDamage(5);
-                    } 
+                        if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
+                        {
+                            if (inRangeTiles.Contains(_focusedTile))
+                            {
+                                _currentFocusedEnemy.TakeDamage(5);
+                                Engine.Instance.TacticalPlayer.TakeAwayActionPoints(1);
+                                SetInRangeTiles();
+                                if (Engine.Instance.TacticalPlayer.GetActionPoints() == 0)
+                                {
+                                    HideCursor();
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (path.Count > 0)
+                {
+                    Debug.Log("Have a path!");
+
+                    path = Engine.Instance.TacticalPlayer.MoveAlongPath(path, _destinationTile);
+                    //MoveAlongPath();
+
+                }
+                else
+                {
+                    cursorLocked = false;
                 }
             }
+            else
+            {
+                Debug.Log("next turn!!!");
+                Engine.Instance.TurnManager.ToNextTurn();
+            }
         }
-        
-        if (path.Count > 0)
-        {
-            Debug.Log("Have a path!");
-           
-            path = Engine.Instance.TacticalPlayer.MoveAlongPath(path, _destinationTile);
-            //MoveAlongPath();
-            
-        } else
-        {
-            cursorLocked = false;
-        }
+    }
+
+    public void HideCursor()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    public void ShowCursor()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     public bool GetFocusedOnTile()
@@ -130,11 +158,12 @@ public class CursorController : MonoBehaviour
         {
             item.HideTile();
         }
-
+        
         // feed the turn's remaining AP into the function
         if (Engine.Instance.mode == 0)
         {
-            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), 3);
+            Debug.Log("Current ap: " + Engine.Instance.TacticalPlayer.GetActionPoints());
+            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), Engine.Instance.TacticalPlayer.GetActionPoints());
 
         } else if (Engine.Instance.mode == 1)
         {
@@ -144,9 +173,12 @@ public class CursorController : MonoBehaviour
             inRangeTiles = rangeFinder.GetTilesInIntervalVer2(Engine.Instance.TacticalPlayer.GetActiveTile(), 6, new List<string> { "NW", "SE", "SW", "NE" });
         }
 
-        foreach (OverlayTile item in inRangeTiles)
+        if (Engine.Instance.TacticalPlayer.GetActionPoints() > 0) 
         {
-            item.ShowTile();
+            foreach (OverlayTile item in inRangeTiles)
+            {
+                item.ShowTile();
+            }
         }
     }
 

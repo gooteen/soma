@@ -4,27 +4,36 @@ using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _charactersInBattle;
+    [SerializeField] private List<GameObject> _charactersInBattle;
     [SerializeField] private GameObject _currentCharacter;
 
     [SerializeField] private float _timeBetweenTurns;
 
-    private int index;
+    [SerializeField] private int index;
     
     void Start()
     {
-        index = 0;
+        index = -1;
     }
 
     public void ToNextTurn()
     {
-        SetNextCharacter();
-        StartCoroutine("Cooldown");
+        StartCoroutine("CoolDown");
     }
 
-    public GameObject[] GetCharactersInBattle()
+    public void AddCharacterToTheList(GameObject character)
+    {
+        _charactersInBattle.Add(character);
+    }
+
+    public List<GameObject> GetCharactersInBattle()
     {
         return _charactersInBattle;
+    }
+
+    public GameObject GetCurrentCharacter()
+    {
+        return _currentCharacter;
     }
 
     public GameObject FindCharacterByTile(OverlayTile tile)
@@ -39,24 +48,46 @@ public class TurnManager : MonoBehaviour
         return null;
     }
 
-    private IEnumerator CoolDown()
-    {
-        yield return new WaitForSeconds(_timeBetweenTurns);
-        if (_currentCharacter.tag == "EnemyTactical")
-        {
-            CallEnemyMove(_currentCharacter);
-        }
-    }
-
-    private void SetNextCharacter()
+    public void SetNextCharacter()
     {
         index++;
-        if (index == _charactersInBattle.Length)
+        if (index == _charactersInBattle.Count)
         {
             index = 0;
         }
 
+        Debug.Log("Count: " + _charactersInBattle.Count + " Index: " + index);
+
         _currentCharacter = _charactersInBattle[index];
+        Debug.Log("CurrentCharacter: " + _currentCharacter);
+
+        _currentCharacter.GetComponent<TacticalCharacterInfo>().RefillActionPoints();
+
+        if (_currentCharacter.tag != "EnemyTactical")
+        {
+            Engine.Instance.UpdatePlayerGateway(_currentCharacter.GetComponent<TacticalPlayerGateway>());
+            CursorController.Instance.ShowCursor();
+            CursorController.Instance.SetInRangeTiles();
+        }
+        else
+        {
+            CursorController.Instance.HideCursor();
+            Engine.Instance.UpdatePlayerGateway(null);
+        }
+    }
+
+    private IEnumerator CoolDown()
+    {
+        SetNextCharacter();
+        Debug.Log("Coroutine one");
+        yield return new WaitForSeconds(_timeBetweenTurns);
+        Debug.Log("Coroutine two");
+
+        if (_currentCharacter.tag == "EnemyTactical")
+        {
+            Debug.Log("YO");
+            CallEnemyMove(_currentCharacter);
+        }
     }
 
     private void CallEnemyMove(GameObject enemy) 

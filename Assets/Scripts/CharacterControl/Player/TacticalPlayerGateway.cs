@@ -14,6 +14,16 @@ public class TacticalPlayerGateway : MonoBehaviour
         _tacticalPlayerMovement = GetComponent<TacticalMovement>();
     }
 
+    public int GetActionPoints()
+    {
+        return _playerInfo.GetActionPoints();
+    }
+
+    public void TakeAwayActionPoints(int points)
+    {
+        _playerInfo.TakeAwayActionPoints(points);
+    }
+
     public List<OverlayTile> MoveAlongPath(List<OverlayTile> path, OverlayTile destination)
     {
         return _tacticalPlayerMovement.MoveAlongPath(path, destination);

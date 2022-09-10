@@ -5,11 +5,17 @@ using UnityEngine;
 public abstract class TacticalCharacterInfo : MonoBehaviour
 {
     [SerializeField] internal float _healthPoints = 50;
-    [SerializeField] internal int _actionPoints = 5;
+    [SerializeField] internal int _maxActionPoints = 20;
+    [SerializeField] internal int _currentActionPoints;
 
     //TEMP
     [SerializeField] internal int _damage = 5;
     [SerializeField] internal OverlayTile _activeTile;
+
+    void Awake()
+    {
+        _currentActionPoints = _maxActionPoints;
+    }
 
     public void TakeDamage(float damage)
     {
@@ -18,17 +24,22 @@ public abstract class TacticalCharacterInfo : MonoBehaviour
 
     public void TakeAwayActionPoints(int points)
     {
-        _actionPoints -= points;
+        _currentActionPoints -= points;
     }
 
-    public float GetHP()
+    public void RefillActionPoints()
+    {
+        _currentActionPoints = _maxActionPoints;
+    }
+
+    public float GetHealthPoints()
     {
         return _healthPoints;
     }
 
-    public int GetAP()
+    public int GetActionPoints()
     {
-        return _actionPoints;
+        return _currentActionPoints;
     }
 
     public void SetActiveTile(OverlayTile tile)
