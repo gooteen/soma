@@ -62,6 +62,7 @@ public class TurnManager : MonoBehaviour
         Debug.Log("CurrentCharacter: " + _currentCharacter);
 
         _currentCharacter.GetComponent<TacticalCharacterInfo>().RefillActionPoints();
+        LockCharacterTiles();
 
         if (_currentCharacter.tag != "EnemyTactical")
         {
@@ -93,5 +94,22 @@ public class TurnManager : MonoBehaviour
     private void CallEnemyMove(GameObject enemy) 
     {
         enemy.GetComponent<TacticalEnemyAI>().StartTurn();
+    }
+
+    private void LockCharacterTiles()
+    {
+        for (int i = 0; i < _charactersInBattle.Count; i++)
+        {
+            Debug.Log("Index: " +i);
+            if (i == index)
+            {
+                Debug.Log("Unlocked tile for " + i);
+                _charactersInBattle[i].GetComponent<TacticalCharacterInfo>().GetActiveTile().UnlockTile();
+            } else
+            {
+                Debug.Log("Locked tile for " + i);
+                _charactersInBattle[i].GetComponent<TacticalCharacterInfo>().GetActiveTile().LockTile();
+            }
+        }
     }
 }

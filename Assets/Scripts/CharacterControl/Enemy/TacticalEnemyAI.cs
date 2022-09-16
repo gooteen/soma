@@ -106,8 +106,8 @@ public class TacticalEnemyAI : MonoBehaviour
         foreach (GameObject player in _playersInBattle)
         {
             OverlayTile _playerCurrentTile = player.GetComponent<TacticalCharacterInfo>().GetActiveTile();
-            List<OverlayTile> _playerTilesInRange = _rangeFinder.GetTilesInRange(_playerCurrentTile, 1);
-            List<OverlayTile> _playerNeighbourTiles = _pathFinder.GetNeighbourTiles(_playerCurrentTile, _playerTilesInRange, new List<string> { "NW", "SE", "SW", "NE" });
+            List<OverlayTile> _playerTilesInRange = _rangeFinder.GetTilesInRange(_playerCurrentTile, 1, true);
+            List<OverlayTile> _playerNeighbourTiles = _pathFinder.GetNeighbourTiles(_playerCurrentTile, _playerTilesInRange, new List<string> { "NW", "SE", "SW", "NE" }, true);
             foreach (OverlayTile tile in _playerNeighbourTiles)
             {
                 int tileManhattanDistance =_pathFinder.GetManhattanDistance(_info.GetActiveTile(), tile);

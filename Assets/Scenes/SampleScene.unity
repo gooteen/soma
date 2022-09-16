@@ -1977,12 +1977,20 @@ MonoBehaviour:
   overlayContainer: {fileID: 2043911680}
   _characterPrefab: {fileID: 6895900443220609820, guid: 8ccbde6aca6a63843bf757a28db168a4,
     type: 3}
+  _character1Prefab: {fileID: 6895900443220609820, guid: 8ccbde6aca6a63843bf757a28db168a4,
+    type: 3}
   _enemyPrefab: {fileID: 6980584620890363662, guid: bd5c463f5f585204cb60fda9139e0d10,
     type: 3}
+  _enemy1Prefab: {fileID: 6980584620890363662, guid: bd5c463f5f585204cb60fda9139e0d10,
+    type: 3}
   _characterStartingTile: {x: 7, y: 7}
+  _character1StartingTile: {x: 7, y: 9}
   _characterStartingOrientation: {x: 0.5, y: 1}
+  _character1StartingOrientation: {x: 0.5, y: 1}
   _enemyStartingTile: {x: 12, y: 7}
+  _enemy1StartingTile: {x: 12, y: 9}
   _enemyStartingOrientation: {x: -0.5, y: -1}
+  _enemy1StartingOrientation: {x: -0.5, y: -1}
   PlayerTextHP: {fileID: 1635263298}
   PlayerTextAP: {fileID: 1259094428}
   EnemyTextHP: {fileID: 1688442872}

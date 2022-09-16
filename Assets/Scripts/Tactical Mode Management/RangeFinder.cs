@@ -7,7 +7,7 @@ public class RangeFinder
 {
     private PathFinder _pathFinder;
 
-    public List<OverlayTile> GetTilesInRange(OverlayTile startingTile, int range)
+    public List<OverlayTile> GetTilesInRange(OverlayTile startingTile, int range, bool needToExcludeBlockedTiles)
     {
         _pathFinder = new PathFinder();
         List<OverlayTile> inRangeTiles = new List<OverlayTile>();
@@ -24,7 +24,7 @@ public class RangeFinder
 
             foreach (OverlayTile item in tileForPreviousStep)
             {
-                surroundingTiles.AddRange(_pathFinder.GetNeighbourTiles(item, new List<OverlayTile>(), new List<string> { "NW", "SE", "SW", "NE" }));
+                surroundingTiles.AddRange(_pathFinder.GetNeighbourTiles(item, new List<OverlayTile>(), new List<string> { "NW", "SE", "SW", "NE" }, needToExcludeBlockedTiles));
 
             }
             inRangeTiles.AddRange(surroundingTiles);
@@ -52,7 +52,7 @@ public class RangeFinder
 
             foreach (OverlayTile item in tileForPreviousStep)
             {
-                surroundingTiles.AddRange(_pathFinder.GetNeighbourTiles(item, new List<OverlayTile>(), new List<string> { _direction }));
+                surroundingTiles.AddRange(_pathFinder.GetNeighbourTiles(item, new List<OverlayTile>(), new List<string> { _direction }, false));
 
             }
             inRangeTiles.AddRange(surroundingTiles);
@@ -80,7 +80,7 @@ public class RangeFinder
 
                 foreach (OverlayTile item in tileForPreviousStep)
                 {
-                    surroundingTiles.AddRange(_pathFinder.GetNeighbourTiles(item, new List<OverlayTile>(), new List<string> {direction}));
+                    surroundingTiles.AddRange(_pathFinder.GetNeighbourTiles(item, new List<OverlayTile>(), new List<string> {direction}, false));
 
                 }
                 inRangeTiles.AddRange(surroundingTiles);
@@ -90,6 +90,18 @@ public class RangeFinder
         }
         
         return inRangeTiles.Distinct().ToList();
+    }
+
+    private List<OverlayTile> RemoveBlockedTilesFromList(List<OverlayTile> tiles)
+    {
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            if (tiles[i].IsBlocked())
+            {
+                tiles.RemoveAt(i);
+            }
+        }
+        return tiles;
     }
 
 }

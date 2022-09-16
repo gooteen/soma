@@ -16,7 +16,7 @@ public class CursorController : MonoBehaviour
     private RangeFinder rangeFinder;
 
     private List<OverlayTile> path = new List<OverlayTile>();
-    private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
+    [SerializeField] private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
 
     private OverlayTile _destinationTile;
     private bool cursorLocked;
@@ -163,11 +163,11 @@ public class CursorController : MonoBehaviour
         if (Engine.Instance.mode == 0)
         {
             Debug.Log("Current ap: " + Engine.Instance.TacticalPlayer.GetActionPoints());
-            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), Engine.Instance.TacticalPlayer.GetActionPoints());
+            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), Engine.Instance.TacticalPlayer.GetActionPoints(), true);
 
         } else if (Engine.Instance.mode == 1)
         {
-            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), 1);
+            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), 1, false);
         } else
         {
             inRangeTiles = rangeFinder.GetTilesInIntervalVer2(Engine.Instance.TacticalPlayer.GetActiveTile(), 6, new List<string> { "NW", "SE", "SW", "NE" });

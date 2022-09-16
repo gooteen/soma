@@ -16,7 +16,7 @@ public class OverlayTile : MonoBehaviour
 
     public Vector3Int gridLocation;
 
-    private bool isBlocked;
+    [SerializeField] private bool isBlocked;
 
     private Color color;
 
@@ -25,7 +25,7 @@ public class OverlayTile : MonoBehaviour
         color = gameObject.GetComponent<SpriteRenderer>().color;
     }
 
-    public void BlockTile()
+    public void LockTile()
     {
         isBlocked = true;
     }

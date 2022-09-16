@@ -24,7 +24,7 @@ public class PathFinder
                 return GetFinishedList(start, end);
             }
 
-            var neighbourTiles = GetNeighbourTiles(currentOverlayTile, searchableTiles, new List<string> { "NW", "SE", "SW", "NE" });
+            var neighbourTiles = GetNeighbourTiles(currentOverlayTile, searchableTiles, new List<string> { "NW", "SE", "SW", "NE" }, true);
 
             foreach (var neighbour in neighbourTiles)
             {
@@ -34,7 +34,7 @@ public class PathFinder
                 }
 
                 neighbour.G = GetManhattanDistance(start, neighbour);
-                neighbour.H = GetManhattanDistance(start, neighbour);
+                neighbour.H = GetManhattanDistance(end, neighbour);
 
                 neighbour.previous = currentOverlayTile;
 
@@ -52,7 +52,7 @@ public class PathFinder
         return Mathf.Abs(start.gridLocation.x - neighbour.gridLocation.x) + Mathf.Abs(start.gridLocation.y - neighbour.gridLocation.y);
     }
 
-    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles, List<string> modes)
+    public List<OverlayTile> GetNeighbourTiles(OverlayTile currentOverlayTile, List<OverlayTile> searchableTiles, List<string> modes, bool needToExcludeBlockedTiles)
     {
         Dictionary<Vector2Int, OverlayTile> map = MapManager.Instance.map;
         Dictionary<Vector2Int, OverlayTile> tilesToSearch = new Dictionary<Vector2Int, OverlayTile>();
@@ -77,7 +77,7 @@ public class PathFinder
            currentOverlayTile.gridLocation.y + 1
            );
 
-            if (tilesToSearch.ContainsKey(locationToCheckTop))
+            if (tilesToSearch.ContainsKey(locationToCheckTop) && !(needToExcludeBlockedTiles && tilesToSearch[locationToCheckTop].IsBlocked()))
             {
                 neighbours.Add(tilesToSearch[locationToCheckTop]);
             }
@@ -90,7 +90,7 @@ public class PathFinder
         currentOverlayTile.gridLocation.y - 1
         );
 
-            if (tilesToSearch.ContainsKey(locationToCheckBottom))
+            if (tilesToSearch.ContainsKey(locationToCheckBottom) && !(needToExcludeBlockedTiles && tilesToSearch[locationToCheckBottom].IsBlocked()))
             {
                 neighbours.Add(tilesToSearch[locationToCheckBottom]);
             }
@@ -102,7 +102,7 @@ public class PathFinder
         currentOverlayTile.gridLocation.y
         );
 
-            if (tilesToSearch.ContainsKey(locationToCheckRight))
+            if (tilesToSearch.ContainsKey(locationToCheckRight) && !(needToExcludeBlockedTiles && tilesToSearch[locationToCheckRight].IsBlocked()))
             {
                 neighbours.Add(tilesToSearch[locationToCheckRight]);
             }
@@ -114,7 +114,7 @@ public class PathFinder
             currentOverlayTile.gridLocation.y
             );
 
-            if (tilesToSearch.ContainsKey(locationToCheckLeft))
+            if (tilesToSearch.ContainsKey(locationToCheckLeft) && !(needToExcludeBlockedTiles && tilesToSearch[locationToCheckLeft].IsBlocked()))
             {
                 neighbours.Add(tilesToSearch[locationToCheckLeft]);
             }
