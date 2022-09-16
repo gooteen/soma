@@ -16,15 +16,26 @@ public class MapManager : MonoBehaviour
     private static MapManager _instance;
 
     [SerializeField] private GameObject _characterPrefab;
+    [SerializeField] private GameObject _character1Prefab;
+
     // temporary
     [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private GameObject _enemy1Prefab;
 
     [SerializeField] private Vector2Int _characterStartingTile;
+    [SerializeField] private Vector2Int _character1StartingTile;
+
     [SerializeField] private Vector2 _characterStartingOrientation;
+    [SerializeField] private Vector2 _character1StartingOrientation;
+
 
     // temporary
     [SerializeField] private Vector2Int _enemyStartingTile;
+    [SerializeField] private Vector2Int _enemy1StartingTile;
+
     [SerializeField] private Vector2 _enemyStartingOrientation;
+    [SerializeField] private Vector2 _enemy1StartingOrientation;
+
     [SerializeField] Text PlayerTextHP;
     [SerializeField] Text PlayerTextAP;
     [SerializeField] Text EnemyTextHP;
@@ -69,8 +80,11 @@ public class MapManager : MonoBehaviour
                 }
             }
         }
-        PositionPlayer(_characterStartingTile);
-        PositionEnemy(_enemyStartingTile);
+        PositionPlayer(_characterStartingTile, _characterPrefab, _characterStartingOrientation);
+        PositionPlayer(_character1StartingTile, _character1Prefab, _character1StartingOrientation);
+
+        PositionEnemy(_enemyStartingTile, _enemyPrefab, _enemyStartingOrientation);
+        PositionEnemy(_enemy1StartingTile, _enemy1Prefab, _enemy1StartingOrientation);
         Engine.Instance.TurnManager.SetNextCharacter();
     }
 
@@ -118,25 +132,25 @@ public class MapManager : MonoBehaviour
         return allTiles;
     }
 
-
-    public void PositionPlayer(Vector2Int position)
+    //TEMPORARY
+    public void PositionPlayer(Vector2Int position, GameObject player, Vector2 orientaion)
     {
         map.TryGetValue(position, out OverlayTile tile);
         //Debug.Log("tile: " + tile);
-        GameObject character = Instantiate(_characterPrefab);
+        GameObject character = Instantiate(player);
 
         Engine.Instance.InitializeTacticalPlayer(character);
         Engine.Instance.TurnManager.AddCharacterToTheList(character);
 
         character.transform.position = tile.transform.position;
 
-        Engine.Instance.TacticalPlayer.SetDirection(_characterStartingOrientation);
+        Engine.Instance.TacticalPlayer.SetDirection(orientaion);
         Engine.Instance.TacticalPlayer.SetActiveTile(tile);
         CursorController.Instance.SetInRangeTiles();
     }
 
     // merge into a universal function later
-    public void PositionEnemy(Vector2Int position)
+    public void PositionEnemy(Vector2Int position, GameObject player, Vector2 orientaion)
     {
         map.TryGetValue(position, out OverlayTile tile);
         //Debug.Log("tile: " + tile);
@@ -148,7 +162,7 @@ public class MapManager : MonoBehaviour
         Debug.Log("animation: " + animation);
         character.transform.position = tile.transform.position;
 
-        animation.SetDirection(_enemyStartingOrientation);
+        animation.SetDirection(orientaion);
         enemy.SetActiveTile(tile);
     }
 }

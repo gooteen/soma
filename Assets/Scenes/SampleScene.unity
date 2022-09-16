@@ -1986,7 +1986,7 @@ MonoBehaviour:
   _characterStartingTile: {x: 7, y: 7}
   _character1StartingTile: {x: 7, y: 9}
   _characterStartingOrientation: {x: 0.5, y: 1}
-  _character1StartingOrientation: {x: 0.5, y: 1}
+  _character1StartingOrientation: {x: 0, y: 0}
   _enemyStartingTile: {x: 12, y: 7}
   _enemy1StartingTile: {x: 12, y: 9}
   _enemyStartingOrientation: {x: -0.5, y: -1}

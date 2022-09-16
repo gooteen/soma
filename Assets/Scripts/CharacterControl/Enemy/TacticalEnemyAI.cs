@@ -44,7 +44,6 @@ public class TacticalEnemyAI : MonoBehaviour
     {
         if (_inATurn)
         {
-            Debug.Log("Enemy's turn!!");
             if(!_targetInReach)
             {
                 if (_info.GetActionPoints() > 0)
@@ -52,7 +51,6 @@ public class TacticalEnemyAI : MonoBehaviour
                     _currentPath = _movement.MoveAlongPath(_currentPath, _currentDestinationTile);
                 } else
                 {
-                    Debug.Log("finished turn");
                     _movement.DropDestinationTile();
                     FinishTurn();
                 }
@@ -65,7 +63,6 @@ public class TacticalEnemyAI : MonoBehaviour
                 } else
                 {
                     FinishTurn();
-                    Debug.Log("finished turn");
                 }
             }
         }
@@ -78,14 +75,12 @@ public class TacticalEnemyAI : MonoBehaviour
 
     public void StartTurn()
     {
-        Debug.Log("started turn");
         SetGoal();
         _inATurn = true;
     }
 
     private void Hit()
     {
-        Debug.Log("_currentTargetInReach: " + _currentTargetInReach);
         _currentTargetInReach.GetComponent<TacticalCharacterInfo>().TakeDamage(5);
         _info.TakeAwayActionPoints(1);
     }
@@ -111,8 +106,11 @@ public class TacticalEnemyAI : MonoBehaviour
             foreach (OverlayTile tile in _playerNeighbourTiles)
             {
                 int tileManhattanDistance =_pathFinder.GetManhattanDistance(_info.GetActiveTile(), tile);
-                tileManhattanDistances.Add(tile, tileManhattanDistance);
-                destinationToTarget.Add(tile, player);
+                if (!tileManhattanDistances.ContainsKey(tile))
+                {
+                    tileManhattanDistances.Add(tile, tileManhattanDistance);
+                    destinationToTarget.Add(tile, player);
+                }
             }
         }
         _closestTile = tileManhattanDistances.OrderBy(x => x.Value).First().Key;
