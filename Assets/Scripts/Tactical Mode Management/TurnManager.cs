@@ -16,6 +16,12 @@ public class TurnManager : MonoBehaviour
         index = -1;
     }
 
+    public void ClearCharactersList()
+    {
+        _charactersInBattle.Clear();
+        index = -1;
+    }
+
     public void ToNextTurn()
     {
         StartCoroutine("CoolDown");

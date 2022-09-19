@@ -6,8 +6,11 @@ public class Engine : MonoBehaviour
 {
     public int mode;
 
-    //ссылка на класс-интерфейс игрока
-    [SerializeField] private TacticalPlayerGateway _player;
+    //ссылка на класс-интерфейс текущего игрока в тактическом режиме
+    [SerializeField] private TacticalPlayerGateway _tacticalPlayer;
+    [SerializeField] private PlayerGateway _player;
+
+    //ссылка на 
 
     private InputManager _input;
     private TurnManager _turnManager;
@@ -16,7 +19,8 @@ public class Engine : MonoBehaviour
     public TurnManager TurnManager { get { return _turnManager; } }
     
     //геттер и сеттер на класс-интерфейс игрока
-    public TacticalPlayerGateway TacticalPlayer { get { return _player; } }
+    public TacticalPlayerGateway TacticalPlayer { get { return _tacticalPlayer; } }
+    public PlayerGateway Player { get { return _player; } }
 
     public static Engine Instance { get; private set; }
 
@@ -29,18 +33,28 @@ public class Engine : MonoBehaviour
 
     // TEMP __________________________________________________
 
+    public void HidePlayer()
+    {
+        _player.HidePlayer();
+    }
+
+    public void ShowPLayer()
+    {
+        _player.ShowPlayer();
+    }
+
     public void UpdatePlayerGateway(TacticalPlayerGateway player)
     {
         if (player == null)
         {
-            _player = null;
+            _tacticalPlayer = null;
             Debug.Log("Gateway null");
         }
         else
         {
             Debug.Log("Gateway: " + player);
         }
-        _player = player;
+        _tacticalPlayer = player;
     }
 
     public void ChangeMode()
@@ -64,9 +78,10 @@ public class Engine : MonoBehaviour
         }
     }
     // TEMP___________________________________________________
-
+    /*
     public void InitializeTacticalPlayer(GameObject player)
     {
-        _player = player.GetComponent<TacticalPlayerGateway>();
+        _tacticalPlayer = player.GetComponent<TacticalPlayerGateway>();
     }
+    */
 }

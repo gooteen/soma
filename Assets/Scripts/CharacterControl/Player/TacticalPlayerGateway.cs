@@ -14,6 +14,11 @@ public class TacticalPlayerGateway : MonoBehaviour
         _tacticalPlayerMovement = GetComponent<TacticalMovement>();
     }
 
+    public void Initialize()
+    {
+        _playerInfo.Initialize();
+    }
+
     public int GetActionPoints()
     {
         return _playerInfo.GetActionPoints();

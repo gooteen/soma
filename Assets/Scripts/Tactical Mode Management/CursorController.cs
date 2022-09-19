@@ -117,6 +117,11 @@ public class CursorController : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 
+    public void ClearInRangeTiles()
+    {
+        inRangeTiles = new List<OverlayTile>();
+    }
+
     public bool GetFocusedOnTile()
     {
         // The camera component tagged "MainCamera"

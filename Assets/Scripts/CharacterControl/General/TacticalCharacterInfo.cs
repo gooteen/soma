@@ -16,18 +16,22 @@ public abstract class TacticalCharacterInfo : MonoBehaviour
     {
         _currentActionPoints = _maxActionPoints;
     }
+    public virtual void Initialize()
+    {
+        //
+    }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         _healthPoints -= damage;
     }
 
-    public void TakeAwayActionPoints(int points)
+    public virtual void TakeAwayActionPoints(int points)
     {
         _currentActionPoints -= points;
     }
 
-    public void RefillActionPoints()
+    public virtual void RefillActionPoints()
     {
         _currentActionPoints = _maxActionPoints;
     }

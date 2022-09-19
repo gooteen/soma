@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45c3cf563294df47988ce9cf7ca2603, type: 3}
+  m_Name: Spiders Level 1 Encounter 1
+  m_EditorClassIdentifier: 
+  _enemyPrefab: {fileID: 6980584620890363662, guid: bd5c463f5f585204cb60fda9139e0d10,
+    type: 3}
+  _characterStartingTiles:
+  - {x: 12, y: 7}
+  - {x: 12, y: 9}
+  _character1StartingOrientation:
+  - {x: -0.5, y: -1}
+  - {x: -0.5, y: -1}
