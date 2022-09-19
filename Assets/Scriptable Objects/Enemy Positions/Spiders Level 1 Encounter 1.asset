@@ -17,6 +17,6 @@ MonoBehaviour:
   _characterStartingTiles:
   - {x: 12, y: 7}
   - {x: 12, y: 9}
-  _character1StartingOrientation:
+  _characterStartingOrientation:
   - {x: -0.5, y: -1}
   - {x: -0.5, y: -1}
