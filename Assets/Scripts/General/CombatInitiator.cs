@@ -17,14 +17,24 @@ public class CombatInitiator : MonoBehaviour
     [Header("NE, NW, SE, SW")]
     [SerializeField] private string _playerLineDirection;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public GameObject[] GetInitiators()
     {
-        InitializeFight();
+        return _enemiesOnMap;
     }
 
-    private void InitializeFight()
+    public Tilemap GetTilemap()
     {
-        MapManager.Instance.SetInitiators(_enemiesOnMap);
+        return _targetTilemap;
+    }
+
+    public Transform GetPositionAfterFight()
+    {
+        return gameObject.transform;
+    }
+
+    public void InitializeFight()
+    {
+        MapManager.Instance.SetInitiator(gameObject);
         MapManager.Instance.InitializeArena();
 
         PlacePlayers();

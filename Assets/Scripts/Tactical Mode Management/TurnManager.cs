@@ -85,15 +85,45 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator CoolDown()
     {
-        SetNextCharacter();
-        Debug.Log("Coroutine one");
-        yield return new WaitForSeconds(_timeBetweenTurns);
-        Debug.Log("Coroutine two");
-
-        if (_currentCharacter.tag == "EnemyTactical")
+        if (EnemiesBeaten())
         {
-            Debug.Log("YO");
-            CallEnemyMove(_currentCharacter);
+            MapManager.Instance.ClearArena();
+        } else
+        {
+            SetNextCharacter();
+            yield return new WaitForSeconds(_timeBetweenTurns);
+
+            if (_currentCharacter != null)
+            {
+                if (_currentCharacter.tag == "EnemyTactical")
+                {
+                    CallEnemyMove(_currentCharacter);
+                }
+            }
+        }
+    }
+
+    private bool EnemiesBeaten()
+    {
+        int enemiesInTheList = 0;
+        int slainEnemiesInTheList = 0;
+        foreach (GameObject character in _charactersInBattle)
+        {
+            if (character.tag == "EnemyTactical")
+            {
+                enemiesInTheList += 1;
+                if (character.GetComponent<TacticalCharacterInfo>().GetHealthPoints() <= 0)
+                {
+                    slainEnemiesInTheList += 1;
+                }
+            }
+        }
+        if (enemiesInTheList == slainEnemiesInTheList)
+        {
+            return true;
+        } else
+        {
+            return false;
         }
     }
 

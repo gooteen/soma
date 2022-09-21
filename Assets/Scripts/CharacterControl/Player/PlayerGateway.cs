@@ -13,4 +13,9 @@ public class PlayerGateway : MonoBehaviour
     {
         this.gameObject.SetActive(true);
     }
+
+    public void PlacePlayerAt(Transform transform)
+    {
+        this.gameObject.transform.position = transform.position;
+    }
 }

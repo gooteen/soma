@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour
     public static MapManager Instance { get { return _instance; } }
     private static MapManager _instance;
 
-    [SerializeField] List<GameObject> _initiators;
+    [SerializeField] CombatInitiator _initiator;
     [SerializeField] Text PlayerTextHP;
     [SerializeField] Text PlayerTextAP;
     [SerializeField] Text EnemyTextHP;
@@ -68,22 +68,20 @@ public class MapManager : MonoBehaviour
         }
     }
 
-    public void SetInitiators(GameObject[] initiators)
+    public void SetInitiator(GameObject initiator)
     {
-        foreach (var initiator in initiators)
-        {
-            _initiators.Add(initiator);
-        }
+        _initiator = initiator.GetComponent<CombatInitiator>();
+        Debug.Log("currentInitiator: " + _initiator);
     }
 
-    public void ClearInitiators()
+    public void ClearInitiator()
     {
-        _initiators = new List<GameObject>();
+        _initiator = null;
     }
 
     public void InitializeArena()
     {
-        var tileMap = gameObject.GetComponentInChildren<Tilemap>();
+        var tileMap = _initiator.GetTilemap();
         map = new Dictionary<Vector2Int, OverlayTile>();
         BoundsInt bounds = tileMap.cellBounds;
         Debug.Log(bounds.ToString());
@@ -97,7 +95,7 @@ public class MapManager : MonoBehaviour
                 if (tileMap.HasTile(tileLocation) && !map.ContainsKey(tileKey))
                 {
                     //Debug.Log(tileLocation);
-                    var overlayTile = Instantiate(overlayTilePrefab, overlayContainer.transform);
+                    var overlayTile = Instantiate(overlayTilePrefab/*, overlayContainer.transform*/);
                     //Debug.Log(tileMap.GetCellCenterWorld(tileLocation));
                     var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
 
@@ -118,7 +116,7 @@ public class MapManager : MonoBehaviour
         CursorController.Instance.ClearInRangeTiles();
         Engine.Instance.Player.HidePlayer();
 
-        foreach (var initiator in _initiators)
+        foreach (var initiator in _initiator.GetInitiators())
         {
             initiator.SetActive(false);
         }
@@ -138,14 +136,16 @@ public class MapManager : MonoBehaviour
         }
         Engine.Instance.TurnManager.ClearCharactersList();
         CursorController.Instance.HideCursor();
+        Engine.Instance.Player.PlacePlayerAt(_initiator.GetPositionAfterFight());
         Engine.Instance.Player.ShowPlayer();
 
-        foreach (var initiator in _initiators)
+        foreach (var initiator in _initiator.GetInitiators())
         {
             initiator.SetActive(true);
+            initiator.GetComponent<OffCombatEnemyController>().SetEnemyStartDirection();
         }
 
-        ClearInitiators();
+        ClearInitiator();
     }
 
     public List<OverlayTile> GetAllTilesOnMap()
