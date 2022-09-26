@@ -95,11 +95,11 @@ public class MapManager : MonoBehaviour
                 if (tileMap.HasTile(tileLocation) && !map.ContainsKey(tileKey))
                 {
                     //Debug.Log(tileLocation);
-                    var overlayTile = Instantiate(overlayTilePrefab/*, overlayContainer.transform*/);
+                    var overlayTile = Instantiate(overlayTilePrefab, overlayContainer.transform);
                     //Debug.Log(tileMap.GetCellCenterWorld(tileLocation));
                     var cellWorldPosition = tileMap.GetCellCenterWorld(tileLocation);
 
-                    overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 2);
+                    overlayTile.transform.position = new Vector3(cellWorldPosition.x, cellWorldPosition.y, cellWorldPosition.z + 0.1f);
                     overlayTile.GetComponent<SpriteRenderer>().sortingOrder = tileMap.GetComponent<TilemapRenderer>().sortingOrder;
                     overlayTile.gridLocation = tileLocation;
                     map.Add(tileKey, overlayTile);
