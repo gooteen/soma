@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
 
     public Vector2 GetMovementDirection()
     {
+        Debug.Log("Debug: " + _input.PlayerMovement.Run.ReadValue<Vector2>());
         return _input.PlayerMovement.Run.ReadValue<Vector2>();
     }
 

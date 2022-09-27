@@ -54,7 +54,7 @@ public class CharacterAnimation : MonoBehaviour
         _anim.Play(_staticDirections[_lastDirection]);
     }
 
-    private int DirectionToIndex(Vector2 direction)
+    public int DirectionToIndex(Vector2 direction)
     {
         float step = 360 / _numberOfSlices;
         float offset = step / 2;
