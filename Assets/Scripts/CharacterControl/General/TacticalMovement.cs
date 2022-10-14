@@ -66,6 +66,4 @@ public class TacticalMovement : MonoBehaviour
         }
         return path;
     }
-
-    
 }
