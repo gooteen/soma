@@ -9,12 +9,14 @@ public class Engine : MonoBehaviour
     //ссылка на класс-интерфейс текущего игрока в тактическом режиме
     [SerializeField] private TacticalPlayerGateway _tacticalPlayer;
     [SerializeField] private PlayerGateway _player;
+    [SerializeField] private HeroStats _mainHeroStats;
 
     //ссылка на 
 
     private InputManager _input;
     private TurnManager _turnManager;
 
+    public HeroStats Hero { get { return _mainHeroStats; } }
     public InputManager InputManager { get { return _input; } }
     public TurnManager TurnManager { get { return _turnManager; } }
     

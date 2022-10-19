@@ -138,7 +138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2079633
 RectTransform:
   m_ObjectHideFlags: 0
@@ -457,6 +457,7 @@ MonoBehaviour:
   mode: 0
   _tacticalPlayer: {fileID: 0}
   _player: {fileID: 571233172}
+  _mainHeroStats: {fileID: 11400000, guid: 77581de29f4a1c44c9f59f8f4bbbda95, type: 2}
 --- !u!114 &169661013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1116,7 +1117,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &501654043
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2103,8 +2104,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 870685096}
   m_HandleRect: {fileID: 870685095}
   m_Direction: 2
-  m_Value: 0.9999928
-  m_Size: 0.6778124
+  m_Value: 0.9999943
+  m_Size: 0.6204408
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3755,7 +3756,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 443931136}
   m_HandleRect: {fileID: 443931135}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

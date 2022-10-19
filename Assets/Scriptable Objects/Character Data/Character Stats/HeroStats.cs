@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class HeroStats : ScriptableObject
 {
+    [SerializeField] public string _name;
     [SerializeField] public float _healthPoints = 50;
     [SerializeField] public int _maxActionPoints = 20;
     [SerializeField] public int _damage = 5;

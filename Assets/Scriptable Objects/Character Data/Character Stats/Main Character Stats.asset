@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f9615404cad8645bec3d6a8e62030d, type: 3}
   m_Name: Main Character Stats
   m_EditorClassIdentifier: 
+  _name: Hero
   _healthPoints: 70
   _maxActionPoints: 5
   _damage: 5
