@@ -8,7 +8,6 @@ public class DialogueController : MonoBehaviour
 {
     [SerializeField] private Dialogue _dialogueSO;
     private List<GameObject> _currentOptionButtons;
-    private int index;
 
     private void Awake()
     {
@@ -21,23 +20,24 @@ public class DialogueController : MonoBehaviour
         UIManager.Instance._dialoguePanel.SetActive(true);
 
         SetNextLine(_dialogueSO.GetDialogueLines()[0]);
-        index = 0;
     }
 
     public void SetNextLine(DialogueLine line)
     {
+        Debug.Log("line text: " + line.GetLineText() + " line alias: " + line._alias);
         if (!line._hasOptionsOfReply) 
         {
             UIManager.Instance._replyBox.SetActive(false);
             UIManager.Instance._continueButton.gameObject.SetActive(true);
+            UIManager.Instance._continueButton.onClick.RemoveAllListeners();
 
             UIManager.Instance._speakerName.text = line.GetSpeakerName();
             UIManager.Instance._dialogueBox.text = line.GetLineText();
 
             if(!line._isFinalLine)
             {
-                index++;
-                UIManager.Instance._continueButton.onClick.AddListener(delegate { SetNextLine(_dialogueSO.GetDialogueLines()[index]); });
+                Debug.Log("CONTINUE button next line alias: " + _dialogueSO.GetDialogueLines()[_dialogueSO.GetLineIndex(line) + 1]._alias);
+                UIManager.Instance._continueButton.onClick.AddListener(delegate { SetNextLine(_dialogueSO.GetDialogueLines()[_dialogueSO.GetLineIndex(line) + 1]); });
             } else
             {
                 UIManager.Instance._continueButton.onClick.AddListener(FinishDialogue);
@@ -57,6 +57,7 @@ public class DialogueController : MonoBehaviour
                 Button _newButton = Instantiate(UIManager.Instance._replyOptionButton, UIManager.Instance._replyBoxContent.transform);
                 _newButton.GetComponentInChildren<Text>().text = _option.GetOptionText();
                 _newButton.onClick.AddListener(delegate { SetNextLine(GetLineByAlias(_option._nextLineAlias)); });
+                Debug.Log("next line alias: " + _option._nextLineAlias);
                 _currentOptionButtons.Add(_newButton.gameObject);
             }
         }

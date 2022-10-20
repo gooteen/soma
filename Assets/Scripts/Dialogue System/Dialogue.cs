@@ -28,7 +28,7 @@ public class DialogueLine
     {
         if (_text.Contains("{PlayerName}"))
         {
-            return _text.Replace("{PlayerName}", Engine.Instance.Hero.name);
+            return _text.Replace("{PlayerName}", Engine.Instance.Hero._name);
         }
         else
         {
@@ -64,5 +64,17 @@ public class Dialogue : ScriptableObject
     public DialogueLine[] GetDialogueLines()
     {
         return _dialogueLines;
+    }
+
+    public int GetLineIndex(DialogueLine line)
+    {
+        for (int i = 0; i < _dialogueLines.Length; i++)
+        {
+            if (_dialogueLines[i]._alias == line._alias)
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 }
