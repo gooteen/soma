@@ -16,7 +16,8 @@ public class DialogueLine
     {
         if (_speakerName.Contains("{PlayerName}"))
         {
-            return _speakerName.Replace("{PlayerName}", Engine.Instance.Hero.name);
+            Debug.Log(Engine.Instance.Hero._name);
+            return _speakerName.Replace("{PlayerName}", Engine.Instance.Hero._name);
         } else
         {
             return _speakerName;
@@ -36,13 +37,23 @@ public class DialogueLine
     }
 }
 
-
-
 [System.Serializable]
 public class DialogueOption
 {
     public string _text;
     public string _nextLineAlias;
+
+    public string GetOptionText()
+    {
+        if (_text.Contains("{PlayerName}"))
+        {
+            return _text.Replace("{PlayerName}", Engine.Instance.Hero._name);
+        }
+        else
+        {
+            return _text;
+        }
+    }
 }
 
 [CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue SO")]
@@ -50,5 +61,8 @@ public class Dialogue : ScriptableObject
 {
     [SerializeField] private DialogueLine[] _dialogueLines;
 
-    
+    public DialogueLine[] GetDialogueLines()
+    {
+        return _dialogueLines;
+    }
 }
