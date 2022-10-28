@@ -25,7 +25,7 @@ public class DialogueController : MonoBehaviour
     public void SetNextLine(DialogueLine line)
     {
         Debug.Log("line text: " + line.GetLineText() + " line alias: " + line._alias);
-        if (!line._hasOptionsOfReply) 
+        if (line._options.Length == 0) 
         {
             UIManager.Instance._replyBox.SetActive(false);
             UIManager.Instance._continueButton.gameObject.SetActive(true);
@@ -33,7 +33,7 @@ public class DialogueController : MonoBehaviour
 
             UIManager.Instance._speakerName.text = line.GetSpeakerName();
             UIManager.Instance._dialogueBox.text = line.GetLineText();
-
+            line._event?.Invoke();
             if(!line._isFinalLine)
             {
                 Debug.Log("CONTINUE button next line alias: " + _dialogueSO.GetDialogueLines()[_dialogueSO.GetLineIndex(line) + 1]._alias);

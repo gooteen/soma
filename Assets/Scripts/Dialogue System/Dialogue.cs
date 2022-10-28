@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class DialogueLine
@@ -8,8 +9,8 @@ public class DialogueLine
     public string _alias;
     public string _speakerName;
     public string _text;
-    public bool _hasOptionsOfReply;
     public bool _isFinalLine;
+    public UnityEvent _event;
     public DialogueOption[] _options;
 
     public string GetSpeakerName()
