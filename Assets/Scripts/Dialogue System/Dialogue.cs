@@ -57,7 +57,7 @@ public class DialogueOption
     }
 }
 
-[CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue SO")]
+[CreateAssetMenu(fileName = "Dialogue", menuName = "Dialogue/Dialogue SO")]
 public class Dialogue : ScriptableObject
 {
     [SerializeField] private DialogueLine[] _dialogueLines;
