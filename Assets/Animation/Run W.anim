@@ -22,7 +22,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -39,17 +39,7 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 2bffca1bd7c9540dc92a6d31cf3267ae, type: 3}
-    - time: 0.06666667
-      value: {fileID: 21300000, guid: c388e625c886545e8aaf29d336221ccb, type: 3}
-    - time: 0.13333334
-      value: {fileID: 21300000, guid: eaa332bfa3086442ea68e8a61db0a486, type: 3}
-    - time: 0.2
-      value: {fileID: 21300000, guid: 4c45aa1f9861a49fc83833a2e62b83bf, type: 3}
-    - time: 0.26666668
-      value: {fileID: 21300000, guid: 0239a936d884c453baa89b7c59ea22d7, type: 3}
-    - time: 0.33333334
-      value: {fileID: 21300000, guid: 1490df10bf90d488d9975c126893552b, type: 3}
+      value: {fileID: 21300000, guid: 71e8aeaf997e1aa4b97f403c2a23d51b, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -76,18 +66,13 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 2bffca1bd7c9540dc92a6d31cf3267ae, type: 3}
-    - {fileID: 21300000, guid: c388e625c886545e8aaf29d336221ccb, type: 3}
-    - {fileID: 21300000, guid: eaa332bfa3086442ea68e8a61db0a486, type: 3}
-    - {fileID: 21300000, guid: 4c45aa1f9861a49fc83833a2e62b83bf, type: 3}
-    - {fileID: 21300000, guid: 0239a936d884c453baa89b7c59ea22d7, type: 3}
-    - {fileID: 21300000, guid: 1490df10bf90d488d9975c126893552b, type: 3}
+    - {fileID: 21300000, guid: 71e8aeaf997e1aa4b97f403c2a23d51b, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.35000002
+    m_StopTime: 0.016666668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -108,7 +93,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
