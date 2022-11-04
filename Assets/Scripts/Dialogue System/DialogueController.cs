@@ -7,11 +7,37 @@ using UnityEngine.UI;
 public class DialogueController : MonoBehaviour
 {
     [SerializeField] private Dialogue _dialogueSO;
+    [SerializeField] private Vector2 _npcDirectionAtStart;
+    [SerializeField] private float _distance;
     private List<GameObject> _currentOptionButtons;
+    private CharacterAnimation _anim;
 
-    private void Awake()
+    void Awake()
     {
+        _anim = GetComponent<CharacterAnimation>();
         _currentOptionButtons = new List<GameObject>();
+    }
+
+    private void Start()
+    {
+        _anim.SetDirection(_npcDirectionAtStart);
+    }
+
+    void Update()
+    {
+        if (IsFocusedOnCharacter())
+        {
+            if (Engine.Instance.InputManager.LeftMouseButtonPressed())
+            {
+                if (Vector3.Distance(Engine.Instance.Player.transform.position, transform.position) <= _distance)
+                {
+                    Engine.Instance.Player.Freeze();
+                    InitializeDialogue();
+                    Engine.Instance.Player.SetDirection(transform.position - Engine.Instance.Player.transform.position);
+                    _anim.SetDirection(Engine.Instance.Player.transform.position - transform.position);
+                }
+            }
+        }
     }
 
     public void InitializeDialogue()
@@ -62,11 +88,30 @@ public class DialogueController : MonoBehaviour
             }
         }
     }
+    public bool IsFocusedOnCharacter()
+    {
+        LayerMask _mask = LayerMask.GetMask("NPC");
+
+        Vector3 _mousePos = Camera.main.ScreenToWorldPoint(Engine.Instance.InputManager.GetMousePosition());
+        Vector2 _mousePos2d = new Vector2(_mousePos.x, _mousePos.y);
+
+        RaycastHit2D _hit = Physics2D.Raycast(_mousePos2d, Vector2.zero, Mathf.Infinity, _mask, -Mathf.Infinity, Mathf.Infinity);
+
+        if (_hit.collider != null && Engine.Instance.TacticalPlayer == null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     private void FinishDialogue()
     {
         UIManager.Instance._dialoguePanel.SetActive(false);
-        
+        _anim.SetDirection(_npcDirectionAtStart);
+        Engine.Instance.Player.Freeze();
         //temp
         UIManager.Instance._combatPanel.SetActive(true);
         ClearButtons();
@@ -98,10 +143,5 @@ public class DialogueController : MonoBehaviour
             }
         }
         return null;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        InitializeDialogue();
     }
 }

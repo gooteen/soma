@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;
-    [SerializeField] private CharacterAnimation anim;
+    [SerializeField] private CharacterAnimation _anim;
     [SerializeField] private float _movementOffset; 
     private Rigidbody2D _rb;
+    private bool _frozen;
 
     void Start()
     {
@@ -16,15 +17,28 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate()
     {
-        Vector2 direction = Engine.Instance.InputManager.GetMovementDirection();
-        Move(new Vector3(direction.x, direction.y));
-        anim.SetDirection(direction);
+        if (!_frozen)
+        {
+            Vector2 direction = Engine.Instance.InputManager.GetMovementDirection();
+            Move(new Vector3(direction.x, direction.y));
+            _anim.SetDirection(direction);
+        }
+    }
+
+    public bool IsFrozen()
+    {
+        return _frozen;
+    }
+
+    public void Freeze()
+    {
+        _frozen = !_frozen;
     }
 
     public void Move(Vector2 direction)
     {
-        CharacterAnimation _anim = new CharacterAnimation();
-        int param = anim.DirectionToIndex(direction);
+        //CharacterAnimation _anim = new CharacterAnimation();
+        int param = _anim.DirectionToIndex(direction);
 
         //directing the movement along the isometric axes 
 

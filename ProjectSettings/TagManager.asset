@@ -19,8 +19,8 @@ TagManager:
   - GridMarker
   - Enemy
   - NPC
-  - 
-  - 
+  - Destructible
+  - Interactive
   - 
   - 
   - 
