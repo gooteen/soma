@@ -21,8 +21,8 @@ TagManager:
   - NPC
   - Destructible
   - Interactive
-  - 
-  - 
+  - Fallable
+  - FallableGround
   - 
   - 
   - 

@@ -9,8 +9,9 @@ public class BerryBush : InteractiveObject
     private bool _isFull = true;
     private SpriteRenderer _renderer;
 
-    void Start()
+    internal override void Start()
     {
+        _interactive = true;
         _renderer = GetComponent<SpriteRenderer>();
         _renderer.sprite = _full;
     }
@@ -18,10 +19,11 @@ public class BerryBush : InteractiveObject
     internal override void OnInteract()
     {
         Debug.Log("Here");
-        if (_isFull)
+        if (_interactive)
         {
             _isFull = false;
             _renderer.sprite = _empty;
+            _interactive = false;
         }
     }
 }

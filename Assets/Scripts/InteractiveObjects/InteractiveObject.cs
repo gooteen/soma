@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class InteractiveObject : MonoBehaviour
 {
-    [SerializeField] private float _distance;
+    [SerializeField] internal float _distance;
+    internal bool _interactive;
+
+    internal virtual void Start()
+    {
+        //_interactive = true;
+    }
 
     void Update()
     {
-        if (IsFocusedOnObject())
+        if (IsFocusedOnObject() && _interactive)
         {
             if (Engine.Instance.InputManager.LeftMouseButtonPressed())
             {
