@@ -10,7 +10,7 @@ public class DialogueLine
     public string _speakerName;
     public string _text;
     public bool _isFinalLine;
-    public UnityEvent _event;
+    //public UnityEvent _event;
     public DialogueOption[] _options;
 
     public string GetSpeakerName()

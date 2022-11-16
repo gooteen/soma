@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class LineEvent
+{
+    public UnityEvent _event;
+    public string _lineAlias;
+}
 
 public class DialogueController : MonoBehaviour
 {
     [SerializeField] private Dialogue _dialogueSO;
     [SerializeField] private Vector2 _npcDirectionAtStart;
     [SerializeField] private float _distance;
+    [SerializeField] private LineEvent[] _events;
     private List<GameObject> _currentOptionButtons;
     private CharacterAnimation _anim;
 
@@ -59,7 +68,7 @@ public class DialogueController : MonoBehaviour
 
             UIManager.Instance._speakerName.text = line.GetSpeakerName();
             UIManager.Instance._dialogueBox.text = line.GetLineText();
-            line._event?.Invoke();
+            InvokeLineEvent(line._alias);
             if(!line._isFinalLine)
             {
                 Debug.Log("CONTINUE button next line alias: " + _dialogueSO.GetDialogueLines()[_dialogueSO.GetLineIndex(line) + 1]._alias);
@@ -104,6 +113,17 @@ public class DialogueController : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    private void InvokeLineEvent(string alias)
+    {
+        foreach (LineEvent _event in _events)
+        {
+            if (_event._lineAlias == alias)
+            {
+                _event._event.Invoke();
+            }
         }
     }
 
