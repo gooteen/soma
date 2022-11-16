@@ -33,8 +33,10 @@ public class Apple : InteractiveObject
     private IEnumerator FallCoroutine()
     {
         _rb2d.isKinematic = false;
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(0.4f);
         _sprite.sortingOrder = _sortOrdEnd;
+        yield return new WaitForSeconds(0.33f);
+        _sprite.sortingOrder = _sortOrdStart;
         _interactive = true;
     }
 }
