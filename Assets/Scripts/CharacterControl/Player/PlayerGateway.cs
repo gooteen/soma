@@ -27,6 +27,11 @@ public class PlayerGateway : MonoBehaviour
         _anim.SetDirection(direction);
     }
 
+    public void SetStaticDirection(Vector2 direction)
+    {
+        _anim.SetStaticDirection(direction);
+    }
+
     public void HidePlayer()
     {
         this.gameObject.SetActive(false);

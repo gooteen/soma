@@ -42,8 +42,8 @@ public class DialogueController : MonoBehaviour
                 {
                     Engine.Instance.Player.Freeze();
                     InitializeDialogue();
-                    Engine.Instance.Player.SetDirection(transform.position - Engine.Instance.Player.transform.position);
-                    _anim.SetDirection(Engine.Instance.Player.transform.position - transform.position);
+                    Engine.Instance.Player.SetStaticDirection(transform.position - Engine.Instance.Player.transform.position);
+                    _anim.SetStaticDirection(Engine.Instance.Player.transform.position - transform.position);
                 }
             }
         }

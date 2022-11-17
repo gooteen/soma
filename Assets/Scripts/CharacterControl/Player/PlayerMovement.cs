@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterAnimation _anim;
     [SerializeField] private float _movementOffset; 
     private Rigidbody2D _rb;
-    private bool _frozen;
+    [SerializeField] private bool _frozen;
 
     void Start()
     {
@@ -33,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
     public void Freeze()
     {
         _frozen = !_frozen;
+        if (_frozen)
+        {
+            _rb.velocity = new Vector2(0, 0);
+        }
     }
 
     public void Move(Vector2 direction)

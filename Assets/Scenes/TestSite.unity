@@ -3804,16 +3804,6 @@ PrefabInstance:
       propertyPath: _initiator
       value: 
       objectReference: {fileID: 1065272527}
-    - target: {fileID: 3157827282721843916, guid: bf9c2f8536da2df4bbd6b06a1c655f5d,
-        type: 3}
-      propertyPath: _dirAtStart.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3157827282721843916, guid: bf9c2f8536da2df4bbd6b06a1c655f5d,
-        type: 3}
-      propertyPath: _dirAtStart.y
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf9c2f8536da2df4bbd6b06a1c655f5d, type: 3}
 --- !u!4 &1718384150 stripped
