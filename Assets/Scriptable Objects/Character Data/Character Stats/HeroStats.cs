@@ -10,5 +10,6 @@ public class HeroStats : ScriptableObject
     [SerializeField] public float _healthPoints = 50;
     [SerializeField] public int _maxActionPoints = 20;
     [SerializeField] public int _damage = 5;
+    [SerializeField] public Weapon _weapon;
 }
 

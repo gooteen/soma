@@ -11,8 +11,6 @@ public class Engine : MonoBehaviour
     [SerializeField] private PlayerGateway _player;
     [SerializeField] private HeroStats _mainHeroStats;
 
-    //ссылка на 
-
     private InputManager _input;
     private TurnManager _turnManager;
 

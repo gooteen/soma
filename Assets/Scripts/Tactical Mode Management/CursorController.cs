@@ -157,6 +157,11 @@ public class CursorController : MonoBehaviour
         }
     }
 
+    public void SetRange()
+    {
+
+    }
+
     public void SetInRangeTiles()
     {
         foreach (OverlayTile item in inRangeTiles)
