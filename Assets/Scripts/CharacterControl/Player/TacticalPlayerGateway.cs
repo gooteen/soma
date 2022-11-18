@@ -19,6 +19,11 @@ public class TacticalPlayerGateway : MonoBehaviour
         _playerInfo.OnWeaponChosen();
     }
 
+    public void OnWeaponUsed()
+    {
+        _playerInfo.OnWeaponUsed();
+    }
+
     public void Initialize()
     {
         _playerInfo.Initialize();

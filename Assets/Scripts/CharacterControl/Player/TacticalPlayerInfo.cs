@@ -21,4 +21,12 @@ public class TacticalPlayerInfo : TacticalCharacterInfo
             _weapon.OnChosen();
         }
     }
+
+    public void OnWeaponUsed()
+    {
+        if (_weapon != null)
+        {
+            _weapon.OnUsed();
+        }
+    }
 }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum TacticalMode { Movement, Combat };
 public class Engine : MonoBehaviour
 {
     public int mode;
+    public TacticalMode _currentMode;
 
     //ссылка на класс-интерфейс текущего игрока в тактическом режиме
     [SerializeField] private TacticalPlayerGateway _tacticalPlayer;
@@ -55,6 +57,11 @@ public class Engine : MonoBehaviour
             Debug.Log("Gateway: " + player);
         }
         _tacticalPlayer = player;
+    }
+
+    public void ChangeTacticalMode(TacticalMode mode)
+    {
+        _currentMode = mode;
     }
 
     public void ChangeMode()

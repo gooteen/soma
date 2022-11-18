@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public GameObject _combatPanel;
     public GameObject _dialoguePanel;
 
+    [Header("Dialogue Panel")]
     public Text _speakerName;
     public Text _dialogueBox;
 
@@ -17,6 +18,7 @@ public class UIManager : MonoBehaviour
     public Button _replyOptionButton;
     public Button _continueButton;
 
+    //[Header("Combat Panel")]
     public static UIManager Instance { get; private set; }
 
     void Awake()

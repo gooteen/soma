@@ -74,8 +74,7 @@ public class CursorController : MonoBehaviour
                         {
                             if (inRangeTiles.Contains(_focusedTile))
                             {
-                                _currentFocusedEnemy.TakeDamage(5);
-                                Engine.Instance.TacticalPlayer.TakeAwayActionPoints(1);
+                                Engine.Instance.TacticalPlayer.OnWeaponUsed();
                                 SetInRangeTiles();
                                 if (Engine.Instance.TacticalPlayer.GetActionPoints() == 0)
                                 {
@@ -139,6 +138,11 @@ public class CursorController : MonoBehaviour
         }
     }
 
+    public TacticalCharacterInfo GetCurrentFocusedEnemy()
+    {
+        return _currentFocusedEnemy;
+    }
+
     public bool GetFocusedOnEnemy()
     {
         // The camera component tagged "MainCamera"
@@ -157,9 +161,51 @@ public class CursorController : MonoBehaviour
         }
     }
 
-    public void SetRange()
+    public void SetMovementRange()
     {
+        foreach (OverlayTile item in inRangeTiles)
+        {
+            item.HideTile();
+        }
 
+        Debug.Log("Current ap: " + Engine.Instance.TacticalPlayer.GetActionPoints());
+        inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), Engine.Instance.TacticalPlayer.GetActionPoints(), true);
+
+        if (Engine.Instance.TacticalPlayer.GetActionPoints() > 0)
+        {
+            foreach (OverlayTile item in inRangeTiles)
+            {
+                item.ShowTile();
+            }
+        }
+    }
+
+    public void SetCombatRange(WeaponMode mode, int length)
+    {
+        foreach (OverlayTile item in inRangeTiles)
+        {
+            item.HideTile();
+        }
+
+        if (mode == WeaponMode.FilledRange)
+        {
+            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), length, false);
+        }
+        else if (mode == WeaponMode.FourLines)
+        {
+            inRangeTiles = rangeFinder.GetTilesInIntervalVer2(Engine.Instance.TacticalPlayer.GetActiveTile(), length, new List<string> { "NW", "SE", "SW", "NE" });
+        } else if (mode == WeaponMode.SingleLine)
+        {
+            inRangeTiles = rangeFinder.GetTilesInInterval(Engine.Instance.TacticalPlayer.GetActiveTile(), length);
+        }
+
+        if (Engine.Instance.TacticalPlayer.GetActionPoints() > 0)
+        {
+            foreach (OverlayTile item in inRangeTiles)
+            {
+                item.ShowTile();
+            }
+        }
     }
 
     public void SetInRangeTiles()

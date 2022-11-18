@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f9615404cad8645bec3d6a8e62030d, type: 3}
   m_Name: Companion Stats
   m_EditorClassIdentifier: 
+  _name: 
   _healthPoints: 65
   _maxActionPoints: 5
   _damage: 7
+  _weapon: {fileID: 5174008795423349229, guid: fcabbdf3be98e80408fa4c10bbb6211d, type: 3}
