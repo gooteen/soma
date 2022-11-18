@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using UnityEngine.Events;
 
 public class TurnManager : MonoBehaviour
 {
@@ -74,7 +75,8 @@ public class TurnManager : MonoBehaviour
         {
             Engine.Instance.UpdatePlayerGateway(_currentCharacter.GetComponent<TacticalPlayerGateway>());
             CursorController.Instance.ShowCursor();
-            CursorController.Instance.SetInRangeTiles();
+            CursorController.Instance.SetMovementRange();
+            UIManager.Instance._toCombatModeButton.onClick.AddListener(delegate { Engine.Instance.TacticalPlayer.OnWeaponChosen(); } );
         }
         else
         {

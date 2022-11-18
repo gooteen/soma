@@ -46,7 +46,7 @@ public class CursorController : MonoBehaviour
         {
             if (Engine.Instance.TacticalPlayer.GetActionPoints() > 0)
             {
-                if (Engine.Instance.mode == 0)
+                if (Engine.Instance._currentMode == TacticalMode.Movement)
                 {
                     if (GetFocusedOnTile())
                     {
@@ -74,11 +74,14 @@ public class CursorController : MonoBehaviour
                         {
                             if (inRangeTiles.Contains(_focusedTile))
                             {
-                                Engine.Instance.TacticalPlayer.OnWeaponUsed();
-                                SetInRangeTiles();
-                                if (Engine.Instance.TacticalPlayer.GetActionPoints() == 0)
+                                if(Engine.Instance.TacticalPlayer.GetWeaponHitCost() <= Engine.Instance.TacticalPlayer.GetActionPoints())
                                 {
-                                    HideCursor();
+                                    Engine.Instance.TacticalPlayer.OnWeaponUsed();
+                                    Engine.Instance.TacticalPlayer.OnWeaponChosen();
+                                    if (Engine.Instance.TacticalPlayer.GetActionPoints() == 0)
+                                    {
+                                        HideCursor();
+                                    }
                                 }
                             }
                         }
@@ -178,6 +181,7 @@ public class CursorController : MonoBehaviour
                 item.ShowTile();
             }
         }
+        Engine.Instance.ChangeTacticalMode(TacticalMode.Movement);
     }
 
     public void SetCombatRange(WeaponMode mode, int length)

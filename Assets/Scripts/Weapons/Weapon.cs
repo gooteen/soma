@@ -18,6 +18,7 @@ public class Weapon : MonoBehaviour
     public void OnChosen()
     {
         CursorController.Instance.SetCombatRange(_mode, _reach);
+        Engine.Instance.ChangeTacticalMode(TacticalMode.Combat);
     }
        
     public void OnUsed()
@@ -28,5 +29,10 @@ public class Weapon : MonoBehaviour
             _focusedEnemy.TakeDamage(_damage);
             Engine.Instance.TacticalPlayer.TakeAwayActionPoints(_hitCost);
         }
+    }
+
+    public int GetHitCost()
+    {
+        return _hitCost;
     }
 }

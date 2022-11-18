@@ -62,6 +62,14 @@ public class Engine : MonoBehaviour
     public void ChangeTacticalMode(TacticalMode mode)
     {
         _currentMode = mode;
+        if (mode == TacticalMode.Movement)
+        {
+            CursorController.Instance.ShowCursor();
+        }
+        else
+        {
+            CursorController.Instance.HideCursor();
+        }
     }
 
     public void ChangeMode()

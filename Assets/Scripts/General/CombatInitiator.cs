@@ -34,6 +34,7 @@ public class CombatInitiator : MonoBehaviour
 
     public void InitializeFight()
     {
+        UIManager.Instance._combatPanel.SetActive(true);
         MapManager.Instance.SetInitiator(gameObject);
         MapManager.Instance.InitializeArena();
 

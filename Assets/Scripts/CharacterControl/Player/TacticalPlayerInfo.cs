@@ -29,4 +29,15 @@ public class TacticalPlayerInfo : TacticalCharacterInfo
             _weapon.OnUsed();
         }
     }
+
+    public int GetHitCost()
+    {
+        if (_weapon != null)
+        {
+           return _weapon.GetHitCost();
+        } else
+        {
+            return 0;
+        }
+    }
 }

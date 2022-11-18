@@ -18,11 +18,20 @@ public class UIManager : MonoBehaviour
     public Button _replyOptionButton;
     public Button _continueButton;
 
-    //[Header("Combat Panel")]
+    [Header("Combat Panel")]
+    public Button _toCombatModeButton;
+    public Button _toMovementModeButton;
+    public Text _apLeft;
+
     public static UIManager Instance { get; private set; }
 
     void Awake()
     {
         Instance = this;
+    }
+
+    private void Update()
+    {
+        _apLeft.text = $"AP: x{Engine.Instance.TacticalPlayer.GetActionPoints()}";
     }
 }

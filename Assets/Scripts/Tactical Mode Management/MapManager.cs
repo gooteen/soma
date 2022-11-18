@@ -41,6 +41,7 @@ public class MapManager : MonoBehaviour
     void Update()
     {
         // TEMP
+        /*
         if (GameObject.Find("EnemyTactical(Clone)") != null)
         {
             EnemyTextHP.text = $"Enemy HP: {GameObject.Find("EnemyTactical(Clone)").GetComponent<TacticalCharacterInfo>().GetHealthPoints().ToString()}";
@@ -57,6 +58,7 @@ public class MapManager : MonoBehaviour
         {
             PlayerTextAP.text = $"Player AP: {GameObject.Find("PlayerTactical(Clone)").GetComponent<TacticalCharacterInfo>().GetActionPoints().ToString()}";
         }
+        */
         //PrintMap();
     }
 
@@ -124,6 +126,8 @@ public class MapManager : MonoBehaviour
 
     public void ClearArena()
     {
+        UIManager.Instance._combatPanel.SetActive(false);
+
         foreach (var tile in GetAllTilesOnMap())
         {
             Destroy(tile.gameObject);
@@ -174,7 +178,7 @@ public class MapManager : MonoBehaviour
 
         Engine.Instance.TacticalPlayer.SetDirection(orientaion);
         Engine.Instance.TacticalPlayer.SetActiveTile(tile);
-        CursorController.Instance.SetInRangeTiles();
+        CursorController.Instance.SetMovementRange();
     }
 
     // merge into a universal function later
