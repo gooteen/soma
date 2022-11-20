@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum TacticalMode { Movement, Combat };
+public enum GameMode { Exploration, Battle };
 public class Engine : MonoBehaviour
 {
-    public int mode;
-    public TacticalMode _currentMode;
+    public GameMode _currentGameMode;
+    public TacticalMode _currentTacticalMode;
 
     //ссылка на класс-интерфейс текущего игрока в тактическом режиме
     [SerializeField] private TacticalPlayerGateway _tacticalPlayer;
@@ -61,7 +62,7 @@ public class Engine : MonoBehaviour
 
     public void ChangeTacticalMode(TacticalMode mode)
     {
-        _currentMode = mode;
+        _currentTacticalMode = mode;
         if (mode == TacticalMode.Movement)
         {
             CursorController.Instance.ShowCursor();
@@ -72,26 +73,18 @@ public class Engine : MonoBehaviour
         }
     }
 
-    public void ChangeMode()
+    public void ChangeGameMode()
     {
-        mode++;
-
-        if (mode == 3)
+        if (_currentGameMode == GameMode.Battle)
         {
-            mode = 0;
-        } 
-
-        if (mode == 0)
+            _currentGameMode = GameMode.Exploration;
+        } else
         {
-            CursorController.Instance.SetInRangeTiles();
-            CursorController.Instance.ShowCursor();
-        }
-        else
-        {
-            CursorController.Instance.SetInRangeTiles();
-            CursorController.Instance.HideCursor();
+            _currentGameMode = GameMode.Battle;
         }
     }
+
+   
     // TEMP___________________________________________________
     /*
     public void InitializeTacticalPlayer(GameObject player)

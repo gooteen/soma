@@ -56,7 +56,7 @@ public class TacticalMovement : MonoBehaviour
                 transform.position = _nextTile.position;
                 if (gameObject.tag != "EnemyTactical")
                 {
-                    CursorController.Instance.SetInRangeTiles();
+                    CursorController.Instance.SetMovementRange();
                 } else
                 {
                     gameObject.GetComponent<TacticalEnemyAI>().SetTargetInReach();

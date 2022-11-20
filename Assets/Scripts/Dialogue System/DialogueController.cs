@@ -133,7 +133,6 @@ public class DialogueController : MonoBehaviour
         _anim.SetDirection(_npcDirectionAtStart);
         Engine.Instance.Player.Freeze();
         //temp
-        UIManager.Instance._combatPanel.SetActive(true);
         ClearButtons();
     }
 

@@ -46,7 +46,7 @@ public class CursorController : MonoBehaviour
         {
             if (Engine.Instance.TacticalPlayer.GetActionPoints() > 0)
             {
-                if (Engine.Instance._currentMode == TacticalMode.Movement)
+                if (Engine.Instance._currentTacticalMode == TacticalMode.Movement)
                 {
                     if (GetFocusedOnTile())
                     {
@@ -212,35 +212,7 @@ public class CursorController : MonoBehaviour
         }
     }
 
-    public void SetInRangeTiles()
-    {
-        foreach (OverlayTile item in inRangeTiles)
-        {
-            item.HideTile();
-        }
-        
-        // feed the turn's remaining AP into the function
-        if (Engine.Instance.mode == 0)
-        {
-            Debug.Log("Current ap: " + Engine.Instance.TacticalPlayer.GetActionPoints());
-            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), Engine.Instance.TacticalPlayer.GetActionPoints(), true);
-
-        } else if (Engine.Instance.mode == 1)
-        {
-            inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), 1, false);
-        } else
-        {
-            inRangeTiles = rangeFinder.GetTilesInIntervalVer2(Engine.Instance.TacticalPlayer.GetActiveTile(), 6, new List<string> { "NW", "SE", "SW", "NE" });
-        }
-
-        if (Engine.Instance.TacticalPlayer.GetActionPoints() > 0) 
-        {
-            foreach (OverlayTile item in inRangeTiles)
-            {
-                item.ShowTile();
-            }
-        }
-    }
+    
 
     /*
     private void MoveAlongPath()

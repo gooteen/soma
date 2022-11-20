@@ -8,9 +8,11 @@ public class TacticalPlayerInfo : TacticalCharacterInfo
     [SerializeField] private Weapon _weapon;
     public override void Initialize()
     {
-        base._healthPoints = _stats._healthPoints;
-        base._maxActionPoints = _stats._maxActionPoints;
-        base._damage = _stats._damage;
+        _maxHealthPoints = _stats._healthPoints;
+        _maxActionPoints = _stats._maxActionPoints;
+        _currentActionPoints = _maxActionPoints;
+        _currentHealthPoints = _maxHealthPoints;
+        _damage = _stats._damage;
         _weapon = _stats._weapon;
     }
 

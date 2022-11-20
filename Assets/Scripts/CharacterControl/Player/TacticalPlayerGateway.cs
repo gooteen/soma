@@ -14,6 +14,11 @@ public class TacticalPlayerGateway : MonoBehaviour
         _tacticalPlayerMovement = GetComponent<TacticalMovement>();
     }
 
+    public float GetHealthRatio()
+    {
+        return _playerInfo.GetHealthRatio();
+    }
+
     public int GetWeaponHitCost()
     {
         return _playerInfo.GetHitCost();

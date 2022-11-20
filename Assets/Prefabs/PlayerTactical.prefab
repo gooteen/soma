@@ -88,9 +88,11 @@ MonoBehaviour:
   _healthPoints: 50
   _maxActionPoints: 5
   _currentActionPoints: 0
+  _nameInBattle: Player
   _damage: 5
   _activeTile: {fileID: 0}
   _stats: {fileID: 11400000, guid: 77581de29f4a1c44c9f59f8f4bbbda95, type: 2}
+  _weapon: {fileID: 0}
 --- !u!114 &7938189183334727638
 MonoBehaviour:
   m_ObjectHideFlags: 0

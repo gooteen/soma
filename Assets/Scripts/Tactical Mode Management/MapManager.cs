@@ -122,6 +122,8 @@ public class MapManager : MonoBehaviour
         {
             initiator.SetActive(false);
         }
+
+        Engine.Instance.ChangeGameMode();
     }
 
     public void ClearArena()
@@ -150,6 +152,8 @@ public class MapManager : MonoBehaviour
         }
 
         ClearInitiator();
+        UIManager.Instance.ClearCombatantQueue();
+        Engine.Instance.ChangeGameMode();
     }
 
     public List<OverlayTile> GetAllTilesOnMap()

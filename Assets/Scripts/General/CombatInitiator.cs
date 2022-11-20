@@ -40,6 +40,10 @@ public class CombatInitiator : MonoBehaviour
 
         PlacePlayers();
         PlaceEnemies();
+        foreach (GameObject character in Engine.Instance.TurnManager.GetCharactersInBattle())
+        {
+            UIManager.Instance.FillCombatantCell(character.GetComponent<TacticalCharacterInfo>().GetNameInBattle());
+        }
 
         Engine.Instance.TurnManager.SetNextCharacter();
     }
@@ -54,7 +58,6 @@ public class CombatInitiator : MonoBehaviour
             }
         }
     }
-
     private void PlacePlayers()
     {
         int _step = 0;

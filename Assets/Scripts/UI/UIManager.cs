@@ -1,0 +1,76 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class UIManager : MonoBehaviour
+{
+    public GameObject _combatPanel;
+    public GameObject _dialoguePanel;
+
+    [Header("Dialogue Panel")]
+    public Text _speakerName;
+    public Text _dialogueBox;
+
+    public GameObject _replyBox;
+    public GameObject _replyBoxContent;
+
+    public Button _replyOptionButton;
+    public Button _continueButton;
+
+    [Header("Combat Panel")]
+    public Image _Healthbar;
+    public Transform _combatantsQueue;
+    public GameObject _combatantCellPrefab;
+    public List<GameObject> _currentCombatantCells;
+    public Button _toCombatModeButton;
+    public Button _toMovementModeButton;
+    public Text _apLeft;
+
+    public static UIManager Instance { get; private set; }
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    public void FillCombatantCell(string _text)
+    {
+        GameObject _cell = Instantiate(_combatantCellPrefab, _combatantsQueue);
+        _cell.GetComponentInChildren<Text>().text = _text;
+        _currentCombatantCells.Add(_cell);
+    }
+
+    public void ClearCombatantQueue()
+    {
+        foreach (GameObject cell in _currentCombatantCells)
+        {
+            cell.GetComponent<CombatantCell>().Pop();
+        }
+        _currentCombatantCells.Clear();
+    }
+
+    public void ManageQueueMarkers(int index)
+    {
+        for (int i = 0; i < _currentCombatantCells.Count; i++)
+        {
+            if (i == index)
+            {
+                _currentCombatantCells[i].GetComponent<CombatantCell>().ShowMarker();
+            } else
+            {
+                _currentCombatantCells[i].GetComponent<CombatantCell>().HideMarker();
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (Engine.Instance._currentGameMode == GameMode.Battle && Engine.Instance.TurnManager.GetCurrentCharacter().tag != "EnemyTactical")
+        {
+            _apLeft.text = $"AP: x{Engine.Instance.TacticalPlayer.GetActionPoints()}";
+            _Healthbar.fillAmount = Engine.Instance.TacticalPlayer.GetHealthRatio();
+        }
+    }
+
+}

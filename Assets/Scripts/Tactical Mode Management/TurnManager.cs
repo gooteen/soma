@@ -62,7 +62,7 @@ public class TurnManager : MonoBehaviour
         {
             index = 0;
         }
-
+        UIManager.Instance.ManageQueueMarkers(index);
         Debug.Log("Count: " + _charactersInBattle.Count + " Index: " + index);
 
         _currentCharacter = _charactersInBattle[index];
