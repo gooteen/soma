@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public abstract class TacticalCharacterInfo : MonoBehaviour
 {
+    [SerializeField] internal CharacterAnimation _anim;
     [SerializeField] internal float _maxHealthPoints;
     [SerializeField] internal int _maxActionPoints;
     [SerializeField] internal int _currentActionPoints;
@@ -32,6 +33,11 @@ public abstract class TacticalCharacterInfo : MonoBehaviour
     private void Update()
     {
         _healthBar.fillAmount = GetHealthRatio();
+    }
+
+    public bool IsDead()
+    {
+        return _anim.IsDead();
     }
 
     public virtual void ShowMarker()
@@ -62,6 +68,10 @@ public abstract class TacticalCharacterInfo : MonoBehaviour
     public virtual void TakeDamage(float damage)
     {
         _currentHealthPoints -= damage;
+        if (_currentHealthPoints <= 0)
+        {
+            _anim.Die();
+        }
     }
 
     public virtual void TakeAwayActionPoints(int points)

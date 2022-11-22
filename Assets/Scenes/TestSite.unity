@@ -601,6 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charactersInBattle: []
+  _deadCharacters: []
   _currentCharacter: {fileID: 0}
   _timeBetweenTurns: 1
   index: 0
@@ -4678,6 +4679,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 29531810}
     m_Modifications:
+    - target: {fileID: 1317508441232596667, guid: bf9c2f8536da2df4bbd6b06a1c655f5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1317508441438609306, guid: bf9c2f8536da2df4bbd6b06a1c655f5d,
         type: 3}
       propertyPath: m_Name

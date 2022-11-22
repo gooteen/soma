@@ -34,10 +34,10 @@ public class UIManager : MonoBehaviour
         Instance = this;
     }
 
-    public void FillCombatantCell(string _text)
+    public void FillCombatantCell(string text)
     {
         GameObject _cell = Instantiate(_combatantCellPrefab, _combatantsQueue);
-        _cell.GetComponentInChildren<Text>().text = _text;
+        _cell.GetComponentInChildren<Text>().text = text;
         _currentCombatantCells.Add(_cell);
     }
 
@@ -48,6 +48,12 @@ public class UIManager : MonoBehaviour
             cell.GetComponent<CombatantCell>().Pop();
         }
         _currentCombatantCells.Clear();
+    }
+
+    public void RemoveCombatantCellAt(int index)
+    {
+        _currentCombatantCells[index].GetComponent<CombatantCell>().Pop();
+        _currentCombatantCells.RemoveAt(index);
     }
 
     public void ManageQueueMarkers(int index)

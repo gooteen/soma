@@ -140,6 +140,12 @@ public class MapManager : MonoBehaviour
         {
             Destroy(character);
         }
+
+        foreach (var character in Engine.Instance.TurnManager.GetDeadCharactersInBattle())
+        {
+            Destroy(character);
+        }
+
         Engine.Instance.TurnManager.ClearCharactersList();
         CursorController.Instance.HideCursor();
         Engine.Instance.Player.PlacePlayerAt(_initiator.GetPositionAfterFight());

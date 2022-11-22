@@ -6,6 +6,7 @@ public class CharacterAnimation : MonoBehaviour
 {
     [SerializeField] private float _staticThreshold;
     [SerializeField] private int _numberOfSlices;
+    private bool isDead;
 
     // 8-directional movement
 
@@ -25,7 +26,13 @@ public class CharacterAnimation : MonoBehaviour
 
     private void Awake()
     {
+        isDead = false;
         _anim = GetComponent<Animator>();
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
  
     public void SetDirection(Vector2 direction)
@@ -40,7 +47,18 @@ public class CharacterAnimation : MonoBehaviour
             _directionArray = _runDirections;
             _lastDirection = DirectionToIndex(direction);
         }
-        _anim.Play(_directionArray[_lastDirection]);
+        if (!isDead)
+        {
+            _anim.Play(_directionArray[_lastDirection]);
+        } else
+        {
+            _anim.Play("Death");
+        }
+    }
+
+    public void Die() 
+    {
+        isDead = true;
     }
 
     public string GetCurrentStaticDirection()

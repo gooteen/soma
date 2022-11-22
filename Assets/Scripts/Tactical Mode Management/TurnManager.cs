@@ -6,6 +6,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     [SerializeField] private List<GameObject> _charactersInBattle;
+    [SerializeField] private List<GameObject> _deadCharacters;
     [SerializeField] private GameObject _currentCharacter;
 
     [SerializeField] private float _timeBetweenTurns;
@@ -20,6 +21,7 @@ public class TurnManager : MonoBehaviour
     public void ClearCharactersList()
     {
         _charactersInBattle.Clear();
+        _deadCharacters.Clear();
         index = -1;
     }
 
@@ -38,10 +40,16 @@ public class TurnManager : MonoBehaviour
         return _charactersInBattle;
     }
 
+    public List<GameObject> GetDeadCharactersInBattle()
+    {
+        return _deadCharacters;
+    }
+
     public GameObject GetCurrentCharacter()
     {
         return _currentCharacter;
     }
+
 
     public GameObject FindCharacterByTile(OverlayTile tile)
     {
@@ -58,10 +66,12 @@ public class TurnManager : MonoBehaviour
     public void SetNextCharacter()
     {
         index++;
-        if (index == _charactersInBattle.Count)
+
+        if (index >= _charactersInBattle.Count)
         {
             index = 0;
         }
+
         UIManager.Instance.ManageQueueMarkers(index);
         Debug.Log("Count: " + _charactersInBattle.Count + " Index: " + index);
 
@@ -71,6 +81,7 @@ public class TurnManager : MonoBehaviour
         _currentCharacter.GetComponent<TacticalCharacterInfo>().RefillActionPoints();
         LockCharacterTiles();
         ManageCharacterMarkers();
+
         if (_currentCharacter.tag != "EnemyTactical")
         {
             Engine.Instance.UpdatePlayerGateway(_currentCharacter.GetComponent<TacticalPlayerGateway>());
@@ -87,6 +98,16 @@ public class TurnManager : MonoBehaviour
 
     private IEnumerator CoolDown()
     {
+        for (int i = 0; i < _charactersInBattle.Count; i++)
+        {
+            if (_charactersInBattle[i].GetComponent<TacticalCharacterInfo>().IsDead())
+            {
+                Debug.Log("Dead??");
+                _deadCharacters.Add(_charactersInBattle[i]);
+                _charactersInBattle.RemoveAt(i);
+                UIManager.Instance.RemoveCombatantCellAt(i);
+            }
+        }
         if (EnemiesBeaten())
         {
             MapManager.Instance.ClearArena();
