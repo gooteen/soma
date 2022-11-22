@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class TacticalCharacterInfo : MonoBehaviour
 {
@@ -16,10 +17,31 @@ public abstract class TacticalCharacterInfo : MonoBehaviour
     [SerializeField] internal int _damage = 5;
     [SerializeField] internal OverlayTile _activeTile;
 
+    [SerializeField] private int _canvasSortingOrder;
+    [SerializeField] private Canvas _canvas;
+    [SerializeField] private GameObject _marker;
+    [SerializeField] private Image _healthBar;
+
     void Awake()
     {
         _currentActionPoints = _maxActionPoints;
         _currentHealthPoints = _maxHealthPoints;
+        _canvas.sortingOrder = _canvasSortingOrder;
+    }
+
+    private void Update()
+    {
+        _healthBar.fillAmount = GetHealthRatio();
+    }
+
+    public virtual void ShowMarker()
+    {
+        _marker.SetActive(true);
+    }
+
+    public virtual void HideMarker()
+    {
+        _marker.SetActive(false);
     }
 
     public virtual string GetNameInBattle()

@@ -70,7 +70,7 @@ public class TurnManager : MonoBehaviour
 
         _currentCharacter.GetComponent<TacticalCharacterInfo>().RefillActionPoints();
         LockCharacterTiles();
-
+        ManageCharacterMarkers();
         if (_currentCharacter.tag != "EnemyTactical")
         {
             Engine.Instance.UpdatePlayerGateway(_currentCharacter.GetComponent<TacticalPlayerGateway>());
@@ -147,6 +147,20 @@ public class TurnManager : MonoBehaviour
             {
                 Debug.Log("Locked tile for " + i);
                 _charactersInBattle[i].GetComponent<TacticalCharacterInfo>().GetActiveTile().LockTile();
+            }
+        }
+    }
+
+    private void ManageCharacterMarkers()
+    {
+        for (int i = 0; i < _charactersInBattle.Count; i++)
+        {
+            if (_currentCharacter == _charactersInBattle[i])
+            {
+                _charactersInBattle[i].GetComponent<TacticalCharacterInfo>().ShowMarker();
+            } else
+            {
+                _charactersInBattle[i].GetComponent<TacticalCharacterInfo>().HideMarker();
             }
         }
     }
