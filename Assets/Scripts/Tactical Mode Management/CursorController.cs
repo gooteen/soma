@@ -16,7 +16,7 @@ public class CursorController : MonoBehaviour
     private RangeFinder rangeFinder;
 
     private List<OverlayTile> path = new List<OverlayTile>();
-    [SerializeField] private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
+    private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
 
     private OverlayTile _destinationTile;
     private bool cursorLocked;
@@ -81,6 +81,10 @@ public class CursorController : MonoBehaviour
                                     if (Engine.Instance.TacticalPlayer.GetActionPoints() == 0)
                                     {
                                         HideCursor();
+                                    }
+                                    if (Engine.Instance.TurnManager.EnemiesBeaten())
+                                    {
+                                        MapManager.Instance.ClearArena();
                                     }
                                 }
                             }
@@ -164,22 +168,32 @@ public class CursorController : MonoBehaviour
         }
     }
 
-    public void SetMovementRange()
+    public void HideTiles()
     {
         foreach (OverlayTile item in inRangeTiles)
         {
             item.HideTile();
         }
+    }
+
+    public void ShowTiles()
+    {
+        foreach (OverlayTile item in inRangeTiles)
+        {
+            item.ShowTile();
+        }
+    }
+
+    public void SetMovementRange()
+    {
+        HideTiles();
 
         Debug.Log("Current ap: " + Engine.Instance.TacticalPlayer.GetActionPoints());
         inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), Engine.Instance.TacticalPlayer.GetActionPoints(), true);
 
         if (Engine.Instance.TacticalPlayer.GetActionPoints() > 0)
         {
-            foreach (OverlayTile item in inRangeTiles)
-            {
-                item.ShowTile();
-            }
+            ShowTiles();
         }
         Engine.Instance.ChangeTacticalMode(TacticalMode.Movement);
     }

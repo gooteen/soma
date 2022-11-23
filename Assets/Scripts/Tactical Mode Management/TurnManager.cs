@@ -96,6 +96,56 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    public bool EnemiesBeaten()
+    {
+        int enemiesInTheList = 0;
+        int slainEnemiesInTheList = 0;
+        foreach (GameObject character in _charactersInBattle)
+        {
+            if (character.tag == "EnemyTactical")
+            {
+                enemiesInTheList += 1;
+                if (character.GetComponent<TacticalCharacterInfo>().IsDead())
+                {
+                    slainEnemiesInTheList += 1;
+                }
+            }
+        }
+        if (enemiesInTheList == slainEnemiesInTheList)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool PlayersBeaten()
+    {
+        int playersInTheList = 0;
+        int slainPlayersInTheList = 0;
+        foreach (GameObject character in _charactersInBattle)
+        {
+            if (character.tag == "PlayerTactical")
+            {
+                playersInTheList += 1;
+                if (character.GetComponent<TacticalCharacterInfo>().IsDead())
+                {
+                    slainPlayersInTheList += 1;
+                }
+            }
+        }
+        if (playersInTheList == slainPlayersInTheList)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private IEnumerator CoolDown()
     {
         for (int i = 0; i < _charactersInBattle.Count; i++)
@@ -108,10 +158,11 @@ public class TurnManager : MonoBehaviour
                 UIManager.Instance.RemoveCombatantCellAt(i);
             }
         }
-        if (EnemiesBeaten())
+        if (EnemiesBeaten() || PlayersBeaten())
         {
             MapManager.Instance.ClearArena();
-        } else
+        }
+        else
         {
             SetNextCharacter();
             yield return new WaitForSeconds(_timeBetweenTurns);
@@ -123,30 +174,6 @@ public class TurnManager : MonoBehaviour
                     CallEnemyMove(_currentCharacter);
                 }
             }
-        }
-    }
-
-    private bool EnemiesBeaten()
-    {
-        int enemiesInTheList = 0;
-        int slainEnemiesInTheList = 0;
-        foreach (GameObject character in _charactersInBattle)
-        {
-            if (character.tag == "EnemyTactical")
-            {
-                enemiesInTheList += 1;
-                if (character.GetComponent<TacticalCharacterInfo>().GetHealthPoints() <= 0)
-                {
-                    slainEnemiesInTheList += 1;
-                }
-            }
-        }
-        if (enemiesInTheList == slainEnemiesInTheList)
-        {
-            return true;
-        } else
-        {
-            return false;
         }
     }
 

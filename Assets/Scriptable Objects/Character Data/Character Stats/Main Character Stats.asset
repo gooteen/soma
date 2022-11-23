@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Main Character Stats
   m_EditorClassIdentifier: 
   _name: Hero
-  _healthPoints: 70
+  _healthPoints: 50
   _maxActionPoints: 5
   _damage: 5
   _weapon: {fileID: 5174008795423349229, guid: fcabbdf3be98e80408fa4c10bbb6211d, type: 3}

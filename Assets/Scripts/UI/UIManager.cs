@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
     public Button _continueButton;
 
     [Header("Combat Panel")]
+    public GameObject _tempTransitionScreen;
+    public float _transitionTimeSeconds;
     public Image _Healthbar;
     public Transform _combatantsQueue;
     public GameObject _combatantCellPrefab;
@@ -31,6 +33,7 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
+        _tempTransitionScreen.SetActive(false);
         Instance = this;
     }
 
@@ -70,6 +73,19 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ShowTransitionPanel()
+    {
+        StartCoroutine("Transition");
+    }
+
+    private IEnumerator Transition()
+    {
+        _tempTransitionScreen.SetActive(true);
+        yield return new WaitForSeconds(_transitionTimeSeconds);
+        _tempTransitionScreen.SetActive(false);
+
+    }
+
     private void Update()
     {
         if (Engine.Instance._currentGameMode == GameMode.Battle && Engine.Instance.TurnManager.GetCurrentCharacter().tag != "EnemyTactical")
@@ -78,5 +94,4 @@ public class UIManager : MonoBehaviour
             _Healthbar.fillAmount = Engine.Instance.TacticalPlayer.GetHealthRatio();
         }
     }
-
 }
