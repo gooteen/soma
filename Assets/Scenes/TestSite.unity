@@ -220,13 +220,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15048148}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 963276403}
-  m_Father: {fileID: 1795078838}
-  m_RootOrder: 10
+  m_Father: {fileID: 419893135}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -410,6 +410,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 379755036}
         m_MethodName: HideTiles
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 379755036}
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1694,6 +1705,7 @@ RectTransform:
   - {fileID: 365049076}
   - {fileID: 774956323}
   - {fileID: 1795078838}
+  - {fileID: 15048149}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2966,7 +2978,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0412\u0445\u043E\u0434\u0438\u043C \u0432 \u0431\u043E\u0439...."
+  m_text: "\u0422\u0438\u043F\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043A\u0430...."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3711,6 +3723,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 379755036}
         m_MethodName: ShowTiles
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 379755036}
+        m_MethodName: UnPause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5422,7 +5445,6 @@ RectTransform:
   - {fileID: 1717850788}
   - {fileID: 42359276}
   - {fileID: 1097338243}
-  - {fileID: 15048149}
   - {fileID: 2146521910}
   m_Father: {fileID: 419893135}
   m_RootOrder: 2
@@ -5638,6 +5660,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 7614357831185396361}
         m_MethodName: ClearArena
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 419893136}
+        m_MethodName: ShowTransitionPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5993,11 +6026,11 @@ RectTransform:
   - {fileID: 1106206144}
   - {fileID: 1621948510}
   m_Father: {fileID: 1795078838}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076293945, y: -0.0000038146973}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 729.353, y: 410.2611}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2146521911

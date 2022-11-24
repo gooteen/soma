@@ -160,7 +160,10 @@ public class TurnManager : MonoBehaviour
         }
         if (EnemiesBeaten() || PlayersBeaten())
         {
-            MapManager.Instance.ClearArena();
+            // экран проигрыша
+            Debug.Log("her)");
+            //UIManager.Instance.ShowTransitionPanel();
+            //MapManager.Instance.ClearArena();
         }
         else
         {

@@ -19,7 +19,8 @@ public class CursorController : MonoBehaviour
     private List<OverlayTile> inRangeTiles = new List<OverlayTile>();
 
     private OverlayTile _destinationTile;
-    private bool cursorLocked;
+    private bool _cursorLocked;
+    private bool _isPaused;
 
     private void Awake()
     {
@@ -35,13 +36,14 @@ public class CursorController : MonoBehaviour
 
     void Start()
     {
-        cursorLocked = false;
+        _cursorLocked = false;
         pathFinder = new PathFinder();
         rangeFinder = new RangeFinder();
     }
 
     void LateUpdate()
     {
+        Debug.Log("isLocked: " + _cursorLocked);
         if (Engine.Instance.TacticalPlayer != null)
         {
             if (Engine.Instance.TacticalPlayer.GetActionPoints() > 0)
@@ -52,9 +54,9 @@ public class CursorController : MonoBehaviour
                     {
                         transform.position = new Vector3(_focusedTile.transform.position.x, _focusedTile.transform.position.y, _focusedTile.transform.position.z + 0.01f);
                         transform.gameObject.GetComponent<SpriteRenderer>().sortingOrder = _focusedTile.GetComponent<SpriteRenderer>().sortingOrder;
-                        if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
+                        if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !_cursorLocked && !_isPaused)
                         {
-                            cursorLocked = true;
+                            _cursorLocked = true;
                             _destinationTile = _focusedTile;
 
                             path = pathFinder.FindPath(Engine.Instance.TacticalPlayer.GetActiveTile(), _destinationTile, inRangeTiles);
@@ -70,7 +72,7 @@ public class CursorController : MonoBehaviour
                 {
                     if (GetFocusedOnEnemy())
                     {
-                        if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !cursorLocked)
+                        if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !_cursorLocked && !_isPaused)
                         {
                             if (inRangeTiles.Contains(_focusedTile))
                             {
@@ -84,6 +86,7 @@ public class CursorController : MonoBehaviour
                                     }
                                     if (Engine.Instance.TurnManager.EnemiesBeaten())
                                     {
+                                        // экран победы
                                         MapManager.Instance.ClearArena();
                                     }
                                 }
@@ -102,7 +105,7 @@ public class CursorController : MonoBehaviour
                 }
                 else
                 {
-                    cursorLocked = false;
+                    _cursorLocked = false;
                 }
             }
             else
@@ -113,9 +116,20 @@ public class CursorController : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        _isPaused = true;
+    }
+
+    public void UnPause()
+    {
+        _isPaused = false;
+    }
+
     public void HideCursor()
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
     }
 
     public void ShowCursor()

@@ -80,10 +80,13 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator Transition()
     {
+        CursorController.Instance.Pause();
         _tempTransitionScreen.SetActive(true);
+        Engine.Instance.Player.Freeze();
         yield return new WaitForSeconds(_transitionTimeSeconds);
+        CursorController.Instance.UnPause();
         _tempTransitionScreen.SetActive(false);
-
+        Engine.Instance.Player.Freeze();
     }
 
     private void Update()
