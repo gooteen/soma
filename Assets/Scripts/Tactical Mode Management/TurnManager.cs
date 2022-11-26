@@ -158,12 +158,16 @@ public class TurnManager : MonoBehaviour
                 UIManager.Instance.RemoveCombatantCellAt(i);
             }
         }
-        if (EnemiesBeaten() || PlayersBeaten())
+        if (EnemiesBeaten())
         {
-            // экран проигрыша
-            Debug.Log("her)");
-            //UIManager.Instance.ShowTransitionPanel();
-            //MapManager.Instance.ClearArena();
+            CursorController.Instance.HideTiles();
+            CursorController.Instance.HideCursor();
+            UIManager.Instance.ShowBattleWonWindow();
+        } else if (PlayersBeaten())
+        {
+            CursorController.Instance.HideTiles();
+            CursorController.Instance.HideCursor();
+            UIManager.Instance.ShowBattleLostWindow();
         }
         else
         {

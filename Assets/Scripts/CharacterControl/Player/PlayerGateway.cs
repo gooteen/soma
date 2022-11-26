@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerGateway : MonoBehaviour
 {
     [SerializeField] private CharacterAnimation _anim;
-    private PlayerMovement _mov;
+    private CharacterMovement _mov;
 
     private void Awake()
     {
-        _mov = GetComponent<PlayerMovement>();
+        _mov = GetComponent<CharacterMovement>();
     }
 
     public bool IsFrozen()

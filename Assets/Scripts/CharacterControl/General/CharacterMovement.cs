@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class CharacterMovement : MonoBehaviour
 {
     [SerializeField] private float _movementSpeed;
     [SerializeField] private CharacterAnimation _anim;
     [SerializeField] private float _movementOffset; 
     private Rigidbody2D _rb;
     [SerializeField] private bool _frozen;
+    [SerializeField] private bool _isPlayer;
 
     void Start()
     {
@@ -17,11 +18,10 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate()
     {
-        if (!_frozen)
+        if (!_frozen && _isPlayer)
         {
             Vector2 direction = Engine.Instance.InputManager.GetMovementDirection();
             Move(new Vector3(direction.x, direction.y));
-            _anim.SetDirection(direction);
         }
     }
 
@@ -62,5 +62,6 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log("param: " + param);
         _rb.velocity = direction.normalized * _movementSpeed;
+        _anim.SetDirection(direction);
     }
 }

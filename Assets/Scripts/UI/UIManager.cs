@@ -19,6 +19,8 @@ public class UIManager : MonoBehaviour
     public Button _continueButton;
 
     [Header("Combat Panel")]
+    public GameObject _battleWonWindow;
+    public GameObject _battleLostWindow;
     public GameObject _tempTransitionScreen;
     public float _transitionTimeSeconds;
     public Image _Healthbar;
@@ -35,6 +37,16 @@ public class UIManager : MonoBehaviour
     {
         _tempTransitionScreen.SetActive(false);
         Instance = this;
+    }
+
+    public void ShowBattleWonWindow()
+    {
+        _battleWonWindow.SetActive(true);
+    }
+
+    public void ShowBattleLostWindow()
+    {
+        _battleLostWindow.SetActive(true);
     }
 
     public void FillCombatantCell(string text)

@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!95 &8562092601504214167
 Animator:
   serializedVersion: 3
@@ -204,6 +204,8 @@ MonoBehaviour:
   _movementSpeed: 3
   _anim: {fileID: 8562092601504214166}
   _movementOffset: 0.55
+  _frozen: 0
+  _isPlayer: 1
 --- !u!114 &6564717401427048926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +265,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CharacterCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7643107859419279853, guid: e05d75e545f9b224b990660a41a76e39,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7643107859419279854, guid: e05d75e545f9b224b990660a41a76e39,
         type: 3}

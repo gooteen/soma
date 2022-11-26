@@ -86,8 +86,11 @@ public class CursorController : MonoBehaviour
                                     }
                                     if (Engine.Instance.TurnManager.EnemiesBeaten())
                                     {
+                                        CursorController.Instance.HideCursor();
+                                        CursorController.Instance.HideTiles();
+                                        UIManager.Instance.ShowBattleWonWindow();
                                         // экран победы
-                                        MapManager.Instance.ClearArena();
+                                        //MapManager.Instance.ClearArena();
                                     }
                                 }
                             }

@@ -6,6 +6,7 @@ public class TacticalPlayerInfo : TacticalCharacterInfo
 {
     [SerializeField] private HeroStats _stats;
     [SerializeField] private Weapon _weapon;
+
     public override void Initialize()
     {
         _maxHealthPoints = _stats._healthPoints;

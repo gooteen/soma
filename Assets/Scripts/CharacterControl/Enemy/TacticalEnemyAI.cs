@@ -29,13 +29,7 @@ public class TacticalEnemyAI : MonoBehaviour
         destinationToTarget = new Dictionary<OverlayTile, GameObject>();
 
         List<GameObject> _charactersInBattle = Engine.Instance.TurnManager.GetCharactersInBattle();
-        foreach (GameObject character in _charactersInBattle)
-        {
-            if (character.tag != "EnemyTactical")
-            {
-                _playersInBattle.Add(character);
-            }
-        }
+        UpdatePlayerInBattleList();
         _pathFinder = new PathFinder();
         _rangeFinder = new RangeFinder();
     }
@@ -68,6 +62,19 @@ public class TacticalEnemyAI : MonoBehaviour
         }
     }
 
+    public void UpdatePlayerInBattleList()
+    {
+        _playersInBattle.Clear();
+        List<GameObject> _charactersInBattle = Engine.Instance.TurnManager.GetCharactersInBattle();
+        foreach (GameObject character in _charactersInBattle)
+        {
+            if (character.tag != "EnemyTactical" && !character.GetComponent<TacticalCharacterInfo>().IsDead())
+            {
+                _playersInBattle.Add(character);
+            }
+        }
+    }
+
     public void SetTargetInReach()
     {
         _targetInReach = true;
@@ -75,6 +82,7 @@ public class TacticalEnemyAI : MonoBehaviour
 
     public void StartTurn()
     {
+        UpdatePlayerInBattleList();
         SetGoal();
         _inATurn = true;
     }
