@@ -16,6 +16,31 @@ public class CombatInitiator : MonoBehaviour
 
     [Header("NE, NW, SE, SW")]
     [SerializeField] private string _playerLineDirection;
+    private bool _playerSpotted;
+
+    private void Start()
+    {
+        _playerSpotted = false;
+    }
+
+    private void Update()
+    {
+        if (_playerSpotted)
+        {
+            InitializeFight();
+            SetNotSpotted();
+        }
+    }
+
+    public void SetSpotted()
+    {
+        _playerSpotted = true;
+    }
+
+    public void SetNotSpotted()
+    {
+        _playerSpotted = false;
+    }
 
     public GameObject[] GetInitiators()
     {
