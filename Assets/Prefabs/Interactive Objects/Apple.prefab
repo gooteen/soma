@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _distance: 1.5
-  _sortOrdStart: 1
+  _sortOrdStart: 3
   _sortOrdEnd: 2
 --- !u!212 &1986651473077580387
 SpriteRenderer:

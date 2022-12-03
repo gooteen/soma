@@ -15,13 +15,30 @@ public class Apple : InteractiveObject
         base.Start();
         _sprite = GetComponent<SpriteRenderer>();
         _rb2d = GetComponent<Rigidbody2D>();
-        _sprite.sortingOrder = _sortOrdStart;
     }
     internal override void OnInteract()
     {
         if (_interactive)
         {
             Destroy(gameObject);
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D col) 
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            if (Engine.Instance.Player.CanPickUpItems())
+            {
+                Destroy(this.gameObject);
+                Debug.Log("worked");
+            } else
+            {
+                Debug.Log("1хуй");
+            }
+        } else
+        {
+            Debug.Log("2хуй");
         }
     }
 
@@ -33,10 +50,10 @@ public class Apple : InteractiveObject
     private IEnumerator FallCoroutine()
     {
         _rb2d.isKinematic = false;
-        yield return new WaitForSeconds(0.4f);
-        _sprite.sortingOrder = _sortOrdEnd;
-        yield return new WaitForSeconds(0.33f);
+       yield return new WaitForSeconds(0.1f);
         _sprite.sortingOrder = _sortOrdStart;
+        yield return new WaitForSeconds(0.7f);
+        _sprite.sortingOrder = _sortOrdEnd;
         _interactive = true;
     }
 }

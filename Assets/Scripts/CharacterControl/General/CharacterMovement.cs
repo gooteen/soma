@@ -7,9 +7,10 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] private float _movementSpeed;
     [SerializeField] private CharacterAnimation _anim;
     [SerializeField] private float _movementOffset; 
-    private Rigidbody2D _rb;
     [SerializeField] private bool _frozen;
     [SerializeField] private bool _isPlayer;
+    [SerializeField] private bool _canPickUpItems;
+    private Rigidbody2D _rb;
 
     void Start()
     {
@@ -37,6 +38,21 @@ public class CharacterMovement : MonoBehaviour
         {
             _rb.velocity = new Vector2(0, 0);
         }
+    }
+
+    public void LockItemPickup()
+    {
+        _canPickUpItems = false;
+    }
+
+    public void UnlockItemPickup()
+    {
+        _canPickUpItems = true;
+    }
+
+    public bool CanPickUpItems()
+    {
+        return _canPickUpItems;
     }
 
     public void Move(Vector2 direction)

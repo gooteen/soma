@@ -12,6 +12,21 @@ public class PlayerGateway : MonoBehaviour
         _mov = GetComponent<CharacterMovement>();
     }
 
+    public void LockItemPickup()
+    {
+        _mov.LockItemPickup();
+    }
+
+    public void UnlockItemPickup()
+    {
+        _mov.UnlockItemPickup();
+    }
+
+    public bool CanPickUpItems()
+    {
+        return _mov.CanPickUpItems();
+    }
+
     public bool IsFrozen()
     {
         return _mov.IsFrozen();
