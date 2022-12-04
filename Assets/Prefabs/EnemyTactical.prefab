@@ -149,7 +149,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6980584620542662190}
-  - {fileID: 7130711751101826250}
+  - {fileID: 7285488567915841116}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -210,10 +210,10 @@ MonoBehaviour:
   _nameInBattle: Spider
   _damage: 5
   _activeTile: {fileID: 0}
-  _canvasSortingOrder: 2
-  _canvas: {fileID: 7130711751101826253}
-  _marker: {fileID: 7130711750873219334}
-  _healthBar: {fileID: 7130711750533518373}
+  _canvasSortingOrder: 3
+  _canvas: {fileID: 7285488567915841115}
+  _marker: {fileID: 7285488567674684304}
+  _healthBar: {fileID: 7285488568417048243}
 --- !u!114 &2343581408617937799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playersInBattle: []
   _inATurn: 0
---- !u!1001 &6018617644482140985
+--- !u!1001 &6082196037335407023
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -362,29 +362,29 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6e96127eaaef874d9b9e34292787a0e, type: 3}
---- !u!224 &7130711751101826250 stripped
+--- !u!224 &7285488567915841116 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3563205279365554163, guid: e6e96127eaaef874d9b9e34292787a0e,
     type: 3}
-  m_PrefabInstance: {fileID: 6018617644482140985}
+  m_PrefabInstance: {fileID: 6082196037335407023}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &7130711751101826253 stripped
+--- !u!223 &7285488567915841115 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 3563205279365554164, guid: e6e96127eaaef874d9b9e34292787a0e,
     type: 3}
-  m_PrefabInstance: {fileID: 6018617644482140985}
+  m_PrefabInstance: {fileID: 6082196037335407023}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7130711750873219334 stripped
+--- !u!1 &7285488567674684304 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3563205279606708799, guid: e6e96127eaaef874d9b9e34292787a0e,
     type: 3}
-  m_PrefabInstance: {fileID: 6018617644482140985}
+  m_PrefabInstance: {fileID: 6082196037335407023}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7130711750533518373 stripped
+--- !u!114 &7285488568417048243 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3563205278721675036, guid: e6e96127eaaef874d9b9e34292787a0e,
     type: 3}
-  m_PrefabInstance: {fileID: 6018617644482140985}
+  m_PrefabInstance: {fileID: 6082196037335407023}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

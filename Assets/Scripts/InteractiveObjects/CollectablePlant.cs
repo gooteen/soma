@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BerryBush : InteractiveObject
+public class CollectablePlant : InteractiveObject
 {
     [SerializeField] Sprite _full;
     [SerializeField] Sprite _empty;
