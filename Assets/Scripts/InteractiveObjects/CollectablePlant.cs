@@ -6,6 +6,8 @@ public class CollectablePlant : InteractiveObject
 {
     [SerializeField] Sprite _full;
     [SerializeField] Sprite _empty;
+    [SerializeField] ItemID _itemID;
+    [SerializeField] int _itemsToBeCollected;
     private bool _isFull = true;
     private SpriteRenderer _renderer;
 
@@ -25,5 +27,6 @@ public class CollectablePlant : InteractiveObject
             _renderer.sprite = _empty;
             _interactive = false;
         }
+        Engine.Instance.AddItemToInventory(_itemID, _itemsToBeCollected);
     }
 }

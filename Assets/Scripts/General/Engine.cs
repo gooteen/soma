@@ -9,6 +9,8 @@ public class Engine : MonoBehaviour
     public GameMode _currentGameMode;
     public TacticalMode _currentTacticalMode;
 
+    [SerializeField] private Inventory _inventory;
+
     //ссылка на класс-интерфейс текущего игрока в тактическом режиме
     [SerializeField] private TacticalPlayerGateway _tacticalPlayer;
     [SerializeField] private PlayerGateway _player;
@@ -32,6 +34,11 @@ public class Engine : MonoBehaviour
         Instance = this;
         _input = GetComponent<InputManager>();
         _turnManager = GetComponent<TurnManager>();
+    }
+
+    public void AddItemToInventory(ItemID id, int quantity)
+    {
+        _inventory.AddItem(id, quantity);
     }
 
     // TEMP __________________________________________________

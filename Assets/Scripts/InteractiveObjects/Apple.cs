@@ -6,6 +6,7 @@ public class Apple : InteractiveObject
 {
     [SerializeField] private int _sortOrdStart;
     [SerializeField] private int _sortOrdEnd;
+    [SerializeField] private int _quantityToAddToInventory;
 
     private SpriteRenderer _sprite;
     private Rigidbody2D _rb2d;
@@ -31,6 +32,7 @@ public class Apple : InteractiveObject
             if (Engine.Instance.Player.CanPickUpItems())
             {
                 Destroy(this.gameObject);
+                Engine.Instance.AddItemToInventory(ItemID.Apple, _quantityToAddToInventory);
                 Debug.Log("worked");
             } else
             {

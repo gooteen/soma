@@ -98,6 +98,8 @@ MonoBehaviour:
   _distance: 1.7
   _full: {fileID: 21300000, guid: 7fe7d26bb90d8dc42aa051077eccf55f, type: 3}
   _empty: {fileID: 21300000, guid: 675bf99dde72299438f6e5981b6ec196, type: 3}
+  _itemID: 0
+  _itemsToBeCollected: 2
 --- !u!70 &5203614803792523049
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

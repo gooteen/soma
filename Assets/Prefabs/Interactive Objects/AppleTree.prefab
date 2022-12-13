@@ -335,6 +335,11 @@ PrefabInstance:
       propertyPath: _secondsToSwitch2
       value: 0.26
       objectReference: {fileID: 0}
+    - target: {fileID: 1986651473077580386, guid: d06e8a9bf232a7a4892086fa8572a77e,
+        type: 3}
+      propertyPath: _quantityToAddToInventory
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1986651473077580390, guid: d06e8a9bf232a7a4892086fa8572a77e,
         type: 3}
       propertyPath: m_Name
@@ -431,6 +436,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _secondsToSwitch2
       value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986651473077580386, guid: d06e8a9bf232a7a4892086fa8572a77e,
+        type: 3}
+      propertyPath: _quantityToAddToInventory
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1986651473077580390, guid: d06e8a9bf232a7a4892086fa8572a77e,
         type: 3}
@@ -529,6 +539,11 @@ PrefabInstance:
       propertyPath: _secondsToSwitch2
       value: 0.26
       objectReference: {fileID: 0}
+    - target: {fileID: 1986651473077580386, guid: d06e8a9bf232a7a4892086fa8572a77e,
+        type: 3}
+      propertyPath: _quantityToAddToInventory
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1986651473077580390, guid: d06e8a9bf232a7a4892086fa8572a77e,
         type: 3}
       propertyPath: m_Name
@@ -625,6 +640,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _secondsToSwitch2
       value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986651473077580386, guid: d06e8a9bf232a7a4892086fa8572a77e,
+        type: 3}
+      propertyPath: _quantityToAddToInventory
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1986651473077580390, guid: d06e8a9bf232a7a4892086fa8572a77e,
         type: 3}
