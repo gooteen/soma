@@ -29,7 +29,7 @@ public class DialogueController : MonoBehaviour
 
     private void Start()
     {
-        _anim.SetDirection(_npcDirectionAtStart);
+        _anim.SetStaticDirection(_npcDirectionAtStart);
     }
 
     void Update()
