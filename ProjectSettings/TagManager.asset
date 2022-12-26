@@ -22,7 +22,7 @@ TagManager:
   - Destructible
   - Interactive
   - Fallable
-  - SolidSurface
+  - OnlyFallable
   - LevelSwitch
   - OnlyPlayer
   - 
