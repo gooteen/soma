@@ -130,7 +130,7 @@ public class DialogueController : MonoBehaviour
     private void FinishDialogue()
     {
         UIManager.Instance._dialoguePanel.SetActive(false);
-        _anim.SetDirection(_npcDirectionAtStart);
+        _anim.SetStaticDirection(_npcDirectionAtStart);
         Engine.Instance.Player.Freeze();
         //temp
         ClearButtons();
