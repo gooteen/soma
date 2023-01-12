@@ -6,10 +6,17 @@ public class PlayerGateway : MonoBehaviour
 {
     [SerializeField] private CharacterAnimation _anim;
     private CharacterMovement _mov;
+    private PlayerInfo _info;
 
     private void Awake()
     {
         _mov = GetComponent<CharacterMovement>();
+        _info = GetComponent<PlayerInfo>();
+    }
+
+    public void RestoreHealth(float healthToRestore)
+    {
+        _info.RestoreHealth(healthToRestore);
     }
 
     public void LockItemPickup()

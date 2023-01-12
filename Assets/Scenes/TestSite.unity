@@ -1785,6 +1785,7 @@ GameObject:
   - component: {fileID: 419893133}
   - component: {fileID: 419893132}
   - component: {fileID: 419893136}
+  - component: {fileID: 419893137}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1909,6 +1910,23 @@ MonoBehaviour:
   _toCombatModeButton: {fileID: 1717850789}
   _toMovementModeButton: {fileID: 1129448359}
   _apLeft: {fileID: 1320519639}
+--- !u!114 &419893137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419893131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18631d2918b8d5f49971e29271e860b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inventoryCellPrefab: {fileID: 0}
+  _inventoryCellsList: []
+  _itemActionButton: {fileID: 0}
+  _itemName: {fileID: 0}
+  _itemImage: {fileID: 0}
 --- !u!1 &421631540
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,21 +2699,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 29531810}
     m_Modifications:
-    - target: {fileID: 8562092601504214248, guid: 6c1638883be54c9439a76386d1e4edc7,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 2.2444444
-      objectReference: {fileID: 0}
-    - target: {fileID: 8562092601504214248, guid: 6c1638883be54c9439a76386d1e4edc7,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 2.3733332
-      objectReference: {fileID: 0}
-    - target: {fileID: 8562092601504214248, guid: 6c1638883be54c9439a76386d1e4edc7,
-        type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8562092601695612361, guid: 6c1638883be54c9439a76386d1e4edc7,
         type: 3}
       propertyPath: m_Name
@@ -3037,7 +3040,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -19.43, y: 0}
-  m_SizeDelta: {x: 845.5685, y: 171.8}
+  m_SizeDelta: {x: 845.5685, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &605719392
 MonoBehaviour:
@@ -3375,7 +3378,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4882,7 +4885,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1015568753
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9470,7 +9473,7 @@ PrefabInstance:
     - target: {fileID: 2522778711066045472, guid: 70c01200e43421f4b998ebcba85f6ef7,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2522778711066045472, guid: 70c01200e43421f4b998ebcba85f6ef7,
         type: 3}
@@ -9480,17 +9483,17 @@ PrefabInstance:
     - target: {fileID: 2522778711066045472, guid: 70c01200e43421f4b998ebcba85f6ef7,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2522778711066045472, guid: 70c01200e43421f4b998ebcba85f6ef7,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 151.7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2522778711066045472, guid: 70c01200e43421f4b998ebcba85f6ef7,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 154.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2522778711066045472, guid: 70c01200e43421f4b998ebcba85f6ef7,
         type: 3}
@@ -9530,12 +9533,12 @@ PrefabInstance:
     - target: {fileID: 2522778711066045472, guid: 70c01200e43421f4b998ebcba85f6ef7,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 92.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2522778711066045472, guid: 70c01200e43421f4b998ebcba85f6ef7,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -94.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2522778711066045472, guid: 70c01200e43421f4b998ebcba85f6ef7,
         type: 3}

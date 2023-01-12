@@ -36,9 +36,29 @@ public class Engine : MonoBehaviour
         _turnManager = GetComponent<TurnManager>();
     }
 
+    private void Start() //to be deleted
+    {
+        Eatable _eatable = (Eatable)_inventory.FindItemInMap(ItemID.Wheat)._item;
+        
+        if (Instance._currentGameMode == GameMode.Battle)
+        {
+            //
+        }
+        else
+        {
+            Instance.Player.RestoreHealth(_eatable._healthToResotre);
+        }
+        RemoveItemFromInventory(ItemID.Wheat, 1);
+    }
+
     public void AddItemToInventory(ItemID id, int quantity)
     {
         _inventory.AddItem(id, quantity);
+    }
+
+    public void RemoveItemFromInventory(ItemID id, int quantity)
+    {
+        _inventory.RemoveItem(id, quantity);
     }
 
     // TEMP __________________________________________________

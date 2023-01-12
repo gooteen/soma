@@ -17,12 +17,22 @@ public class Slot
     {
         _quantity += quantity;
     }
+
+    public void DecreaseQuantity(int quantity)
+    {
+        _quantity -= quantity;
+        if (_quantity < 0)
+        {
+            _quantity = 0;
+        } 
+    }
 }
 
 [CreateAssetMenu(fileName = "Inventory", menuName = "Inventory")]
 public class Inventory : ScriptableObject
 {
     public List<Slot> _items;
+    public ItemMapSO _itemMap;
 
     public static Inventory Instance { get; set; }
     
@@ -44,5 +54,35 @@ public class Inventory : ScriptableObject
             Slot _slot = new Slot(id, quantity);
             _items.Add(_slot);
         }
+    }
+
+    public void RemoveItem(ItemID id, int quantity)
+    {
+        for (int i = 0; i < _items.Count; i++)
+        {
+            if (_items[i]._itemId == id)
+            {
+                _items[i].DecreaseQuantity(quantity);
+                if (_items[i]._quantity == 0)
+                {
+                    _items.RemoveAt(i);
+                }
+            }
+        }
+    }
+
+    public IdToItem FindItemInMap(ItemID id) 
+    {
+        for (int i = 0; i <= _items.Count; i++)
+        {
+            for (int j = 0; j <= _itemMap._items.Length; j++)
+            {
+                if (_items[i]._itemId == _itemMap._items[j]._id)
+                {
+                    return _itemMap._items[j];
+                } 
+            }
+        }
+        return null;
     }
 }
