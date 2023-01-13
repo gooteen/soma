@@ -22,7 +22,7 @@ public class Engine : MonoBehaviour
     public HeroStats Hero { get { return _mainHeroStats; } }
     public InputManager InputManager { get { return _input; } }
     public TurnManager TurnManager { get { return _turnManager; } }
-    
+
     //геттер и сеттер на класс-интерфейс игрока
     public TacticalPlayerGateway TacticalPlayer { get { return _tacticalPlayer; } }
     public PlayerGateway Player { get { return _player; } }
@@ -36,19 +36,26 @@ public class Engine : MonoBehaviour
         _turnManager = GetComponent<TurnManager>();
     }
 
-    private void Start() //to be deleted
+    /*
+    private void Start() 
     {
         Eatable _eatable = (Eatable)_inventory.FindItemInMap(ItemID.Wheat)._item;
-        
+
         if (Instance._currentGameMode == GameMode.Battle)
         {
             //
         }
         else
         {
-            Instance.Player.RestoreHealth(_eatable._healthToResotre);
+            Instance.Player.RestoreHealth(_eatable.GetHealthToRestore());
         }
         RemoveItemFromInventory(ItemID.Wheat, 1);
+    }
+    */
+    
+    public Item GetItemByID(ItemID id)
+    {
+        return _inventory.FindItemInMap(id)._item;
     }
 
     public void AddItemToInventory(ItemID id, int quantity)
@@ -59,6 +66,11 @@ public class Engine : MonoBehaviour
     public void RemoveItemFromInventory(ItemID id, int quantity)
     {
         _inventory.RemoveItem(id, quantity);
+    }
+
+    public List<Slot> GetItemsInInvetory()
+    {
+        return _inventory._items;
     }
 
     // TEMP __________________________________________________

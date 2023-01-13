@@ -73,15 +73,13 @@ public class Inventory : ScriptableObject
 
     public IdToItem FindItemInMap(ItemID id) 
     {
-        for (int i = 0; i <= _items.Count; i++)
+        Debug.Log("item id within FindItemInMa method: " + id);
+        for (int i = 0; i <= _itemMap._items.Length; i++)
         {
-            for (int j = 0; j <= _itemMap._items.Length; j++)
+            if (_itemMap._items[i]._id == id)
             {
-                if (_items[i]._itemId == _itemMap._items[j]._id)
-                {
-                    return _itemMap._items[j];
-                } 
-            }
+                return _itemMap._items[i];
+            } 
         }
         return null;
     }

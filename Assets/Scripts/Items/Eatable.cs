@@ -5,5 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Eatable", menuName = "Item/Eatable")]
 public class Eatable : Item
 {
-    public float _healthToResotre;
+    [SerializeField] private float _healthToResotre;
+
+    public float GetHealthToRestore()
+    {
+        return _healthToResotre;
+    }
 }
