@@ -58,6 +58,11 @@ public class Engine : MonoBehaviour
         return _inventory.FindItemInMap(id)._item;
     }
 
+    public Slot GetItemSlotByID(ItemID id)
+    {
+        return _inventory.FindSlotInInventory(id);
+    }
+
     public void AddItemToInventory(ItemID id, int quantity)
     {
         _inventory.AddItem(id, quantity);

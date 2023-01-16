@@ -83,4 +83,16 @@ public class Inventory : ScriptableObject
         }
         return null;
     }
+
+    public Slot FindSlotInInventory(ItemID id)
+    {
+        for (int i = 0; i <= _items.Count; i++)
+        {
+            if (_items[i]._itemId == id)
+            {
+                return _items[i];
+            }
+        }
+        return null;
+    }
 }
