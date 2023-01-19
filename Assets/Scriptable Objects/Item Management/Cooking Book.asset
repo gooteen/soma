@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a1e6045f3bb02440b535126f561a46c, type: 3}
-  m_Name: Inventory
+  m_Script: {fileID: 11500000, guid: 3c6f5fc5425c15543a4f2875920dca84, type: 3}
+  m_Name: Cooking Book
   m_EditorClassIdentifier: 
-  _items:
-  - _itemId: 1
-    _quantity: 19
-  - _itemId: 0
-    _quantity: 1
-  _itemMap: {fileID: 11400000, guid: 68aec6153f79e944a9cde855f155f18b, type: 2}
+  _recipes:
+  - _isUnlocked: 0
+    _itemsNeeded: 000000000000000000000000
+    _itemToCook: 0
+    _method: 0

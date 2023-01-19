@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemID { Wheat, Apple, LapisBerry }
+public enum ItemID { Wheat, Apple, LapisBerry, Null }
 
 [System.Serializable]
 public class IdToItem

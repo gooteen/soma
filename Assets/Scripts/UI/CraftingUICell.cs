@@ -3,19 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class CraftingUICell : InventoryUICell, IPointerEnterHandler
+public class CraftingUICell : InventoryUICell, IPointerEnterHandler, IPointerExitHandler
 {
+    public bool _isHoveredOver;
     public void OnPointerEnter(PointerEventData data)
     {
         Debug.Log("HOVERING");
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        _isHoveredOver = true; 
     }
 
-    // Update is called once per frame
+    public void OnPointerExit(PointerEventData data)
+    {
+        Debug.Log("stopped HOVERING");
+        _isHoveredOver = false;
+    }
+
+    void Start()
+    {
+        _isHoveredOver = false;
+    }
+
     void Update()
     {
         

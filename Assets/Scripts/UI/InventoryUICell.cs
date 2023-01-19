@@ -12,6 +12,10 @@ public class InventoryUICell : MonoBehaviour
     public void SetCellImage(Sprite image)
     {
         _itemImage.sprite = image;
+    } 
+    public Image GetCellImage()
+    {
+        return _itemImage;
     }
 
     public void SetCellQuantity(int quantity)
