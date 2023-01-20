@@ -15,5 +15,9 @@ MonoBehaviour:
   _recipes:
   - _isUnlocked: 0
     _itemsNeeded: 000000000000000000000000
-    _itemToCook: 0
+    _itemToCook: 3
     _method: 0
+  - _isUnlocked: 0
+    _itemsNeeded: 040000000400000004000000
+    _itemToCook: 5
+    _method: 1

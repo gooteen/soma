@@ -36,15 +36,23 @@ public class CookingScreenController : InventoryUIManager
         _cursorOccupied = false;
         DestroyHoveringImage();
         _cookingMethod = CookingMethod.Raw;
+        _dropdown.value = 0;
+        SetCookingMethod();
+        ClearResultCell();
+        ReturnItemsToInventory();
+        ClearCraftingCells();
     }
 
     private void OnEnable()
     {
         FillCells();
+        ClearCraftingCells();
         SetCellsListeners();
         _cursorOccupied = false;
         DestroyHoveringImage();
-        _cookingMethod = CookingMethod.Raw;
+
+        _dropdown.value = 0;
+        SetCookingMethod();
     }
 
     void Update()
@@ -53,6 +61,7 @@ public class CookingScreenController : InventoryUIManager
         {
             HoverWithMouse();
         }
+        ProcessMouseClick();
     }
 
     public void SetCookingMethod()
@@ -69,6 +78,7 @@ public class CookingScreenController : InventoryUIManager
                 _cookingMethod = CookingMethod.Baked;
                 break;
         }
+        GenerateResult();
     }
 
     public override void SetCellsListeners()
@@ -94,15 +104,107 @@ public class CookingScreenController : InventoryUIManager
     {
         Vector2 _mousePos = Engine.Instance.InputManager.GetMousePosition();
         _hoveringImageInstance.transform.position = _mousePos;
+    }
+
+    public void ProcessMouseClick()
+    {
         if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !HoveringOverCell())
         {
-            Engine.Instance.AddItemToInventory(_lastClickedCell.GetItemID(), 1);
-            _cursorOccupied = false;
-            ClearCells();
-            FillCells();
-            SetCellsListeners();
-            DestroyHoveringImage();
+            if(_cursorOccupied)
+            {
+                Debug.Log("ERRORSHMERROR: ...");
+                ReturnItemOnMouseToInventory();
+            }
         }
+        else if (Engine.Instance.InputManager.LeftMouseButtonPressed() && HoveringOverCell())
+        {
+            Debug.Log("ERRORSHMERROR: ..2.");
+
+            int _cellIndex = GetSelectedCellIndex();
+            CraftingUICell _cell = _cookingCells[_cellIndex];
+            if(!_cell._isOccupied)
+            {
+                if (_cursorOccupied)
+                {
+                    Debug.Log("ERRORSHMERROR: cursor is occupied");
+                    SetCraftingCell(_cellIndex);
+                    ClearCells();
+                    FillCells();
+                    SetCellsListeners();
+                    DestroyHoveringImage();
+                    GenerateResult();
+                    _cell.SetOccupied();
+                }
+            } else
+            {
+                Debug.Log("Conditions: cursor: " + _cursorOccupied + ", slot: " + _cell._isOccupied); 
+                if(_cursorOccupied)
+                {
+                    Debug.Log("SHMERROR CHECK: cell highlighted: " + _cell.GetItemID() + " lact clicked cell: " + _lastClickedCell.GetItemID());
+                    if (_cell.GetItemID() != _lastClickedCell.GetItemID())
+                    {
+                        Debug.Log("ERRORSHMERROR: cell is occupied");
+                        ReturnItemOnMouseToInventory();
+                    }
+                    else
+                    {
+                        Debug.Log("ERRORSHMERROR: supposed to add one item to the slot");
+                        UpdateCraftingCell(_cellIndex);
+                        ClearCells();
+                        FillCells();
+                        SetCellsListeners();
+                        DestroyHoveringImage();
+                        GenerateResult();
+                    }
+                } else
+                {
+                    Debug.Log("ERRORSHMERROR: supposed to delete an item from the crafting cells");
+                    Engine.Instance.AddItemToInventory(_cell.GetItemID(), _ingredientsReady[_cellIndex]._quantity);
+                    _ingredientsReady[_cellIndex] = new Slot(ItemID.Null, 0);
+                    ClearCraftingCell(_cellIndex);
+                    ClearCells();
+                    FillCells();
+                    SetCellsListeners();
+                    GenerateResult();
+                }
+
+            }
+        }
+    }
+
+    public void ReturnItemOnMouseToInventory()
+    {
+        Engine.Instance.AddItemToInventory(_lastClickedCell.GetItemID(), 1);
+        ClearCells();
+        FillCells();
+        SetCellsListeners();
+        DestroyHoveringImage();
+    }
+
+    public void UpdateCraftingCell(int cellIndex)
+    {
+        CraftingUICell _cell = _cookingCells[cellIndex];
+        _ingredientsReady[cellIndex].IncreaseQuantity(1);
+        _cell.SetCellQuantity(_ingredientsReady[cellIndex]._quantity);
+    }
+
+    public void SetCraftingCell(int cellIndex)
+    {
+        CraftingUICell _cell = _cookingCells[cellIndex];
+        _ingredientsReady[cellIndex] = new Slot(_lastClickedCell.GetItemID(), 1);
+        _cell.SetItemID(_ingredientsReady[cellIndex]._itemId);
+        _cell.SetCellImage(Engine.Instance.GetItemByID(_ingredientsReady[cellIndex]._itemId).GetItemIcon());
+        _cell.ShowCellQuantity();
+        _cell.SetCellQuantity(_ingredientsReady[cellIndex]._quantity);
+    }
+
+    public void ClearCraftingCell(int cellIndex)
+    {
+        _ingredientsReady[cellIndex] = new Slot(ItemID.Null, 0);
+        CraftingUICell _cell = _cookingCells[cellIndex];
+        _cell.SetCellImage(null);
+        _cell.HideCellQuantity();
+        _cell.SetUnoccupied();
     }
 
     public bool HoveringOverCell()
@@ -117,6 +219,93 @@ public class CookingScreenController : InventoryUIManager
         return false;
     }
 
+    public void ReturnItemsToInventory()
+    {
+        foreach (Slot ingredient in _ingredientsReady)
+        {
+            if (ingredient._itemId != ItemID.Null)
+            {
+                Engine.Instance.AddItemToInventory(ingredient._itemId, ingredient._quantity);
+            }
+        }
+    }
+
+    public void GenerateResult()
+    {
+        if (_resultSlot._itemId != ItemID.Null)
+        {
+            _resultSlot = new Slot(ItemID.Null, 0);
+            ClearResultCell();
+        }
+
+        foreach (Recipe recipe in _cookingBook._recipes)
+        {
+            Debug.Log("Count? " + _ingredientsReady.Count);
+
+            Slot _result = recipe.TryCooking(_ingredientsReady, _cookingMethod);
+            if (_result._itemId != ItemID.Null)
+            {
+                _resultSlot = _result;
+                SetResultCell();
+            }
+        }
+    }
+
+    public void ClearResultCell()
+    {
+        _resultCell.SetCellImage(null);
+        _resultCell.HideCellQuantity();
+        _resultCell.GetCellButton().onClick.RemoveAllListeners();
+    }
+
+    public void SetResultCell()
+    {
+        _resultCell.SetCellImage(Engine.Instance.GetItemByID(_resultSlot._itemId).GetItemIcon());
+        _resultCell.SetCellQuantity(_resultSlot._quantity);
+        _resultCell.ShowCellQuantity();
+        _resultCell.GetCellButton().onClick.RemoveAllListeners();
+        _resultCell.GetCellButton().onClick.AddListener(delegate { Engine.Instance.AddItemToInventory(_resultSlot._itemId, _resultSlot._quantity); });
+        _resultCell.GetCellButton().onClick.AddListener(ClearResultCell);
+        _resultCell.GetCellButton().onClick.AddListener(delegate { AddExcessItemsToInvetory(_resultSlot._quantity); });
+        _resultCell.GetCellButton().onClick.AddListener(ClearCraftingCells);
+        _resultCell.GetCellButton().onClick.AddListener(ClearCells);
+        _resultCell.GetCellButton().onClick.AddListener(FillCells);
+        _resultCell.GetCellButton().onClick.AddListener(SetCellsListeners);
+    }
+
+    public void AddExcessItemsToInvetory(int quantity)
+    {
+        for (int i = 0; i < _ingredientsReady.Count; i++)
+        {
+            if (_ingredientsReady[i]._quantity > quantity)
+            {
+                int numItemsToBeAdded = _ingredientsReady[i]._quantity - quantity;
+                Engine.Instance.AddItemToInventory(_ingredientsReady[i]._itemId, numItemsToBeAdded);
+            }
+        }
+    }
+
+    public void ClearCraftingCells()
+    {
+        for (int i = 0; i < _cookingCells.Length; i++)
+        {
+            ClearCraftingCell(i);
+        }
+    }
+
+    public int GetSelectedCellIndex()
+
+    {
+        for (int i = 0; i < _cookingCells.Length; i++)
+        {
+            if (_cookingCells[i]._isHoveredOver)
+            {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     public void CreateHoveringImage()
     {
         _hoveringImageInstance = Instantiate(_hoveringImagePrefab, UIManager.Instance.gameObject.transform);
@@ -125,6 +314,7 @@ public class CookingScreenController : InventoryUIManager
 
     public void DestroyHoveringImage()
     {
+        _cursorOccupied = false;
         if (_hoveringImageInstance != null)
         {
             Destroy(_hoveringImageInstance);

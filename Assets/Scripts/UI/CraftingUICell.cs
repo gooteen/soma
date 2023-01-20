@@ -6,10 +6,11 @@ using UnityEngine.EventSystems;
 public class CraftingUICell : InventoryUICell, IPointerEnterHandler, IPointerExitHandler
 {
     public bool _isHoveredOver;
+    public bool _isOccupied;
     public void OnPointerEnter(PointerEventData data)
     {
         Debug.Log("HOVERING");
-        _isHoveredOver = true; 
+        _isHoveredOver = true;
     }
 
     public void OnPointerExit(PointerEventData data)
@@ -21,10 +22,16 @@ public class CraftingUICell : InventoryUICell, IPointerEnterHandler, IPointerExi
     void Start()
     {
         _isHoveredOver = false;
+        _isOccupied = false;
     }
 
-    void Update()
+    public void SetOccupied()
     {
-        
+        _isOccupied = true;
+    }
+
+    public void SetUnoccupied()
+    {
+        _isOccupied = false;
     }
 }

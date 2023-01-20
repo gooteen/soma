@@ -25,6 +25,10 @@ public class Slot
         {
             _quantity = 0;
         } 
+        if(_quantity == 0)
+        {
+            _itemId = ItemID.Null;
+        }
     }
 }
 

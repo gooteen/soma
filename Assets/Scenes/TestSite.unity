@@ -3116,20 +3116,20 @@ MonoBehaviour:
   _resultCell: {fileID: 1058399606}
   _dropdown: {fileID: 1507911890}
   _cookingMethod: 0
-  _cookingBook: {fileID: 0}
+  _cookingBook: {fileID: 11400000, guid: 545811620e0fea74eb3aaf1a9fcd93c5, type: 2}
   _hoveringImagePrefab: {fileID: 8137877238529319569, guid: bf423acb773d04240b9e8128bdf9a9cc,
     type: 3}
   _hoveringImageInstance: {fileID: 0}
   _lastClickedCell: {fileID: 0}
   _ingredientsReady:
-  - _itemId: 3
+  - _itemId: 4
     _quantity: 0
-  - _itemId: 3
+  - _itemId: 4
     _quantity: 0
-  - _itemId: 3
+  - _itemId: 4
     _quantity: 0
   _resultSlot:
-    _itemId: 0
+    _itemId: 4
     _quantity: 0
   _cursorOccupied: 0
 --- !u!1 &484962753
@@ -5546,7 +5546,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemImage: {fileID: 1877164341}
   _itemQuantity: {fileID: 666622798}
+  _quantityBox: {fileID: 1954779143}
+  _itemID: 0
   _isHoveredOver: 0
+  _isOccupied: 0
 --- !u!114 &840283716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6922,6 +6925,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemImage: {fileID: 1252624119}
   _itemQuantity: {fileID: 57968739}
+  _quantityBox: {fileID: 551132218}
+  _itemID: 0
 --- !u!114 &1058399607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11407,7 +11412,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemImage: {fileID: 290983957}
   _itemQuantity: {fileID: 494221753}
+  _quantityBox: {fileID: 1386125519}
+  _itemID: 0
   _isHoveredOver: 0
+  _isOccupied: 0
 --- !u!114 &1913550477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24450,7 +24458,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemImage: {fileID: 7532450903181254949}
   _itemQuantity: {fileID: 7532450904642565961}
+  _quantityBox: {fileID: 7532450904778800672}
+  _itemID: 0
   _isHoveredOver: 0
+  _isOccupied: 0
 --- !u!222 &7532450904642565960
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -16,8 +16,10 @@ public class Recipe
 
     public Slot TryCooking(List<Slot> itemsInSlots, CookingMethod method)
     {
-        for (int i = 0; i <= itemsInSlots.Count; i++)
+        for (int i = 0; i < itemsInSlots.Count; i++)
         {
+            Debug.Log("InDEEEXXX: " + i);
+
             if (itemsInSlots[i]._itemId != _itemsNeeded[i])
             {
                 return new Slot(ItemID.Null, 0);
@@ -37,7 +39,7 @@ public class Recipe
     {
         List<int> _slotQuantities = new List<int>();
 
-        for (int i = 0; i <= itemsInSlots.Count; i++)
+        for (int i = 0; i < itemsInSlots.Count; i++)
         {
             if (itemsInSlots[i]._itemId != ItemID.Null)
             {
