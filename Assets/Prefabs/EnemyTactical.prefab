@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 6980584620542662189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6548175, y: 0.6548175, z: 0.6548175}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6980584620890363698}
   m_RootOrder: 0
@@ -72,8 +72,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: dac1063086c83fe44b8813a0dcabb700, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 9b04392b48e05444286f4c19da0cf550, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -93,7 +93,7 @@ Animator:
   m_GameObject: {fileID: 6980584620542662189}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ac0a927081ec43d468a47756abbdf901, type: 2}
+  m_Controller: {fileID: 9100000, guid: 903af6bbabaa80746963ff65b123387e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -146,7 +146,7 @@ Transform:
   m_GameObject: {fileID: 6980584620890363662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.8195518, y: 4.549977, z: 0.82}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6548175, y: 0.6548175, z: 0.6548175}
   m_Children:
   - {fileID: 6980584620542662190}
   - {fileID: 7285488567915841116}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anim: {fileID: 6980584620542662225}
   _maxHealthPoints: 10
-  _maxActionPoints: 5
+  _maxActionPoints: 3
   _currentActionPoints: 0
   _currentHealthPoints: 0
   _nameInBattle: Spider
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5954727c49f1c3445bcbbad7451ac25d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _speed: 0.5
   _anim: {fileID: 6980584620542662225}
   ActionPointsPerStep: 1
 --- !u!114 &2789111881980390340
@@ -250,6 +250,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6980584620890363698}
     m_Modifications:
+    - target: {fileID: 363733425804688076, guid: e6e96127eaaef874d9b9e34292787a0e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -36.999226
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563205278721675037, guid: e6e96127eaaef874d9b9e34292787a0e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37
+      objectReference: {fileID: 0}
     - target: {fileID: 3563205279365554160, guid: e6e96127eaaef874d9b9e34292787a0e,
         type: 3}
       propertyPath: m_Name
@@ -358,6 +368,16 @@ PrefabInstance:
     - target: {fileID: 3563205279365554163, guid: e6e96127eaaef874d9b9e34292787a0e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563205279606708798, guid: e6e96127eaaef874d9b9e34292787a0e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -28.100006
+      objectReference: {fileID: 0}
+    - target: {fileID: 3563205279606708799, guid: e6e96127eaaef874d9b9e34292787a0e,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

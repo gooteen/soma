@@ -154,12 +154,23 @@ public class MapManager : MonoBehaviour
         foreach (var initiator in _initiator.GetInitiators())
         {
             initiator.SetActive(true);
-            initiator.GetComponent<OffCombatEnemyController>().SetEnemyStartDirection();
+            OffCombatEnemyController _controller = initiator.GetComponent<OffCombatEnemyController>();
+            _controller.SetEnemyStartDirection();
         }
 
         ClearInitiator();
         UIManager.Instance.ClearCombatantQueue();
         Engine.Instance.ChangeGameMode();
+    }
+
+    public void AddEnemyLootToInventory()
+    {
+        foreach(var initiator in _initiator.GetInitiators())
+        {
+            OffCombatEnemyController _controller = initiator.GetComponent<OffCombatEnemyController>();
+            _controller.Kill();
+            _controller.AddLootToInventory();
+        }
     }
 
     public List<OverlayTile> GetAllTilesOnMap()

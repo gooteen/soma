@@ -7,6 +7,7 @@ public enum EnemyMode { Still, Patrolling};
 
 public class OffCombatEnemyController : MonoBehaviour
 {
+    [SerializeField] private Slot[] _items;
     [SerializeField] private CombatInitiator _initiator;
     [SerializeField] private CharacterAnimation _animation;
     [SerializeField] private Vector2 _dirAtStart;
@@ -25,10 +26,12 @@ public class OffCombatEnemyController : MonoBehaviour
     [SerializeField] private bool _currentlyAtWaypoint;
     [SerializeField] private Transform _currentWayPoint;
     [SerializeField] private float _offset;
+    [SerializeField] private bool _isDead;
     private CharacterMovement _character;
     
     void Start()
     {
+        _isDead = false;
         _currentTime = 0;
         _spotted = false;
         HideUI();
@@ -51,28 +54,50 @@ public class OffCombatEnemyController : MonoBehaviour
 
     void Update()
     {
-        if (_spotted)
+        if (!_isDead)
         {
-            ManageSpottedBar();
-        }
-        if (_mode == EnemyMode.Patrolling)
-        {
-            if (!_currentlyAtWaypoint)
+            if (_spotted)
             {
-                if (Vector2.Distance(transform.position, _currentWayPoint.position) >= _offset || Vector2.Distance(transform.position, _currentWayPoint.position) <= -_offset)
+                ManageSpottedBar();
+            }
+            if (_mode == EnemyMode.Patrolling)
+            {
+                if (!_currentlyAtWaypoint)
                 {
-                    Debug.Log("moving");
-                    _character.Move(_currentWayPoint.position - transform.position);
-                } else
-                {
-                    Debug.Log("reached");
-                    _character.Freeze();
-                    _currentlyAtWaypoint = true;
-                    transform.position = _currentWayPoint.position;
-                    _currentWayPointIndex++;
-                    StartCoroutine("ToNextWaypoint");
+                    if (Vector2.Distance(transform.position, _currentWayPoint.position) >= _offset || Vector2.Distance(transform.position, _currentWayPoint.position) <= -_offset)
+                    {
+                        Debug.Log("moving");
+                        _character.Move(_currentWayPoint.position - transform.position);
+                    }
+                    else
+                    {
+                        Debug.Log("reached");
+                        _character.Freeze();
+                        _currentlyAtWaypoint = true;
+                        transform.position = _currentWayPoint.position;
+                        _currentWayPointIndex++;
+                        StartCoroutine("ToNextWaypoint");
+                    }
                 }
             }
+        } else
+        {
+            _animation.SetDirection(new Vector3(0,0,0));
+        }
+    }
+
+    public void Kill()
+    {
+        _isDead = true;
+        _animation.Die();
+        GetComponent<Rigidbody2D>().isKinematic = true;
+    }
+
+    public void AddLootToInventory()
+    {
+        foreach (Slot item in _items)
+        {
+            Engine.Instance.AddItemToInventory(item._itemId, item._quantity);
         }
     }
 
@@ -121,23 +146,32 @@ public class OffCombatEnemyController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        _initiator.InitializeFight();
+        if (Engine.Instance._currentGameMode == GameMode.Exploration && !_isDead)
+        {
+            _initiator.InitializeFight();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        _spotted = true;
-        ShowUI();
-        _currentTime = Time.time;
+        if (Engine.Instance._currentGameMode == GameMode.Exploration && !_isDead)
+        {
+            _spotted = true;
+            ShowUI();
+            _currentTime = Time.time;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _spotted = false;
-        HideUI();
+        if (Engine.Instance._currentGameMode == GameMode.Exploration && !_isDead)
+        {
+            _spotted = false;
+            HideUI();
+        }
     }
 
-    public void SetEnemyStartDirection()
+public void SetEnemyStartDirection()
     {
         _animation.SetStaticDirection(_dirAtStart);
     }

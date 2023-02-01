@@ -160,6 +160,7 @@ public class TurnManager : MonoBehaviour
         }
         if (EnemiesBeaten())
         {
+            Debug.Log("Initiated");
             CursorController.Instance.HideTiles();
             CursorController.Instance.HideCursor();
             UIManager.Instance.ShowBattleWonWindow();

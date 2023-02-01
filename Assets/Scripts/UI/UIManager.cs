@@ -85,19 +85,47 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ShowTransitionPanel()
+    public void TransitionToBattle()
     {
         StartCoroutine("Transition");
     }
 
+    public void TransitionOutOfLostBattle()
+    {
+        StartCoroutine("Transition");
+        MapManager.Instance.ClearArena();
+    }
+
+    public void TransitionOutOfWonBattle()
+    {
+        StartCoroutine("Transition");
+        MapManager.Instance.AddEnemyLootToInventory();
+        MapManager.Instance.ClearArena();
+    }
+
+    public void ShowTransitionPanelOut()
+    {
+        StartCoroutine("TransitionOut");
+    }
+
     private IEnumerator Transition()
+    {
+        TransitionPanelOn();
+        yield return new WaitForSeconds(_transitionTimeSeconds);
+        TransitionPanelOff();
+    }
+
+    private void TransitionPanelOff()
+    {
+        CursorController.Instance.UnPause();
+        _tempTransitionScreen.SetActive(false);
+        Engine.Instance.Player.Freeze();
+    }
+
+    private void TransitionPanelOn()
     {
         CursorController.Instance.Pause();
         _tempTransitionScreen.SetActive(true);
-        Engine.Instance.Player.Freeze();
-        yield return new WaitForSeconds(_transitionTimeSeconds);
-        CursorController.Instance.UnPause();
-        _tempTransitionScreen.SetActive(false);
         Engine.Instance.Player.Freeze();
     }
 

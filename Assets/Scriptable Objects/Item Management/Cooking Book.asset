@@ -21,3 +21,11 @@ MonoBehaviour:
     _itemsNeeded: 040000000400000004000000
     _itemToCook: 5
     _method: 1
+  - _isUnlocked: 0
+    _itemsNeeded: 030000000400000001000000
+    _itemToCook: 8
+    _method: 2
+  - _isUnlocked: 0
+    _itemsNeeded: 030000000400000002000000
+    _itemToCook: 9
+    _method: 2
