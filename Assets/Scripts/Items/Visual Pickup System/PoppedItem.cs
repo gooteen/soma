@@ -10,9 +10,13 @@ public class PoppedItem : MonoBehaviour
     private SpriteRenderer _renderer;
     private Slot _itemSlot;
     private bool _isPulledToPlayer;
+    private bool _absorbable;
+    private bool _oneItemPerThrow;
 
     void Awake()
     {
+        _oneItemPerThrow = false;
+        _absorbable = false;
         _isPulledToPlayer = false;
         _rb = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
@@ -29,10 +33,11 @@ public class PoppedItem : MonoBehaviour
         }
     }
     
-    public void InitializePoppedItem(Sprite itemImage, Slot itemSlot)
+    public void InitializePoppedItem(Sprite itemImage, Slot itemSlot, bool oneItemPerThrow)
     {
         _renderer.sprite = itemImage;
         _itemSlot = itemSlot;
+        _oneItemPerThrow = oneItemPerThrow;
         StartCoroutine("Delay");
     }
 
@@ -46,12 +51,23 @@ public class PoppedItem : MonoBehaviour
         yield return new WaitForSeconds(_delaySeconds);
         _isPulledToPlayer = true;
         _rb.gravityScale = 0;
+        _absorbable = true;
         //_rb.velocity = new Vector2(0,0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Engine.Instance.AddItemToInventory(_itemSlot._itemId, _itemSlot._quantity);
-        Destroy(gameObject);
+        if (_absorbable)
+        {
+            if (!_oneItemPerThrow)
+            {
+                Engine.Instance.AddItemToInventory(_itemSlot._itemId, _itemSlot._quantity);
+
+            } else
+            {
+                Engine.Instance.AddItemToInventory(_itemSlot._itemId, 1);
+            }
+            Destroy(gameObject);
+        }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 54743010714513937}
   - component: {fileID: 54743010714513936}
   - component: {fileID: 54743010714513939}
+  - component: {fileID: -2781447751287217563}
   m_Layer: 13
   m_Name: BerryBush
   m_TagString: Untagged
@@ -29,7 +30,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.72, y: 0.55, z: 3.178235}
   m_LocalScale: {x: 0.7756571, y: 0.7756571, z: 0.7756571}
-  m_Children: []
+  m_Children:
+  - {fileID: 6602838676949162738}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -114,5 +116,54 @@ MonoBehaviour:
   _distance: 1.4
   _full: {fileID: 21300000, guid: d771b6f9a9ef2bd479ff3e11033b816f, type: 3}
   _empty: {fileID: 21300000, guid: ca400ab1a451ba84eab6e3ca4b8179b8, type: 3}
-  _itemID: 2
-  _itemsToBeCollected: 4
+  _itemSlot:
+    _itemId: 2
+    _quantity: 2
+--- !u!114 &-2781447751287217563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54743010714513965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf9868ba8f3c5c44807b9b07478303d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poppedItemPrefab: {fileID: 2803413622265775951, guid: 714a9be984c4e0144a3070c074330bfb,
+    type: 3}
+  _spawningPoint: {fileID: 6602838676949162738}
+  _pauseBetweenThrows: 0.25
+  _forceToSprinkleWith: 7
+  _sprinkleEachItemOfType: 1
+--- !u!1 &3734862201151282178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6602838676949162738}
+  m_Layer: 13
+  m_Name: SpawningPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6602838676949162738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3734862201151282178}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.081, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 54743010714513938}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

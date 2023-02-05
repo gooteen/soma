@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public enum EnemyMode { Still, Patrolling};
 
+[RequireComponent(typeof(ItemSprinkler))]
 public class OffCombatEnemyController : MonoBehaviour
 {
     [SerializeField] private Slot[] _items;
@@ -27,10 +28,12 @@ public class OffCombatEnemyController : MonoBehaviour
     [SerializeField] private Transform _currentWayPoint;
     [SerializeField] private float _offset;
     [SerializeField] private bool _isDead;
+    private ItemSprinkler _sprinkler;
     private CharacterMovement _character;
     
     void Start()
     {
+        _sprinkler = GetComponent<ItemSprinkler>();
         _isDead = false;
         _currentTime = 0;
         _spotted = false;
@@ -97,10 +100,9 @@ public class OffCombatEnemyController : MonoBehaviour
     {
         foreach (Slot item in _items)
         {
-            Engine.Instance.AddItemToInventory(item._itemId, item._quantity);
+            _sprinkler.StartSpawningItems(_items);
         }
     }
-
 
     public void ManageSpottedBar()
     {

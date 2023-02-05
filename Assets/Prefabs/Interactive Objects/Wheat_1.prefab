@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &497104919988116888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2127741420527744444}
+  m_Layer: 13
+  m_Name: SpawningPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2127741420527744444
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497104919988116888}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.176, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5203614803792523046}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5203614803792523044
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +42,7 @@ GameObject:
   - component: {fileID: 5203614803792523047}
   - component: {fileID: 5203614803792523048}
   - component: {fileID: 5203614803792523049}
+  - component: {fileID: 8198031036755435656}
   m_Layer: 13
   m_Name: Wheat_1
   m_TagString: Untagged
@@ -29,7 +60,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.21, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2127741420527744444}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -98,8 +130,9 @@ MonoBehaviour:
   _distance: 1.7
   _full: {fileID: 21300000, guid: 7fe7d26bb90d8dc42aa051077eccf55f, type: 3}
   _empty: {fileID: 21300000, guid: 675bf99dde72299438f6e5981b6ec196, type: 3}
-  _itemID: 0
-  _itemsToBeCollected: 2
+  _itemSlot:
+    _itemId: 0
+    _quantity: 2
 --- !u!70 &5203614803792523049
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -116,3 +149,21 @@ CapsuleCollider2D:
   m_Offset: {x: -0.006486501, y: 0.29084828}
   m_Size: {x: 1.103198, y: 0.7563113}
   m_Direction: 1
+--- !u!114 &8198031036755435656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5203614803792523044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf9868ba8f3c5c44807b9b07478303d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _poppedItemPrefab: {fileID: 2803413622265775951, guid: 714a9be984c4e0144a3070c074330bfb,
+    type: 3}
+  _spawningPoint: {fileID: 2127741420527744444}
+  _pauseBetweenThrows: 0.25
+  _forceToSprinkleWith: 7
+  _sprinkleEachItemOfType: 0

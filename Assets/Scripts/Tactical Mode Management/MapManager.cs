@@ -153,7 +153,10 @@ public class MapManager : MonoBehaviour
 
         foreach (var initiator in _initiator.GetInitiators())
         {
-            initiator.SetActive(true);
+            if (!initiator.activeSelf)
+            {
+                initiator.SetActive(true);
+            }
             OffCombatEnemyController _controller = initiator.GetComponent<OffCombatEnemyController>();
             _controller.SetEnemyStartDirection();
         }
@@ -167,6 +170,7 @@ public class MapManager : MonoBehaviour
     {
         foreach(var initiator in _initiator.GetInitiators())
         {
+            initiator.SetActive(true);
             OffCombatEnemyController _controller = initiator.GetComponent<OffCombatEnemyController>();
             _controller.Kill();
             _controller.AddLootToInventory();

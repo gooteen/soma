@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemID { Wheat, Apple, LapisBerry, Flour, Egg, ScrambledEggs, BerryJam, AppleJam, ApplePie, BerryPie, PanCakes, Pita, Null }
+public enum ItemID { Wheat, Apple, LapisBerry, Flour, Egg, ScrambledEggs, BerryJam, AppleJam, ApplePie, BerryPie, PanCakes, Pita, CaterpillarMeat, Null }
 
 [System.Serializable]
 public class IdToItem

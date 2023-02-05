@@ -84,10 +84,11 @@ public class UIManager : MonoBehaviour
             }
         }
     }
-
     public void TransitionToBattle()
     {
         StartCoroutine("Transition");
+        _battleLostWindow.SetActive(false);
+        _battleWonWindow.SetActive(false);
     }
 
     public void TransitionOutOfLostBattle()
@@ -98,20 +99,23 @@ public class UIManager : MonoBehaviour
 
     public void TransitionOutOfWonBattle()
     {
-        StartCoroutine("Transition");
-        MapManager.Instance.AddEnemyLootToInventory();
-        MapManager.Instance.ClearArena();
-    }
-
-    public void ShowTransitionPanelOut()
-    {
-        StartCoroutine("TransitionOut");
+        StartCoroutine("TransitionWithLoot");
+        
     }
 
     private IEnumerator Transition()
     {
         TransitionPanelOn();
         yield return new WaitForSeconds(_transitionTimeSeconds);
+        TransitionPanelOff();
+    }
+
+    private IEnumerator TransitionWithLoot()
+    {
+        TransitionPanelOn();
+        yield return new WaitForSeconds(_transitionTimeSeconds);
+        MapManager.Instance.AddEnemyLootToInventory();
+        MapManager.Instance.ClearArena();
         TransitionPanelOff();
     }
 

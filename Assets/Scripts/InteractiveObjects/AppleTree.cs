@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ItemSprinkler))]
 public class AppleTree : InteractiveObject
 {
+    [SerializeField] private Slot _itemSlot;
     private Animator _anim;
-    [SerializeField] private Apple[] _apples;
+    private ItemSprinkler _sprinkler;
 
     internal override void Start()
     {
         _interactive = true;
+        _sprinkler = GetComponent<ItemSprinkler>();
         _anim = GetComponentInChildren<Animator>();
     }
 
@@ -18,16 +21,8 @@ public class AppleTree : InteractiveObject
         if(_interactive)
         {
             _anim.Play("Impact");
-            DropApples();
             _interactive = false;
         }
-    }
-
-    private void DropApples()
-    {
-        foreach (Apple _apple in _apples)
-        {
-            _apple.Drop();
-        }
+        _sprinkler.StartSpawningItems(new Slot[] { _itemSlot });
     }
 }
