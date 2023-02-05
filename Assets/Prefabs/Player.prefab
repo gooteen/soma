@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1649163987}
   - component: {fileID: 1649163988}
-  - component: {fileID: 1649163989}
   m_Layer: 15
   m_Name: ItemTrigger
   m_TagString: Player
@@ -25,12 +24,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649163986}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8562092601695612405}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &1649163988
 CircleCollider2D:
@@ -48,27 +47,6 @@ CircleCollider2D:
   m_Offset: {x: 0.010749102, y: 0.31709743}
   serializedVersion: 2
   m_Radius: 0.48387623
---- !u!50 &1649163989
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1649163986}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &8562092601504214250
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,7 +78,7 @@ Transform:
   m_LocalScale: {x: 0.6548175, y: 0.6548175, z: 0.6548175}
   m_Children: []
   m_Father: {fileID: 8562092601695612405}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8562092601504214248
 SpriteRenderer:
@@ -217,9 +195,9 @@ Transform:
   m_LocalPosition: {x: -1.22, y: 5.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1649163987}
   - {fileID: 8562092601504214249}
   - {fileID: 14108489}
-  - {fileID: 1649163987}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -370,7 +348,7 @@ PrefabInstance:
     - target: {fileID: 7643107859419279854, guid: e05d75e545f9b224b990660a41a76e39,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7643107859419279854, guid: e05d75e545f9b224b990660a41a76e39,
         type: 3}
