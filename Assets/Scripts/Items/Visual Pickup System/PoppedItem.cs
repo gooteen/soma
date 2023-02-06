@@ -55,7 +55,7 @@ public class PoppedItem : MonoBehaviour
         //_rb.velocity = new Vector2(0,0);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (_absorbable)
         {
