@@ -14,7 +14,7 @@ public class TacticalPlayerInfo : TacticalCharacterInfo
         _currentActionPoints = _maxActionPoints;
         _currentHealthPoints = _maxHealthPoints;
         _damage = _stats._damage;
-        _weapon = _stats._weapon;
+        _weapon = _stats.CurrentWeapon;
     }
 
     public void OnWeaponChosen()

@@ -6418,6 +6418,8 @@ MonoBehaviour:
   _itemActionButtonTextValue: "\u0421\u044A\u0435\u0441\u0442\u044C"
   _itemName: {fileID: 636210510}
   _itemImage: {fileID: 860412270}
+  _equippedWeaponImage: {fileID: 0}
+  _unequipWeaponButton: {fileID: 0}
 --- !u!1 &1032370248
 GameObject:
   m_ObjectHideFlags: 0

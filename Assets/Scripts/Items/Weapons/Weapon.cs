@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum WeaponMode { FilledRange, FourLines, SingleLine };
 
-public class Weapon : MonoBehaviour
+[CreateAssetMenu(fileName = "Eatable", menuName = "Item/Weapon")]
+public class Weapon : Item
 {
     [SerializeField] private int _damage;
     [SerializeField] private int _hitCost;

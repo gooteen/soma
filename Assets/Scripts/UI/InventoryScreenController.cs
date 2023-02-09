@@ -12,6 +12,8 @@ public class InventoryScreenController : InventoryUIManager
     [SerializeField] private string _itemActionButtonTextValue;
     [SerializeField] private Text _itemName;
     [SerializeField] private Image _itemImage;
+    [SerializeField] private Image _equippedWeaponImage;
+    [SerializeField] private Button _unequipWeaponButton;
 
     public void FillInfoPanel(Item item, Slot slot)
     {
