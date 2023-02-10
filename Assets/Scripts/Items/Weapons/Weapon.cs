@@ -12,8 +12,7 @@ public class Weapon : Item
     [SerializeField] private int _damage;
     [SerializeField] private int _hitCost;
 
-    //replace with an array of MagiAbility instances later
-    [SerializeField] private int[] _abilities;
+    [SerializeField] private MagicAbility[] _abilities;
 
     [SerializeField] private WeaponMode _mode;
     [SerializeField] private int _reach;
