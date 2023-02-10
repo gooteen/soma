@@ -64,7 +64,27 @@ public class CookingScreenController : InventoryUIManager
         ProcessMouseClick();
     }
 
-    public void SetCookingMethod()
+
+    public override void FillCells()
+    {
+        List<Slot> _items = Engine.Instance.GetItemsInInvetory();
+        foreach (Slot slot in _items)
+        {
+            if (Engine.Instance.GetItemByID(slot._itemId).GetType() != typeof(Weapon))
+            {
+                GameObject _itemSlot = Instantiate(_inventoryCellPrefab, _content);
+                InventoryUICell _cell = _itemSlot.GetComponent<InventoryUICell>();
+                _inventoryCellsList.Add(_cell);
+                Item item = Engine.Instance.GetItemByID(slot._itemId);
+
+                _cell.SetItemID(slot._itemId);
+                _cell.SetCellImage(item.GetItemIcon());
+                _cell.SetCellQuantity(slot._quantity);
+            }
+        }
+    }
+
+        public void SetCookingMethod()
     {
         switch(_dropdown.value)
         {

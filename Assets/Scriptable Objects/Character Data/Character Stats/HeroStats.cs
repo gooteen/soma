@@ -13,7 +13,18 @@ public class HeroStats : ScriptableObject
     [SerializeField] private Weapon _currentWeapon;
     [SerializeField] private Weapon _defaultWeapon;
 
-    public Weapon CurrentWeapon { get { return _currentWeapon; } }
+    public Weapon CurrentWeapon { 
+        get 
+        {
+            if (_currentWeapon == null)
+            {
+                return _defaultWeapon;
+            } else
+            {
+                return _currentWeapon;
+            }
+        } 
+    }
 
     public void SetCurrentWeapon(Weapon weapon)
     {
@@ -25,6 +36,7 @@ public class HeroStats : ScriptableObject
         } else
         {
             _currentWeapon = weapon;
+            weapon.Equip();
         }
     }
 }

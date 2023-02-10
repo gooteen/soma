@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f9615404cad8645bec3d6a8e62030d, type: 3}
   m_Name: Companion Stats
   m_EditorClassIdentifier: 
-  _name: 
+  _name: "\u042D\u043B\u0438\u0437\u0430\u0431\u0435\u0442"
   _healthPoints: 10
   _maxActionPoints: 5
   _damage: 7
-  _weapon: {fileID: 11400000, guid: d1e77aa39904c3e4d829190c8338fe7c, type: 2}
+  _currentWeapon: {fileID: 11400000, guid: d1e77aa39904c3e4d829190c8338fe7c, type: 2}
+  _defaultWeapon: {fileID: 11400000, guid: bd0c4f42b88ddef4bbe436a39276a275, type: 2}

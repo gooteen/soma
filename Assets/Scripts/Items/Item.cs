@@ -8,6 +8,12 @@ public class Item : ScriptableObject
     [SerializeField] private string _itemName;
     [SerializeField] private Sprite _itemIcon;
     [SerializeField] private float _itemWeight;
+    [SerializeField] private string _actionTextInInventory;
+
+    public string GetActionText()
+    {
+        return _actionTextInInventory;
+    }
 
     public string GetItemName()
     {

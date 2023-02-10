@@ -34,6 +34,7 @@ public class Engine : MonoBehaviour
         Instance = this;
         _input = GetComponent<InputManager>();
         _turnManager = GetComponent<TurnManager>();
+        CheckIfRightWeaponIsEquipped();
     }
 
     /*
@@ -125,6 +126,28 @@ public class Engine : MonoBehaviour
         } else
         {
             _currentGameMode = GameMode.Battle;
+        }
+    }
+
+    private void CheckIfRightWeaponIsEquipped()
+    {
+        Weapon _weaponToSet = null;
+        foreach (Slot item in _inventory._items)
+        {
+            Item _item = GetItemByID(item._itemId);
+            if (_item.GetType() == typeof(Weapon))
+            {
+                Weapon _weapon = (Weapon)_item;
+                if (_weapon.Equipped && Hero.CurrentWeapon != _weapon)
+                {
+                    Hero.SetCurrentWeapon(_weapon);
+                    _weaponToSet = _weapon;
+                }
+            }
+        }
+        if (_weaponToSet == null)
+        {
+            Hero.SetCurrentWeapon(null);
         }
     }
 

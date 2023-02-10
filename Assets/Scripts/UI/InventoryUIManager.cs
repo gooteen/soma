@@ -10,7 +10,7 @@ public abstract class InventoryUIManager : MonoBehaviour
 
     [SerializeField] internal Transform _content;
 
-    public void FillCells()
+    public virtual void FillCells()
     {
         List<Slot> _items = Engine.Instance.GetItemsInInvetory();
         foreach (Slot slot in _items)
@@ -29,7 +29,7 @@ public abstract class InventoryUIManager : MonoBehaviour
     public abstract void SetCellsListeners();
    
 
-    public void ClearCells() 
+    public virtual void ClearCells() 
     {
         foreach (InventoryUICell cell in _inventoryCellsList)
         {

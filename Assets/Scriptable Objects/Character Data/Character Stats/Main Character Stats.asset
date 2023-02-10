@@ -16,4 +16,5 @@ MonoBehaviour:
   _healthPoints: 10
   _maxActionPoints: 5
   _damage: 5
-  _weapon: {fileID: 11400000, guid: d1e77aa39904c3e4d829190c8338fe7c, type: 2}
+  _currentWeapon: {fileID: 11400000, guid: bd0c4f42b88ddef4bbe436a39276a275, type: 2}
+  _defaultWeapon: {fileID: 11400000, guid: bd0c4f42b88ddef4bbe436a39276a275, type: 2}

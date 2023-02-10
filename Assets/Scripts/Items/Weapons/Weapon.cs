@@ -7,6 +7,8 @@ public enum WeaponMode { FilledRange, FourLines, SingleLine };
 [CreateAssetMenu(fileName = "Eatable", menuName = "Item/Weapon")]
 public class Weapon : Item
 {
+    // automated check whether the weapon is equipped at start?
+
     [SerializeField] private int _damage;
     [SerializeField] private int _hitCost;
 
@@ -15,6 +17,10 @@ public class Weapon : Item
 
     [SerializeField] private WeaponMode _mode;
     [SerializeField] private int _reach;
+
+    [SerializeField] private bool _equipped;
+
+    public bool Equipped { get { return _equipped; } }
 
     public void OnChosen()
     {
@@ -35,5 +41,15 @@ public class Weapon : Item
     public int GetHitCost()
     {
         return _hitCost;
+    }
+
+    public void Equip()
+    {
+        _equipped = true;
+    }
+
+    public void Unequip()
+    {
+        _equipped = false;
     }
 }

@@ -2022,7 +2022,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _distance: 1.7
   _items:
-  - _itemId: 0
+  - _itemId: 13
     _quantity: 1
   - _itemId: 1
     _quantity: 2
@@ -6415,11 +6415,10 @@ MonoBehaviour:
   _itemInfoPanel: {fileID: 580676961}
   _itemActionButton: {fileID: 1985079159}
   _itemActionButtonText: {fileID: 150594332}
-  _itemActionButtonTextValue: "\u0421\u044A\u0435\u0441\u0442\u044C"
   _itemName: {fileID: 636210510}
   _itemImage: {fileID: 860412270}
-  _equippedWeaponImage: {fileID: 0}
-  _unequipWeaponButton: {fileID: 0}
+  _equippedWeaponImage: {fileID: 1967427357}
+  _unequipWeaponButton: {fileID: 504831641}
 --- !u!1 &1032370248
 GameObject:
   m_ObjectHideFlags: 0

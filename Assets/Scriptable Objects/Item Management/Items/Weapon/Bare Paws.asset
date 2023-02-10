@@ -9,8 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a1e6045f3bb02440b535126f561a46c, type: 3}
-  m_Name: Inventory
+  m_Script: {fileID: 11500000, guid: 5d727396360c3bf4fb8266206c8dfd8a, type: 3}
+  m_Name: Bare Paws
   m_EditorClassIdentifier: 
-  _items: []
-  _itemMap: {fileID: 11400000, guid: 68aec6153f79e944a9cde855f155f18b, type: 2}
+  _itemName: "\u041B\u0430\u043F\u043A\u0438"
+  _itemIcon: {fileID: 0}
+  _itemWeight: 0
+  _actionTextInInventory: 
+  _damage: 1
+  _hitCost: 1
+  _abilities: 
+  _mode: 1
+  _reach: 1
+  _equipped: 0

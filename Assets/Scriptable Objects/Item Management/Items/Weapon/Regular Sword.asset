@@ -15,8 +15,10 @@ MonoBehaviour:
   _itemName: "\u041E\u0431\u044B\u0447\u043D\u044B\u0439 \u043C\u0435\u0447"
   _itemIcon: {fileID: 21300000, guid: 4bd445d1f8758024dbe8e1c3e22f24d1, type: 3}
   _itemWeight: 5
+  _actionTextInInventory: "\u042D\u043A\u0438\u043F\u0438\u0440\u043E\u0432\u0430\u0442\u044C"
   _damage: 3
   _hitCost: 1
   _abilities: 
-  _mode: 2
+  _mode: 1
   _reach: 1
+  _equipped: 0

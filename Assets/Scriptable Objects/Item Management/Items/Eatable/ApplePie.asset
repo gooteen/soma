@@ -15,4 +15,5 @@ MonoBehaviour:
   _itemName: "\u042F\u0431\u043B\u043E\u0447\u043D\u044B\u0439 \u043F\u0438\u0440\u043E\u0433"
   _itemIcon: {fileID: 21300000, guid: 0d7b0b123e3e62540ba31a7ba1d5506e, type: 3}
   _itemWeight: 1
+  _actionTextInInventory: "\u0421\u044A\u0435\u0441\u0442\u044C"
   _healthToResotre: 7
