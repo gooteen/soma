@@ -88,6 +88,7 @@ public class TurnManager : MonoBehaviour
             CursorController.Instance.ShowCursor();
             CursorController.Instance.SetMovementRange();
             UIManager.Instance._toCombatModeButton.onClick.AddListener(delegate { Engine.Instance.TacticalPlayer.OnWeaponChosen(); } );
+            UIManager.Instance.ConfigureSpellsButton();
         }
         else
         {

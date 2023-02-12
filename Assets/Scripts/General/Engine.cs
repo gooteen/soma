@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TacticalMode { Movement, Combat };
+public enum TacticalMode { Movement, Combat, Magic };
 public enum GameMode { Exploration, Battle };
 public class Engine : MonoBehaviour
 {

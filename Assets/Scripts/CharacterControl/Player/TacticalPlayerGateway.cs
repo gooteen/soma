@@ -14,6 +14,16 @@ public class TacticalPlayerGateway : MonoBehaviour
         _tacticalPlayerMovement = GetComponent<TacticalMovement>();
     }
 
+    public MagicAbility GetCurrentMagicAbility()
+    {
+        return _playerInfo.MagicAbility;
+    }
+
+    public void SetCurrentMagicAbility(MagicAbility ability)
+    {
+        _playerInfo.MagicAbility = ability;
+    }
+
     public float GetHealthRatio()
     {
         return _playerInfo.GetHealthRatio();
@@ -22,6 +32,11 @@ public class TacticalPlayerGateway : MonoBehaviour
     public int GetWeaponHitCost()
     {
         return _playerInfo.GetHitCost();
+    }
+
+    public List<MagicAbility> GetMagicAbilitiesOnCurrentWeapon() 
+    {
+        return _playerInfo.GetAbilitiesOnWeapon();
     }
 
     public void OnWeaponChosen()

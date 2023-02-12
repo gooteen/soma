@@ -6,6 +6,19 @@ public class TacticalPlayerInfo : TacticalCharacterInfo
 {
     [SerializeField] private HeroStats _stats;
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private MagicAbility _currentMagicAbility;
+
+    public MagicAbility MagicAbility
+    {
+        get
+        {
+            return _currentMagicAbility;
+        }
+        set
+        {
+            _currentMagicAbility = value;
+        }
+    }
 
     public override void Initialize()
     {
@@ -23,6 +36,12 @@ public class TacticalPlayerInfo : TacticalCharacterInfo
         {
             _weapon.OnChosen();
         }
+    }
+
+
+    public List<MagicAbility> GetAbilitiesOnWeapon()
+    {
+        return _weapon.GetMagicAbilities();
     }
 
     public void OnWeaponUsed()

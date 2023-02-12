@@ -29,7 +29,11 @@ public class UIManager : MonoBehaviour
     public List<GameObject> _currentCombatantCells;
     public Button _toCombatModeButton;
     public Button _toMovementModeButton;
+    public Button _toMagicModeButton;
+    public GameObject _spellsPanel;
     public Text _apLeft;
+    public List<GameObject> _magicSpellsList;
+    public GameObject _magicAbilityButtonPrefab;
 
     public static UIManager Instance { get; private set; }
 
@@ -84,6 +88,53 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    public void ConfigureSpellsButton()
+    {
+        Debug.Log("MAGIC: Configuring");
+        _toMagicModeButton.onClick.RemoveAllListeners();
+        ClearSpellsPanel();
+        HideSpellsPanel();
+        _toMagicModeButton.onClick.AddListener(FillSpellsPanel);
+    }
+
+    public void FillSpellsPanel()
+    {
+        List<MagicAbility> _abilities = Engine.Instance.TacticalPlayer.GetMagicAbilitiesOnCurrentWeapon();
+        if (_abilities.Count > 0)
+        {
+            ShowSpellsPanel();
+            foreach (MagicAbility ability in _abilities)
+            {
+                GameObject _abilityButton = Instantiate(_magicAbilityButtonPrefab, _spellsPanel.transform);
+                _abilityButton.GetComponent<Button>().onClick.AddListener(ability.OnChosen);
+                _magicSpellsList.Add(_abilityButton);
+            }
+            _toMagicModeButton.onClick.AddListener(HideSpellsPanel);
+            _toMagicModeButton.onClick.AddListener(delegate { _toMagicModeButton.onClick.AddListener(FillSpellsPanel); });
+        }
+    }
+
+    public void ClearSpellsPanel()
+    {
+        foreach (GameObject button in _magicSpellsList)
+        {
+            Destroy(button);
+        }
+        _magicSpellsList.Clear();
+    }
+
+    public void ShowSpellsPanel()
+    {
+        _spellsPanel.SetActive(true);
+    }
+
+    public void HideSpellsPanel()
+    {
+        ClearSpellsPanel();
+        _spellsPanel.SetActive(false);
+    }
+
     public void TransitionToBattle()
     {
         StartCoroutine("Transition");

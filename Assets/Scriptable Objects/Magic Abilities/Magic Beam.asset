@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437b541bd45c0a346bc327a7de94c720, type: 3}
   m_Name: Magic Beam
   m_EditorClassIdentifier: 
-  _unlocked: 0
-  _magicMode: 0
-  _damage: 0
-  _hitCost: 0
-  _reach: 0
+  _unlocked: 1
+  _magicMode: 1
+  _damage: 10
+  _hitCost: 3
+  _reach: 6

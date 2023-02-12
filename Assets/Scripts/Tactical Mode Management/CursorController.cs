@@ -68,7 +68,7 @@ public class CursorController : MonoBehaviour
                         }
                     }
                 }
-                else
+                else if (Engine.Instance._currentTacticalMode == TacticalMode.Combat)
                 {
                     if (GetFocusedOnEnemy())
                     {
@@ -80,6 +80,35 @@ public class CursorController : MonoBehaviour
                                 {
                                     Engine.Instance.TacticalPlayer.OnWeaponUsed();
                                     Engine.Instance.TacticalPlayer.OnWeaponChosen();
+                                    if (Engine.Instance.TacticalPlayer.GetActionPoints() == 0)
+                                    {
+                                        HideCursor();
+                                    }
+                                    if (Engine.Instance.TurnManager.EnemiesBeaten())
+                                    {
+                                        CursorController.Instance.HideCursor();
+                                        CursorController.Instance.HideTiles();
+                                        UIManager.Instance.ShowBattleWonWindow();
+                                        // экран победы
+                                        //MapManager.Instance.ClearArena();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else
+                {
+                    if (GetFocusedOnEnemy())
+                    {
+                        if (Engine.Instance.InputManager.LeftMouseButtonPressed() && !_cursorLocked && !_isPaused)
+                        {
+                            if (inRangeTiles.Contains(_focusedTile))
+                            {
+                                MagicAbility _ability = Engine.Instance.TacticalPlayer.GetCurrentMagicAbility();
+                                if (_ability.HitCost <= Engine.Instance.TacticalPlayer.GetActionPoints())
+                                {
+                                    _ability.OnUsed();
+                                    _ability.OnChosen();
                                     if (Engine.Instance.TacticalPlayer.GetActionPoints() == 0)
                                     {
                                         HideCursor();
@@ -217,11 +246,8 @@ public class CursorController : MonoBehaviour
 
     public void SetCombatRange(WeaponMode mode, int length)
     {
-        foreach (OverlayTile item in inRangeTiles)
-        {
-            item.HideTile();
-        }
-
+        HideTiles();
+        Debug.Log("heyo..");
         if (mode == WeaponMode.FilledRange)
         {
             inRangeTiles = rangeFinder.GetTilesInRange(Engine.Instance.TacticalPlayer.GetActiveTile(), length, false);

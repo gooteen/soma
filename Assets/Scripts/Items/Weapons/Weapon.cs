@@ -51,4 +51,17 @@ public class Weapon : Item
     {
         _equipped = false;
     }
+
+    public List<MagicAbility> GetMagicAbilities()
+    {
+        List<MagicAbility> _unlockedMagicAbilities = new List<MagicAbility>();
+        foreach (MagicAbility ability in _abilities)
+        {
+            if (ability.Unlocked)
+            {
+                _unlockedMagicAbilities.Add(ability);
+            }
+        }
+        return _unlockedMagicAbilities;
+    }
 }
