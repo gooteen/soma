@@ -135,6 +135,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemImage: {fileID: 2522778711299862220}
   _itemQuantity: {fileID: 2522778712182126752}
+  _quantityBox: {fileID: 0}
+  _itemID: 0
 --- !u!1 &2522778711299862217
 GameObject:
   m_ObjectHideFlags: 0
