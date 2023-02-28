@@ -90,7 +90,7 @@ public class Inventory : ScriptableObject
 
     public Slot FindSlotInInventory(ItemID id)
     {
-        for (int i = 0; i <= _items.Count; i++)
+        for (int i = 0; i < _items.Count; i++)
         {
             if (_items[i]._itemId == id)
             {
