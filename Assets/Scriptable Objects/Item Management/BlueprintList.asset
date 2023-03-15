@@ -17,3 +17,11 @@ MonoBehaviour:
     _resourcesNeeded:
     - _itemId: 14
       _quantity: 1
+  - _itemToBeCrafted: 17
+    _resourcesNeeded:
+    - _itemId: 16
+      _quantity: 1
+  - _itemToBeCrafted: 19
+    _resourcesNeeded:
+    - _itemId: 18
+      _quantity: 1
